@@ -1,34 +1,17 @@
 import React from 'react';
-import Tooltip from './Tooltip';
 
 const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
   <table className="w-full mt-4 border text-sm">
     <thead>
       <tr className="bg-gray-100">
-        <th className="border p-2">
-          <Tooltip text="Geographical site identifier">Geo ID</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Base station identifier">eNodeB</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Sector number within the site">Sector</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Carrier or frequency band">Carrier</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Name of the KPI being monitored">KPI Name</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Measured KPI value">KPI Value</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Timestamp of last update">Last Updated</Tooltip>
-        </th>
-        <th className="border p-2">
-          <Tooltip text="Create a task for this site">⋯</Tooltip>
-        </th>
+        <th className="border p-2">Geo ID</th>
+        <th className="border p-2">eNodeB</th>
+        <th className="border p-2">Sector</th>
+        <th className="border p-2">Carrier</th>
+        <th className="border p-2">KPI Name</th>
+        <th className="border p-2">KPI Value</th>
+        <th className="border p-2">Last Updated</th>
+        <th className="border p-2">⋯</th>
       </tr>
     </thead>
     <tbody>
