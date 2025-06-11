@@ -16,12 +16,6 @@ npm install
 npm run dev
 ```
 
-In a separate terminal start the KPI stream server:
-
-```bash
-npm run server
-```
-
 To generate a production build:
 
 ```bash
@@ -38,7 +32,7 @@ Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). 
 - **KPI table with filters** – view, sort and filter sites by impact categories
 - **AI insights** – heuristic predictions and recommended actions for the selected site
 - **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
-- **Real-time KPI stream** – dashboard listens to a local SSE endpoint for the top 30 KPIs
+- **Simulated real-time KPI updates** – dashboard periodically refreshes the top KPIs without a backend server
 
 ## Contributing / Extending
 

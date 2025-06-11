@@ -39,17 +39,22 @@ export default function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
+  // Simulate live KPI updates by tweaking the top 30 sites every few seconds
   useEffect(() => {
-    const es = new EventSource('http://localhost:3001/stream');
-    es.onmessage = (e) => {
-      try {
-        const data = JSON.parse(e.data);
-        setSites(data);
-      } catch {
-        // ignore JSON errors
-      }
-    };
-    return () => es.close();
+    const interval = setInterval(() => {
+      setSites((prev) => {
+        const next = [...prev];
+        const top = [...next]
+          .sort((a, b) => b.severity - a.severity)
+          .slice(0, 30);
+        top.forEach((site) => {
+          site.value = parseFloat((site.value + (Math.random() * 2 - 1)).toFixed(2));
+          site.updatedAt = new Date().toISOString();
+        });
+        return next;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleSiteSelect = (site) => setSelectedSite(site);
