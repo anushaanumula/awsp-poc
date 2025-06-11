@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Render the entire application in black and white */
+body {
+  @apply bg-white text-black;
+  filter: grayscale(100%);
+}

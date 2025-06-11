@@ -32,6 +32,7 @@ Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). 
 - **KPI table with filters** – view, sort and filter sites by impact categories
 - **AI insights** – heuristic predictions and recommended actions for the selected site
 - **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
+- **Simulated real-time KPI updates** – dashboard periodically refreshes the top KPIs without a backend server
 
 
 ## Integration Philosophy
