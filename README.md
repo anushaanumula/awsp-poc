@@ -40,4 +40,3 @@ Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). 
 3. Update `src/data/sites.json` or add additional data files to experiment with different KPIs or site parameters.
 4. Submit a pull request describing your changes.
 
-Feel free to open issues for bugs or feature requests.
