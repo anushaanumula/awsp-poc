@@ -26,6 +26,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [market, setMarket] = useState(MARKETS[0]);
   const [activeFilters, setActiveFilters] = useState([]);
+  const [sites, setSites] = useState(sitesData);
   const [tasks, setTasks] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('tasks')) || [];
@@ -37,6 +38,19 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    const es = new EventSource('http://localhost:3001/stream');
+    es.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        setSites(data);
+      } catch {
+        // ignore JSON errors
+      }
+    };
+    return () => es.close();
+  }, []);
 
   const handleSiteSelect = (site) => setSelectedSite(site);
 
@@ -52,8 +66,8 @@ export default function App() {
   const clearFilters = () => setActiveFilters([]);
 
   const filteredSites = activeFilters.length
-    ? sitesData.filter((site) => activeFilters.includes(site.kpiType))
-    : sitesData;
+    ? sites.filter((site) => activeFilters.includes(site.kpiType))
+    : sites;
 
   const sortedSites = useMemo(
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
