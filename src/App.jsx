@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import MapView from './components/MapView';
 import KpiTable from './components/KpiTable';
 import SiteDetails from './components/SiteDetails';
@@ -35,6 +35,11 @@ export default function App() {
   const filteredSites = activeFilters.length
     ? sitesData.filter((site) => activeFilters.includes(site.kpiType))
     : sitesData;
+
+  const sortedSites = useMemo(
+    () => [...filteredSites].sort((a, b) => b.severity - a.severity),
+    [filteredSites]
+  );
 
   return (
     <div className="p-4">
@@ -79,7 +84,7 @@ export default function App() {
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="col-span-2">
               <KpiTable
-                sites={filteredSites.sort((a, b) => b.severity - a.severity)}
+                sites={sortedSites}
                 onSelect={handleSiteSelect}
                 selected={selectedSite}
                 onCreateTask={(site) => {
