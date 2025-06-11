@@ -168,7 +168,7 @@ export default function App() {
 
       {activeTab === 1 && (
         <div className="p-4 border rounded">
-          <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site wise KPI degraded, Outages, etc.)</h2>
+          <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
           <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
           <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
