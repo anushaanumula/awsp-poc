@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import MapView from './components/MapView';
 import KpiTable from './components/KpiTable';
 import SiteDetails from './components/SiteDetails';
 import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
+import TaskList from './components/TaskList';
 import sitesData from './data/sites.json';
 
 const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
@@ -21,8 +22,22 @@ export default function App() {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [activeFilters, setActiveFilters] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('tasks')) || [];
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleSiteSelect = (site) => setSelectedSite(site);
+
+  const handleTaskCreate = (task) => setTasks((prev) => [...prev, task]);
+  const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
 
   const toggleFilter = (filter) => {
     setActiveFilters((prev) =>
@@ -115,7 +130,11 @@ export default function App() {
           </div>
 
           {showTaskModal && (
-            <TaskModal site={selectedSite} onClose={() => setShowTaskModal(false)} />
+            <TaskModal
+              site={selectedSite}
+              onClose={() => setShowTaskModal(false)}
+              onCreate={handleTaskCreate}
+            />
           )}
         </>
       )}
@@ -123,21 +142,14 @@ export default function App() {
       {activeTab === 1 && (
         <div className="p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site wise KPI degraded, Outages, etc.)</h2>
-          <AiInsights site={selectedSite} />
+          <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
           <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
           <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
 
       {activeTab === 2 && (
-        <div className="border p-4 rounded">
-          <h2 className="text-xl font-semibold mb-2">Task List (Mocked)</h2>
-          <ul className="list-disc pl-6">
-            <li>Fix RACH Failure in Sector 101</li>
-            <li>Check coverage in Market NY7</li>
-            <li>Low UL SINR in Site 4453</li>
-          </ul>
-        </div>
+        <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
     </div>
   );
