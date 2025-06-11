@@ -1,9 +1,16 @@
 import React from 'react';
 
+// This component currently relies on hand-tuned rules to emulate what a machine
+// learning model might produce. Each KPI is checked against basic threshold
+// values to generate a short prediction and recommended action. The values were
+// chosen purely for demonstration and do not reflect a real model.
+
 const AiInsights = ({ site, onApprove = () => {} }) => {
   if (!site) return <div className="p-4 border">Select a site to view AI insights</div>;
 
   const getPrediction = () => {
+    // Simple heuristic thresholds approximate an ML classifier.
+    // Each KPI range maps to a short insight string.
     switch (site.kpi) {
       case 'RRC Setup Failure Rate':
         return site.value > 15
@@ -47,6 +54,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
   };
 
   const getAction = () => {
+    // Suggested actions mirror the rules above and are not data-driven yet.
     switch (site.kpi) {
       case 'RRC Setup Failure Rate':
         return 'Check signaling traces and verify neighbor relations.';
@@ -66,6 +74,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
   };
 
   const handleApprove = () => {
+    // Approving creates a simple task object using the rule-based suggestion.
     const task = {
       id: Date.now(),
       title: `Resolve ${site.kpi} at GeoID ${site.geoId}`,
