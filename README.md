@@ -1,5 +1,42 @@
 # AWSP AI Dashboard
 
-This project is a small prototype showing how AI-driven insights might surface in a RAN performance dashboard. It currently relies on mock data and simple heuristic rules.
+This project is a simple React and Vite based prototype dashboard that visualizes mock network KPI data.
 
-For notes on how these rules could eventually be replaced by real machine learning models, see [docs/AI_NOTES.md](docs/AI_NOTES.md).
+## Prerequisites
+
+- **Node.js 18+** (Vite 5 requires Node 18 or newer)
+- npm (comes with Node)
+
+## Getting Started
+
+Install dependencies and start the development server:
+
+```bash
+npm install
+npm run dev
+```
+
+To generate a production build:
+
+```bash
+npm run build
+```
+
+## Mock Data
+
+Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). Each entry represents a network site with fields such as `geoId`, `enodeb`, `sector`, current KPI value, and severity. The coordinates included in the file allow the map view to show markers for each site.
+
+## Features
+
+- **Interactive map** – displays site markers using React‑Leaflet
+- **KPI table with filters** – view, sort and filter sites by impact categories
+- **AI insights** – heuristic predictions and recommended actions for the selected site
+- **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
+
+## Contributing / Extending
+
+1. Fork the repository and create a new branch for your changes.
+2. Add new components or extend existing ones. The roadmap in [`ROADMAP.md`](ROADMAP.md) outlines planned enhancements.
+3. Update `src/data/sites.json` or add additional data files to experiment with different KPIs or site parameters.
+4. Submit a pull request describing your changes.
+
