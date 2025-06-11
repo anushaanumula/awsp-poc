@@ -33,11 +33,9 @@ Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). 
 - **AI insights** – heuristic predictions and recommended actions for the selected site
 - **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
 
-## Usage Tips
 
-The dashboard prioritizes clarity for new users. Only the ten most severe sites
-are listed in the KPI table, and a brief banner explains how to get started.
-Select a market, choose a site from the list and create tasks as needed.
+## Integration Philosophy
+Airwave ingests only the fields needed to identify and contextualize issues. For deeper analysis, the dashboard links out to external tools rather than duplicating their data. See [Integration Guidelines](docs/INTEGRATION_GUIDELINES.md) for more detail.
 
 ## Contributing / Extending
 
