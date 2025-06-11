@@ -5,6 +5,7 @@ import SiteDetails from './components/SiteDetails';
 import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
+import GuideBanner from './components/GuideBanner';
 import sitesData from './data/sites.json';
 
 const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
@@ -32,6 +33,7 @@ export default function App() {
       return [];
     }
   });
+  const [showGuide, setShowGuide] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -58,6 +60,7 @@ export default function App() {
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
     [filteredSites]
   );
+  const topSites = useMemo(() => sortedSites.slice(0, 10), [sortedSites]);
 
   const topSitesByImpact = useMemo(() => {
     const groups = {};
@@ -77,6 +80,7 @@ export default function App() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">AWSP AI Dashboard</h1>
+      {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
       {/* Market Selector */}
       <div className="mb-4 flex items-center space-x-2">
@@ -136,7 +140,7 @@ export default function App() {
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="col-span-2">
               <KpiTable
-                sites={sortedSites}
+                sites={topSites}
                 onSelect={handleSiteSelect}
                 selected={selectedSite}
                 onCreateTask={(site) => {
@@ -144,6 +148,7 @@ export default function App() {
                   setShowTaskModal(true);
                 }}
               />
+              <p className="text-xs text-gray-600 mt-1">Showing top 10 sites by severity</p>
 
             </div>
             <div className="flex flex-col space-y-4">

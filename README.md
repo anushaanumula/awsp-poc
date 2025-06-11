@@ -33,6 +33,12 @@ Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). 
 - **AI insights** – heuristic predictions and recommended actions for the selected site
 - **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
 
+## Usage Tips
+
+The dashboard prioritizes clarity for new users. Only the ten most severe sites
+are listed in the KPI table, and a brief banner explains how to get started.
+Select a market, choose a site from the list and create tasks as needed.
+
 ## Contributing / Extending
 
 1. Fork the repository and create a new branch for your changes.
