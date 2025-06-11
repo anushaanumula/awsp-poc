@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TaskModal = ({ site, onClose }) => {
+const TaskModal = ({ site, onClose, onCreate }) => {
   const [title, setTitle] = useState(`Check ${site.kpi} at GeoID ${site.geoId}`);
   const [description, setDescription] = useState(
     `Investigate ${site.kpi} issue on site ${site.geoId} (eNodeB: ${site.enodeb}). Current value is ${site.value}.`
@@ -8,7 +8,14 @@ const TaskModal = ({ site, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`✅ Task Created:\nTitle: ${title}\nDescription: ${description}`);
+    const task = {
+      id: Date.now(),
+      title,
+      description,
+      siteId: site.id,
+      createdAt: new Date().toISOString(),
+    };
+    onCreate(task);
     onClose();
   };
 
