@@ -36,7 +36,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
           : site.value < -10
           ? 'Degraded quality. Monitor for UL scheduling issues.'
           : 'Healthy signal quality';
-      case 'Uplink SINR (dB)':
+      case 'UL SINR (dB)':
         return site.value < 5
           ? 'High uplink interference. User throughput affected.'
           : site.value < 10
@@ -64,7 +64,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
         return 'Inspect antenna alignment or plan a drive test.';
       case 'RSRQ (dB)':
         return 'Investigate interference and verify power settings.';
-      case 'Uplink SINR (dB)':
+      case 'UL SINR (dB)':
         return 'Look for uplink blockers and schedule a site visit.';
       case 'Paging Success Rate':
         return 'Check paging channel configuration and core connectivity.';
