@@ -21,7 +21,7 @@ const TaskModal = ({ site, onClose, onCreate }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-md w-96 max-w-full">
+      <div className="bg-white p-6 rounded shadow-md w-96 max-w-full bw">
         <h2 className="text-lg font-semibold mb-4">Create Network Task</h2>
 
         <div className="mb-3 text-sm bg-gray-100 p-2 rounded border">

@@ -98,11 +98,11 @@ export default function App() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">AWSP AI Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
       {/* Market Selector */}
-      <div className="mb-4 flex items-center space-x-2">
+      <div className="mb-4 flex items-center space-x-2 bw">
         <label htmlFor="market" className="font-medium">
           Market:
         </label>
@@ -121,7 +121,7 @@ export default function App() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex space-x-4 mb-4">
+      <div className="flex space-x-4 mb-4 bw">
         {TABS.map((tab, i) => (
           <button
             key={tab}
@@ -136,7 +136,7 @@ export default function App() {
       {/* Category Filters */}
       {(activeTab === 0 || activeTab === 3) && (
         <>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-4 bw">
             {IMPACT_CATEGORIES.map((filter) => (
               <button
                 key={filter}
@@ -157,7 +157,7 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-3 gap-4 mb-4">
-            <div className="col-span-2">
+            <div className="col-span-2 bw">
               <KpiTable
                 sites={topSites}
                 onSelect={handleSiteSelect}
@@ -174,13 +174,13 @@ export default function App() {
               <div className="h-64 border rounded">
                 <MapView sites={filteredSites} onSelect={handleSiteSelect} selected={selectedSite} />
               </div>
-              <div className="h-64 border rounded overflow-auto">
+              <div className="h-64 border rounded overflow-auto bw">
                 <SiteDetails site={selectedSite} />
               </div>
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 bw">
             <button
               className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
               disabled={!selectedSite}
@@ -201,7 +201,7 @@ export default function App() {
       )}
 
       {activeTab === 1 && (
-        <div className="p-4 border rounded">
+        <div className="p-4 border rounded bw">
           <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
           <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
