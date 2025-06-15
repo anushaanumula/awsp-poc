@@ -4,7 +4,7 @@ const SiteDetails = ({ site }) => {
   if (!site) return <div className="p-4 border">Select a site to view details</div>;
 
   return (
-    <div className="p-4 border rounded">
+    <div className="p-4 border rounded bw">
       <h2 className="text-lg font-semibold mb-2">Selected Site</h2>
       <p><strong>Geo ID:</strong> {site.geoId}</p>
       <p><strong>eNodeB:</strong> {site.enodeb}</p>

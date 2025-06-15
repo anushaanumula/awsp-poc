@@ -1,7 +1,7 @@
 import React from 'react';
 
 const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
-  <table className="w-full mt-4 border text-sm">
+  <table className="w-full mt-4 border text-sm bw">
     <thead>
       <tr className="bg-gray-100">
         <th className="border p-2">Geo ID</th>
