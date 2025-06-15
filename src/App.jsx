@@ -110,10 +110,10 @@ export default function App() {
           id="market"
           value={market}
           onChange={(e) => setMarket(e.target.value)}
-          className="border rounded px-2 py-1 text-sm"
+          className="border rounded px-2 py-1 text-sm bg-gray-200"
         >
           {MARKETS.map((m) => (
-            <option key={m} value={m} title={`View ${m} market`}> 
+            <option key={m} value={m} title={`View ${m} market`}>
               {m}
             </option>
           ))}
@@ -126,7 +126,11 @@ export default function App() {
           <button
             key={tab}
             onClick={() => setActiveTab(i)}
-            className={`px-4 py-2 rounded-md border ${activeTab === i ? 'bg-blue-600 text-white' : 'bg-white text-black'}`}
+            className={`px-4 py-2 rounded-md border ${
+              activeTab === i
+                ? 'bg-black text-white hover:bg-gray-800'
+                : 'bg-white text-black hover:bg-gray-200'
+            }`}
           >
             {tab}
           </button>
@@ -141,7 +145,11 @@ export default function App() {
               <button
                 key={filter}
                 onClick={() => toggleFilter(filter)}
-                className={`px-3 py-1 rounded border text-sm ${activeFilters.includes(filter) ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}
+                className={`px-3 py-1 rounded border text-sm ${
+                  activeFilters.includes(filter)
+                    ? 'bg-black text-white hover:bg-gray-800'
+                    : 'bg-white text-black hover:bg-gray-200'
+                }`}
               >
                 {filter}
               </button>
@@ -149,7 +157,7 @@ export default function App() {
             {activeFilters.length > 0 && (
               <button
                 onClick={clearFilters}
-                className="px-3 py-1 bg-red-500 text-white text-sm rounded"
+                className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800"
               >
                 Clear Filters
               </button>
@@ -182,7 +190,7 @@ export default function App() {
 
           <div className="mt-4 bw">
             <button
-              className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
+              className="bg-black text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-gray-800"
               disabled={!selectedSite}
               onClick={() => setShowTaskModal(true)}
             >

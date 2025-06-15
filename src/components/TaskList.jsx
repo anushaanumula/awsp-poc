@@ -14,7 +14,7 @@ const TaskList = ({ tasks, onRemove }) => {
             <span>{task.title}</span>
             <button
               onClick={() => onRemove(task.id)}
-              className="text-red-600 hover:underline ml-2"
+              className="text-black hover:underline ml-2 hover:text-gray-700"
             >
               Remove
             </button>

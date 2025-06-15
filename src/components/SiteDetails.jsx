@@ -17,7 +17,7 @@ const SiteDetails = ({ site }) => {
           <h3 className="font-semibold mb-2">Sector/Carrier Overview</h3>
           <div className="overflow-x-auto">
             <table className="table-auto w-full text-sm border">
-              <thead className="bg-gray-100">
+              <thead className="bg-gray-700 text-white">
                 <tr>
                   <th className="border px-2 py-1">Cell ID</th>
                   <th className="border px-2 py-1">Band</th>

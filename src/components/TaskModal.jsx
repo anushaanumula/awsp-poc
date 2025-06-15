@@ -56,10 +56,10 @@ const TaskModal = ({ site, onClose, onCreate }) => {
           </div>
 
           <div className="flex justify-end gap-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-400 text-white rounded">
+            <button type="button" onClick={onClose} className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800">
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+            <button type="submit" className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800">
               Create Task
             </button>
           </div>
