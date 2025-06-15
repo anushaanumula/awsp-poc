@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Render the entire application in black and white */
+/* Base body styling */
 body {
-  @apply bg-white text-black;
+  @apply bg-white text-black font-sans;
+}
+
+/* Utility class to render sections in black and white */
+.bw {
   filter: grayscale(100%);
 }
