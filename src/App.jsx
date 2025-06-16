@@ -358,11 +358,11 @@ export default function App() {
                       </div>
                     </div>
                     <div className="grid grid-cols-3 gap-4 mt-4">
-                      <div className="border rounded overflow-auto">
-                        <SiteDetails site={selectedSite} />
-                      </div>
                       <div className="col-span-2 border rounded">
                         <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+                      </div>
+                      <div className="border rounded overflow-auto">
+                        <SiteDetails site={selectedSite} />
                       </div>
                     </div>
                   </>
