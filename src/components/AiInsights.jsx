@@ -80,6 +80,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
       title: `Resolve ${site.kpi} at GeoID ${site.geoId}`,
       description: getAction(),
       siteId: site.id,
+      impactType: site.kpiType,
       createdAt: new Date().toISOString(),
     };
     onApprove(task);

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 const TaskModal = ({ site, onClose, onCreate }) => {
-  const [title, setTitle] = useState(`Check ${site.kpi} at GeoID ${site.geoId}`);
+  const [title, setTitle] = useState(
+    `Check ${site.kpi} (${site.kpiType}) at GeoID ${site.geoId}`
+  );
   const [description, setDescription] = useState(
     `Investigate ${site.kpi} issue on site ${site.geoId} (eNodeB: ${site.enodeb}). Current value is ${site.value}.`
   );
@@ -13,6 +15,7 @@ const TaskModal = ({ site, onClose, onCreate }) => {
       title,
       description,
       siteId: site.id,
+      impactType: site.kpiType,
       createdAt: new Date().toISOString(),
     };
     onCreate(task);
@@ -29,6 +32,7 @@ const TaskModal = ({ site, onClose, onCreate }) => {
           <p><strong>eNodeB:</strong> {site.enodeb}</p>
           <p><strong>Sector:</strong> {site.sector}, <strong>Carrier:</strong> {site.carrier}</p>
           <p><strong>KPI:</strong> {site.kpi} = {site.value}</p>
+          <p><strong>Impact:</strong> {site.kpiType}</p>
           <p><strong>Last Updated:</strong> {site.updatedAt || 'N/A'}</p>
           <p><strong>Severity:</strong> {site.severity || '—'}</p>
         </div>

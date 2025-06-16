@@ -33,6 +33,7 @@ The app now selects the first entry in [`src/data/states.json`](src/data/states.
 - **KPI table with filters** – view, sort and filter sites by impact categories
 - **AI insights** – heuristic predictions and recommended actions for the selected site
 - **Task workflow** – create, view and remove tasks; tasks are persisted in local storage
+- **Impact tracking** – each task records the site's impact type for quick reference
 - **Simulated real-time KPI updates** – dashboard periodically refreshes the top KPIs without a backend server
 
 
