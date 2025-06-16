@@ -9,11 +9,19 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Set default icon manually
-let DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
+});
+
+// Slightly larger icon used for the selected marker
+const SelectedIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [30, 50],
+  iconAnchor: [15, 50],
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
@@ -40,6 +48,7 @@ const MapView = ({ sites, onSelect, selected }) => {
         <Marker
           key={site.geoId}
           position={[site.lat, site.lng]}
+          icon={selected?.id === site.id ? SelectedIcon : DefaultIcon}
           eventHandlers={{ click: () => onSelect(site) }}
         />
       ))}
