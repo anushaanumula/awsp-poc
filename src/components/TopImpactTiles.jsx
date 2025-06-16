@@ -20,7 +20,6 @@ const TopImpactTiles = ({ impactRegions, months = 3 }) => {
         className="w-full text-left font-semibold px-2 py-1 bg-yellow-100 rounded"
       >
         In the last {months} months, the top
-        <span className="float-right ml-2 bg-yellow-200 px-1">choose UI</span>
         <span className="float-right mr-2">{open ? '▲' : '▼'}</span>
       </button>
       {open && (
@@ -41,7 +40,7 @@ const TopImpactTiles = ({ impactRegions, months = 3 }) => {
                     {i < Math.min(regions.length, 3) - 1 ? ', ' : ''}
                   </span>
                 ))}
-                {regions.length > 3 && ' and remaining'}
+                {regions.length > 3}
               </p>
             );
           })}
