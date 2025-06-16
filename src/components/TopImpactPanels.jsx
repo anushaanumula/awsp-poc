@@ -12,30 +12,35 @@ const TopImpactPanels = ({ impactRegions, months = 3 }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-      {orderedTypes.map((type) => {
-        const regions = impactRegions[type] || [];
-        return (
-          <div key={type} className="p-3 border rounded text-sm bw">
-            <p className="font-semibold mb-1">
-              In the last {months} months, the top {type.toLowerCase()} regions:
-            </p>
-            <p>
-              {regions.slice(0, 3).map((region, i) => (
-                <span key={region}>
-                  <a
-                    href="#"
-                    className="underline text-blue-600 hover:text-blue-800"
-                  >
-                    {region}
-                  </a>
-                  {i < Math.min(regions.length, 3) - 1 ? ', ' : ''}
-                </span>
-              ))}
-            </p>
-          </div>
-        );
-      })}
+    <div className="mb-4">
+      <p className="font-semibold mb-2">
+        In the last {months} months, the top
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {orderedTypes.map((type) => {
+          const regions = impactRegions[type] || [];
+          return (
+            <div key={type} className="p-3 border rounded text-sm bw">
+              <p className="font-semibold mb-1">
+                {type} regions:
+              </p>
+              <p>
+                {regions.slice(0, 3).map((region, i) => (
+                  <span key={region}>
+                    <a
+                      href="#"
+                      className="underline text-blue-600 hover:text-blue-800"
+                    >
+                      {region}
+                    </a>
+                    {i < Math.min(regions.length, 3) - 1 ? ', ' : ''}
+                  </span>
+                ))}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
