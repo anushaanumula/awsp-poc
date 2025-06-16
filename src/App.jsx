@@ -39,7 +39,8 @@ const IMPACT_COLORS = {
   'Sleepy Cells': '#3182ce',
 };
 
-const DEFAULT_TILE_COLOR = '#4a5568';
+const DEFAULT_TILE_COLOR = '#cbd5e0';
+const SELECTED_TILE_COLOR = '#4a5568';
 
 const PRESELECTED_TOP_SITES = {
   'Top n Offenders': ['CHI003', 'OKL004', 'CHI008'],
@@ -99,7 +100,11 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSiteSelect = (site) => setSelectedSite(site);
+  const handleSiteSelect = (site) => {
+    setSelectedSite((prev) =>
+      prev && prev.geoId === site.geoId ? null : site
+    );
+  };
 
   const handleTaskCreate = (task) => {
     if (tasks.some((t) => t.siteId === task.siteId)) {
@@ -337,9 +342,10 @@ export default function App() {
                       <button
                         key={s.geoId}
                         onClick={() => handleSiteSelect(s)}
-                        className="btn text-white"
+                        className="btn"
                         style={{
-                          backgroundColor: isSelected ? IMPACT_COLORS[type] : DEFAULT_TILE_COLOR,
+                          backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
+                          color: isSelected ? '#fff' : '#000',
                         }}
                         title={`View ${s.geoId}`}
                       >
