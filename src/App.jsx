@@ -196,70 +196,66 @@ export default function App() {
 
       <TopImpactPanels impactRegions={topRegionsByImpact} />
 
-      {/* State/Geo Filters */}
-      <div className="mb-4 flex items-center space-x-2 bw">
-        <label htmlFor="state" className="font-medium">
-          Market/Geofence:
-        </label>
-        <select
-          id="state"
-          value={stateFilter}
-          onChange={(e) => setStateFilter(e.target.value)}
-          className="border rounded px-2 py-1 text-sm bg-gray-200"
-        >
-          <option value="All">All</option>
-          {STATES.map((s) => (
-            <option key={s} value={s} title={`View ${s}`}>
-              {s}
-            </option>
-          ))}
-        </select>
-        {geoOptions.length > 0 && (
-          <>
-            <label htmlFor="geo" className="ml-4 font-medium">
-              Site:
-            </label>
-            <select
-              id="geo"
-              value={geoFilter}
-              onChange={(e) => setGeoFilter(e.target.value)}
-              className="border rounded px-2 py-1 text-sm bg-gray-200"
-            >
-              <option value="All">All</option>
-              {geoOptions.map((g) => (
-                <option key={g} value={g} title={`View ${g}`}>{g}</option>
-              ))}
-            </select>
-          </>
-        )}
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="flex space-x-4 mb-4 bw">
-        {TABS.map((tab, i) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(i)}
-            className={`btn px-4 py-2 ${
-              activeTab === i
-                ? 'bg-black text-white hover:bg-gray-800'
-                : 'bg-white text-black hover:bg-gray-200'
-            }`}
+      {/* Filters and Tabs */}
+      <div className="mb-4 flex justify-between items-center bw">
+        <div className="flex items-center space-x-2">
+          <label htmlFor="state" className="font-medium">
+            Market/Geofence:
+          </label>
+          <select
+            id="state"
+            value={stateFilter}
+            onChange={(e) => setStateFilter(e.target.value)}
+            className="border rounded px-2 py-1 text-sm bg-gray-200"
           >
-            {tab}
-          </button>
-        ))}
+            <option value="All">All</option>
+            {STATES.map((s) => (
+              <option key={s} value={s} title={`View ${s}`}> {s} </option>
+            ))}
+          </select>
+          {geoOptions.length > 0 && (
+            <>
+              <label htmlFor="geo" className="ml-4 font-medium"> Site: </label>
+              <select
+                id="geo"
+                value={geoFilter}
+                onChange={(e) => setGeoFilter(e.target.value)}
+                className="border rounded px-2 py-1 text-sm bg-gray-200"
+              >
+                <option value="All">All</option>
+                {geoOptions.map((g) => (
+                  <option key={g} value={g} title={`View ${g}`}>{g}</option>
+                ))}
+              </select>
+            </>
+          )}
+        </div>
+        <div className="flex space-x-4">
+          {TABS.map((tab, i) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(i)}
+              className={`btn bg-transparent ${
+                activeTab === i
+                  ? 'font-bold underline'
+                  : 'hover:underline'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Category Filters */}
       {(activeTab === 0 || activeTab === 3) && (
         <>
-          <div className="flex flex-wrap gap-2 mb-4 bw">
+          <div className="flex flex-wrap gap-2 overflow-x-auto whitespace-nowrap mb-4 bw">
             {IMPACT_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => toggleFilter(cat)}
-                className={`btn ${
+                className={`btn rounded-full ${
                   activeFilters.includes(cat)
                     ? 'bg-black text-white hover:bg-gray-800'
                     : 'bg-gray-200 text-black hover:bg-gray-300'
