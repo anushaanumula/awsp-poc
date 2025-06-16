@@ -126,7 +126,7 @@ export default function App() {
       {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">
         <label htmlFor="state" className="font-medium">
-          State:
+          Market/Geofence:
         </label>
         <select
           id="state"
@@ -144,7 +144,7 @@ export default function App() {
         {geoOptions.length > 0 && (
           <>
             <label htmlFor="geo" className="ml-4 font-medium">
-              Geo ID:
+              Site:
             </label>
             <select
               id="geo"

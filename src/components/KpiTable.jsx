@@ -4,9 +4,9 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
   <table className="w-full mt-4 border text-sm bw">
     <thead>
       <tr className="bg-gray-700 text-white">
-        <th className="border p-2">Geo ID</th>
+        <th className="border p-2">Site</th>
         <th className="border p-2">eNodeB</th>
-        <th className="border p-2">State</th>
+        <th className="border p-2">Market/Geofence</th>
         <th className="border p-2">Sector</th>
         <th className="border p-2">Carrier</th>
         <th className="border p-2">KPI Name</th>

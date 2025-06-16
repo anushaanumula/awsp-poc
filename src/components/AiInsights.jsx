@@ -77,7 +77,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
     // Approving creates a simple task object using the rule-based suggestion.
     const task = {
       id: Date.now(),
-      title: `Resolve ${site.kpi} at GeoID ${site.geoId}`,
+      title: `Resolve ${site.kpi} at site ${site.geoId}`,
       description: getAction(),
       siteId: site.id,
       impactType: site.kpiType,
@@ -89,7 +89,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
   return (
     <div className="p-4 border rounded bw">
       <h2 className="text-lg font-semibold mb-2">AI Insights</h2>
-      <p><strong>Geo ID:</strong> {site.geoId}</p>
+      <p><strong>Site:</strong> {site.geoId}</p>
       <p><strong>eNodeB:</strong> {site.enodeb}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
