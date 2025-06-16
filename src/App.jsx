@@ -192,7 +192,7 @@ const topSitesByImpact = useMemo(() => {
           <button
             key={tab}
             onClick={() => setActiveTab(i)}
-            className={`px-4 py-2 rounded-md border ${
+            className={`btn px-4 py-2 ${
               activeTab === i
                 ? 'bg-black text-white hover:bg-gray-800'
                 : 'bg-white text-black hover:bg-gray-200'
@@ -211,7 +211,7 @@ const topSitesByImpact = useMemo(() => {
               <button
                 key={filter}
                 onClick={() => toggleFilter(filter)}
-                className={`px-3 py-1 rounded border text-sm ${
+                className={`btn ${
                   activeFilters.includes(filter)
                     ? 'bg-black text-white'
                     : 'bg-gray-200 text-black'
@@ -224,7 +224,7 @@ const topSitesByImpact = useMemo(() => {
             {activeFilters.length > 0 && (
               <button
                 onClick={clearFilters}
-                className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800"
+                className="btn bg-black text-white hover:bg-gray-800"
               >
                 Clear Filters
               </button>
@@ -264,7 +264,7 @@ const topSitesByImpact = useMemo(() => {
 
           <div className="mt-4 bw">
             <button
-              className="bg-black text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-gray-800"
+              className="btn px-4 py-2 bg-black text-white disabled:opacity-50 hover:bg-gray-800"
               disabled={!selectedSite}
               onClick={() => setShowTaskModal(true)}
             >

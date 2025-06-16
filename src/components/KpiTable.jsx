@@ -53,7 +53,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
                 e.stopPropagation();
                 onCreateTask(site);
               }}
-              className="text-black hover:underline text-xs hover:text-gray-700"
+              className="btn bg-black text-white hover:bg-gray-800"
               title="Create Task"
             >
               +Task
