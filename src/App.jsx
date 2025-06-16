@@ -302,7 +302,7 @@ export default function App() {
           <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
-              <div key={type}>
+              <div key={type} className="space-y-2">
                 <div className="mb-1 font-medium">{type}</div>
                 <div className="flex flex-wrap gap-2">
                   {sites.map((s) => (
@@ -317,25 +317,25 @@ export default function App() {
                     </button>
                   ))}
                 </div>
+                {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
+                  <div className="grid grid-cols-3 gap-4 mt-2">
+                    <div className="col-span-2 h-64 border rounded">
+                      <MapView
+                        sites={[selectedSite]}
+                        onSelect={handleSiteSelect}
+                        selected={selectedSite}
+                        stateFilter={stateFilter}
+                        zoomToSelected
+                      />
+                    </div>
+                    <div className="h-64 border rounded overflow-auto">
+                      <SiteDetails site={selectedSite} />
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-          {selectedSite && (
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="col-span-2 h-64 border rounded">
-                <MapView
-                  sites={[selectedSite]}
-                  onSelect={handleSiteSelect}
-                  selected={selectedSite}
-                  stateFilter={stateFilter}
-                  zoomToSelected
-                />
-              </div>
-              <div className="h-64 border rounded overflow-auto">
-                <SiteDetails site={selectedSite} />
-              </div>
-            </div>
-          )}
           <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
           <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
