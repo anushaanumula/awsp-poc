@@ -6,7 +6,9 @@ const TopImpactTiles = ({ impactRegions, months = 3 }) => {
     'Sleepy Cells',
     'Broken Trends',
     'High Runners',
+    'Heavy Hitters',
     'Top n Offenders',
+    'Micro/Macro Outage',
   ];
 
   return (
@@ -28,6 +30,7 @@ const TopImpactTiles = ({ impactRegions, months = 3 }) => {
                 {i < Math.min(regions.length, 3) - 1 ? ', ' : ''}
               </span>
             ))}
+            {regions.length > 3 && ' and remaining'}
           </p>
         );
       })}
