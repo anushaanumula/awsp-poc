@@ -2,8 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Render the entire application in black and white */
+/* Base body styling */
 body {
-  @apply bg-white text-black;
+  @apply bg-white text-black font-sans;
+}
+
+/* Utility class to render sections in black and white */
+.bw {
   filter: grayscale(100%);
+}
+
+/* Simple pointer style for map markers */
+.map-pointer {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 14px solid var(--color, #000);
+}
+
+.map-pointer.selected {
+  border-top-width: 18px;
+  border-left-width: 9px;
+  border-right-width: 9px;
 }
