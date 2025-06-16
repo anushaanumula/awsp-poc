@@ -120,7 +120,7 @@ export default function App() {
 
   const topSitesByImpact = useMemo(() => {
     const groups = {};
-    filteredSites.forEach((site) => {
+    sitesData.forEach((site) => {
       if (!groups[site.kpiType]) groups[site.kpiType] = [];
       groups[site.kpiType].push(site);
     });
@@ -131,14 +131,7 @@ export default function App() {
         .slice(0, 3);
     });
     return result;
-  }, [filteredSites]);
-
-  const heavyHitters = useMemo(() => {
-    return filteredSites
-      .filter((s) => s.kpiType === 'Heavy Hitters')
-      .sort((a, b) => b.severity - a.severity)
-      .slice(0, 3);
-  }, [filteredSites]);
+  }, []);
 
   return (
     <div className="p-4">
@@ -231,8 +224,6 @@ export default function App() {
             )}
           </div>
 
-          <ImpactTiles sites={filteredSites} />
-
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="col-span-2 bw">
               <KpiTable
@@ -284,12 +275,9 @@ export default function App() {
 
       {activeTab === 1 && (
         <div className="p-4 border rounded bw space-y-4">
-          <h2 className="text-xl font-semibold">Predicted Issues</h2>
+          <h2 className="text-xl font-semibold">AI Insights</h2>
+          <ImpactTiles sites={filteredSites} />
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-          {heavyHitters.length > 0 && (
-            <p className="text-sm" title="Sites generating the most trouble">Top Heavy Hitters: {heavyHitters.map((s) => s.geoId).join(', ')}</p>
-          )}
-
           <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2 h-64 border rounded">
               <MapView
@@ -303,7 +291,6 @@ export default function App() {
               <SiteDetails site={selectedSite} />
             </div>
           </div>
-
           <h2 className="text-xl font-semibold">Predicted Top Sites by Impact Type</h2>
           <ul className="list-disc pl-6 space-y-1 text-sm">
             {Object.entries(topSitesByImpact).map(([type, sites]) => (
@@ -312,9 +299,6 @@ export default function App() {
               </li>
             ))}
           </ul>
-
-          <h2 className="text-xl font-semibold">Recommended Actions and Generated Flow</h2>
-          <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
 

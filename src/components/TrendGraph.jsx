@@ -12,9 +12,8 @@ import { Line } from 'react-chartjs-2';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 
 const TrendGraph = ({ value }) => {
-  // Generate a short trend around current value
   const data = useMemo(() => {
-    const points = Array.from({ length: 7 }, (_, i) => {
+    const points = Array.from({ length: 7 }, () => {
       const variance = (Math.random() * 2 - 1) * 0.5;
       return parseFloat((value + variance).toFixed(2));
     });
@@ -35,10 +34,7 @@ const TrendGraph = ({ value }) => {
   const options = {
     responsive: true,
     plugins: { legend: { display: false } },
-    scales: {
-      x: { display: false },
-      y: { display: false },
-    },
+    scales: { x: { display: false }, y: { display: false } },
   };
 
   return <Line data={data} options={options} height={80} />;
