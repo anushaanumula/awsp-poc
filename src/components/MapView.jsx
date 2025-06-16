@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -24,6 +24,7 @@ const getIcon = (type, selected) =>
 
 const MapView = ({ sites, onSelect, selected, stateFilter }) => {
   const center = [39.5, -97.5];
+  const [zoom, setZoom] = useState(6);
 
   const BoundsSetter = () => {
     const map = useMap();
@@ -31,17 +32,31 @@ const MapView = ({ sites, onSelect, selected, stateFilter }) => {
       if (!sites.length) return;
       const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
       map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 7 : 10 });
-    }, [sites, map, stateFilter]);
+      setZoom(map.getZoom());
+    }, [stateFilter]);
+    return null;
+  };
+
+  const ZoomHandler = () => {
+    const map = useMapEvents({
+      zoomend: () => setZoom(map.getZoom()),
+    });
+    useEffect(() => {
+      if (map.getZoom() !== zoom) {
+        map.setZoom(zoom);
+      }
+    }, [zoom, map]);
     return null;
   };
 
   return (
-    <MapContainer center={center} zoom={6} scrollWheelZoom={true} className="w-full h-full">
+    <MapContainer center={center} zoom={zoom} scrollWheelZoom={true} className="w-full h-full">
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
       <BoundsSetter />
+      <ZoomHandler />
       {sites.map((site) => (
         <Marker
           key={site.geoId}

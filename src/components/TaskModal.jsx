@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const TaskModal = ({ site, onClose, onCreate }) => {
   const [title, setTitle] = useState(
-    `Check ${site.kpi} (${site.kpiType}) at GeoID ${site.geoId}`
+    `Check ${site.kpi} (${site.kpiType}) at site ${site.geoId}`
   );
   const [description, setDescription] = useState(
     `Investigate ${site.kpi} issue on site ${site.geoId} (eNodeB: ${site.enodeb}). Current value is ${site.value}.`
@@ -28,7 +28,7 @@ const TaskModal = ({ site, onClose, onCreate }) => {
         <h2 className="text-lg font-semibold mb-4">Create Network Task</h2>
 
         <div className="mb-3 text-sm bg-gray-100 p-2 rounded border">
-          <p><strong>Geo ID:</strong> {site.geoId}</p>
+          <p><strong>Site:</strong> {site.geoId}</p>
           <p><strong>eNodeB:</strong> {site.enodeb}</p>
           <p><strong>Sector:</strong> {site.sector}, <strong>Carrier:</strong> {site.carrier}</p>
           <p><strong>KPI:</strong> {site.kpi} = {site.value}</p>
