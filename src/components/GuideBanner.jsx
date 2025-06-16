@@ -10,7 +10,7 @@ const GuideBanner = ({ onClose }) => (
     <button
       onClick={onClose}
       aria-label="Dismiss guidance"
-      className="ml-2 text-black hover:underline hover:text-gray-700"
+      className="btn ml-2 bg-black text-white hover:bg-gray-800"
     >
       ×
     </button>

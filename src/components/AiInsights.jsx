@@ -96,16 +96,10 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
       <p className="mt-2 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
       <p className="mt-2"><strong>Suggested Action:</strong> {getAction()}</p>
       <div className="mt-4 flex gap-2">
-        <button
-          onClick={handleApprove}
-          className="px-3 py-1 bg-black text-white rounded text-sm hover:bg-gray-800"
-        >
+        <button onClick={handleApprove} className="btn bg-black text-white hover:bg-gray-800">
           Approve
         </button>
-        <button
-          onClick={() => {}}
-          className="px-3 py-1 bg-black text-white rounded text-sm hover:bg-gray-800"
-        >
+        <button onClick={() => {}} className="btn bg-black text-white hover:bg-gray-800">
           Dismiss
         </button>
       </div>

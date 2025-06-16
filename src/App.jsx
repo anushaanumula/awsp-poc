@@ -19,6 +19,33 @@ const IMPACT_CATEGORIES = [
   'Sleepy Cells'
 ];
 
+const IMPACT_INFO = {
+  'Top n Offenders': 'Worst KPI performance sites',
+  'Heavy Hitters': 'High traffic impact',
+  'High Runners': 'Consistently high usage',
+  'Micro/Macro Outage': 'Currently unreachable',
+  'Broken Trends': 'KPIs trending down',
+  'Sleepy Cells': 'Low traffic or inactive',
+};
+
+const IMPACT_COLORS = {
+  'Top n Offenders': '#e53e3e',
+  'Heavy Hitters': '#dd6b20',
+  'High Runners': '#38a169',
+  'Micro/Macro Outage': '#805ad5',
+  'Broken Trends': '#718096',
+  'Sleepy Cells': '#3182ce',
+};
+
+const PRESELECTED_TOP_SITES = {
+  'Top n Offenders': ['CHI003', 'OKL004', 'CHI008'],
+  'Heavy Hitters': ['CHI013', 'DAL016', 'STL020'],
+  'High Runners': ['DAL021', 'CHI023', 'OKL024'],
+  'Micro/Macro Outage': ['DAL031', 'OKL039', 'DAL036'],
+  'Broken Trends': ['TAM042', 'CHI043', 'OKL044'],
+  'Sleepy Cells': ['OKL054', 'STL055', 'CHI053'],
+};
+
 const STATES = statesList;
 const DEFAULT_STATE = STATES[0];
 
@@ -76,6 +103,10 @@ export default function App() {
       return;
     }
     setTasks((prev) => [...prev, task]);
+    setSites((prev) => prev.filter((s) => s.id !== task.siteId));
+    if (selectedSite?.id === task.siteId) {
+      setSelectedSite(null);
+    }
     setTaskMessage('Task created.');
   };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
@@ -87,6 +118,7 @@ export default function App() {
   };
 
   const clearFilters = () => setActiveFilters([]);
+
 
   useEffect(() => {
     setGeoFilter('All');
@@ -107,9 +139,10 @@ export default function App() {
       ? filteredByState
       : filteredByState.filter((s) => s.geoId === geoFilter);
 
-  const filteredSites = activeFilters.length
-    ? filteredByGeo.filter((site) => activeFilters.includes(site.kpiType))
-    : filteredByGeo;
+  const filteredSites =
+    activeFilters.length > 0
+      ? filteredByGeo.filter((site) => activeFilters.includes(site.kpiType))
+      : filteredByGeo;
 
   const sortedSites = useMemo(
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
@@ -117,17 +150,11 @@ export default function App() {
   );
   const topSites = useMemo(() => sortedSites.slice(0, 10), [sortedSites]);
 
-  const topSitesByImpact = useMemo(() => {
-    const groups = {};
-    sitesData.forEach((site) => {
-      if (!groups[site.kpiType]) groups[site.kpiType] = [];
-      groups[site.kpiType].push(site);
-    });
+  const predictedSitesByImpact = useMemo(() => {
+    const byId = Object.fromEntries(sitesData.map((s) => [s.geoId, s]));
     const result = {};
-    Object.keys(groups).forEach((type) => {
-      result[type] = groups[type]
-        .sort((a, b) => b.severity - a.severity)
-        .slice(0, 3);
+    Object.entries(PRESELECTED_TOP_SITES).forEach(([type, ids]) => {
+      result[type] = ids.map((id) => byId[id]).filter(Boolean);
     });
     return result;
   }, []);
@@ -184,7 +211,7 @@ export default function App() {
           <button
             key={tab}
             onClick={() => setActiveTab(i)}
-            className={`px-4 py-2 rounded-md border ${
+            className={`btn px-4 py-2 ${
               activeTab === i
                 ? 'bg-black text-white hover:bg-gray-800'
                 : 'bg-white text-black hover:bg-gray-200'
@@ -199,23 +226,24 @@ export default function App() {
       {(activeTab === 0 || activeTab === 3) && (
         <>
           <div className="flex flex-wrap gap-2 mb-4 bw">
-            {IMPACT_CATEGORIES.map((filter) => (
+            {IMPACT_CATEGORIES.map((cat) => (
               <button
-                key={filter}
-                onClick={() => toggleFilter(filter)}
-                className={`px-3 py-1 rounded border text-sm ${
-                  activeFilters.includes(filter)
+                key={cat}
+                onClick={() => toggleFilter(cat)}
+                className={`btn ${
+                  activeFilters.includes(cat)
                     ? 'bg-black text-white hover:bg-gray-800'
-                    : 'bg-white text-black hover:bg-gray-200'
+                    : 'bg-gray-200 text-black hover:bg-gray-300'
                 }`}
+                title={IMPACT_INFO[cat]}
               >
-                {filter}
+                {cat}
               </button>
             ))}
             {activeFilters.length > 0 && (
               <button
                 onClick={clearFilters}
-                className="px-3 py-1 bg-black text-white text-sm rounded hover:bg-gray-800"
+                className="btn bg-black text-white hover:bg-gray-800"
               >
                 Clear Filters
               </button>
@@ -253,7 +281,7 @@ export default function App() {
 
           <div className="mt-4 bw">
             <button
-              className="bg-black text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-gray-800"
+              className="btn px-4 py-2 bg-black text-white disabled:opacity-50 hover:bg-gray-800"
               disabled={!selectedSite}
               onClick={() => setShowTaskModal(true)}
             >
@@ -276,13 +304,42 @@ export default function App() {
           <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
           <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
-          <ul className="list-disc pl-6 space-y-1 text-sm">
-            {Object.entries(topSitesByImpact).map(([type, sites]) => (
-              <li key={type}>
-                <strong>{type}:</strong> {sites.map((s) => s.geoId).join(', ')}
-              </li>
+          <div className="space-y-3 mb-4">
+            {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
+              <div key={type} className="space-y-2">
+                <div className="mb-1 font-medium">{type}</div>
+                <div className="flex flex-wrap gap-2">
+                  {sites.map((s) => (
+                    <button
+                      key={s.geoId}
+                      onClick={() => handleSiteSelect(s)}
+                      className="btn text-white"
+                      style={{ backgroundColor: IMPACT_COLORS[type] }}
+                      title={`View ${s.geoId}`}
+                    >
+                      {s.geoId}
+                    </button>
+                  ))}
+                </div>
+                {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
+                  <div className="grid grid-cols-3 gap-4 mt-2">
+                    <div className="col-span-2 h-64 border rounded">
+                      <MapView
+                        sites={[selectedSite]}
+                        onSelect={handleSiteSelect}
+                        selected={selectedSite}
+                        stateFilter={stateFilter}
+                        zoomToSelected
+                      />
+                    </div>
+                    <div className="h-64 border rounded overflow-auto">
+                      <SiteDetails site={selectedSite} />
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
-          </ul>
+          </div>
           <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
           <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>

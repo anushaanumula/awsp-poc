@@ -22,7 +22,7 @@ const getIcon = (type, selected) =>
     iconAnchor: selected ? [9, 9] : [7, 7],
   });
 
-const MapView = ({ sites, onSelect, selected, stateFilter }) => {
+const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = false }) => {
   const center = [39.5, -97.5];
   const [zoom, setZoom] = useState(6);
 
@@ -33,7 +33,18 @@ const MapView = ({ sites, onSelect, selected, stateFilter }) => {
       const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
       map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 7 : 10 });
       setZoom(map.getZoom());
-    }, [stateFilter]);
+    }, [stateFilter, sites]);
+    return null;
+  };
+
+  const SelectedSetter = () => {
+    const map = useMap();
+    useEffect(() => {
+      if (zoomToSelected && selected) {
+        map.flyTo([selected.lat, selected.lng], 12);
+        setZoom(12);
+      }
+    }, [selected, zoomToSelected]);
     return null;
   };
 
@@ -56,6 +67,7 @@ const MapView = ({ sites, onSelect, selected, stateFilter }) => {
         attribution="&copy; OpenStreetMap contributors"
       />
       <BoundsSetter />
+      <SelectedSetter />
       <ZoomHandler />
       {sites.map((site) => (
         <Marker
