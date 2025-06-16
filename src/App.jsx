@@ -3,6 +3,7 @@ import MapView from './components/MapView';
 import KpiTable from './components/KpiTable';
 import SiteDetails from './components/SiteDetails';
 import AiInsights from './components/AiInsights';
+import TrendGraph from './components/TrendGraph';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
@@ -37,6 +38,9 @@ const IMPACT_COLORS = {
   'Broken Trends': '#718096',
   'Sleepy Cells': '#3182ce',
 };
+
+const DEFAULT_TILE_COLOR = '#cbd5e0';
+const SELECTED_TILE_COLOR = '#4a5568';
 
 const PRESELECTED_TOP_SITES = {
   'Top n Offenders': ['CHI003', 'OKL004', 'CHI008'],
@@ -96,7 +100,11 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSiteSelect = (site) => setSelectedSite(site);
+  const handleSiteSelect = (site) => {
+    setSelectedSite((prev) =>
+      prev && prev.geoId === site.geoId ? null : site
+    );
+  };
 
   const handleTaskCreate = (task) => {
     if (tasks.some((t) => t.siteId === task.siteId)) {
@@ -322,41 +330,56 @@ export default function App() {
 
       {activeTab === 1 && (
         <div className="p-4 border rounded bw">
-          <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
-          <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-          <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
+          <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
               <div key={type} className="space-y-2">
                 <div className="mb-1 font-medium">{type}</div>
                 <div className="flex flex-wrap gap-2">
-                  {sites.map((s) => (
-                    <button
-                      key={s.geoId}
-                      onClick={() => handleSiteSelect(s)}
-                      className="btn text-white"
-                      style={{ backgroundColor: IMPACT_COLORS[type] }}
-                      title={`View ${s.geoId}`}
-                    >
-                      {s.geoId}
-                    </button>
-                  ))}
+                  {sites.map((s) => {
+                    const isSelected = selectedSite && selectedSite.geoId === s.geoId;
+                    return (
+                      <button
+                        key={s.geoId}
+                        onClick={() => handleSiteSelect(s)}
+                        className="btn"
+                        style={{
+                          backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
+                          color: isSelected ? '#fff' : '#000',
+                        }}
+                        title={`View ${s.geoId}`}
+                      >
+                        {s.geoId}
+                      </button>
+                    );
+                  })}
                 </div>
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
-                  <div className="grid grid-cols-3 gap-4 mt-2">
-                    <div className="col-span-2 h-64 border rounded">
-                      <MapView
-                        sites={[selectedSite]}
-                        onSelect={handleSiteSelect}
-                        selected={selectedSite}
-                        stateFilter={stateFilter}
-                        zoomToSelected
-                      />
+                  <>
+                    <div className="grid grid-cols-3 gap-4 mt-2">
+                      {/* Keep map in default color */}
+                      <div className="h-64 border rounded full-color">
+                        <MapView
+                          sites={[selectedSite]}
+                          onSelect={handleSiteSelect}
+                          selected={selectedSite}
+                          stateFilter={stateFilter}
+                          zoomToSelected
+                        />
+                      </div>
+                      <div className="col-span-2 h-64 border rounded">
+                        <TrendGraph site={selectedSite} />
+                      </div>
                     </div>
-                    <div className="h-64 border rounded overflow-auto">
-                      <SiteDetails site={selectedSite} />
+                    <div className="grid grid-cols-3 gap-4 mt-4">
+                      <div className="h-64 border rounded overflow-auto">
+                        <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+                      </div>
+                      <div className="col-span-2 h-64 border rounded overflow-auto">
+                        <SiteDetails site={selectedSite} />
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
             ))}
