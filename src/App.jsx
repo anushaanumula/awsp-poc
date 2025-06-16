@@ -164,17 +164,22 @@ export default function App() {
     return result;
   }, []);
 
-  // Determine the most common regions experiencing micro/macro outages
-  const topOutageRegions = useMemo(() => {
-    const counts = {};
+  // Determine the most common regions for each impact category
+  const topRegionsByImpact = useMemo(() => {
+    const countsByImpact = {};
     sitesData.forEach((s) => {
-      if (s.kpiType === 'Micro/Macro Outage') {
-        counts[s.state] = (counts[s.state] || 0) + 1;
-      }
+      const impact = s.kpiType;
+      countsByImpact[impact] = countsByImpact[impact] || {};
+      countsByImpact[impact][s.state] =
+        (countsByImpact[impact][s.state] || 0) + 1;
     });
-    return Object.entries(counts)
-      .sort((a, b) => b[1] - a[1])
-      .map(([region]) => region);
+    const result = {};
+    Object.entries(countsByImpact).forEach(([impact, counts]) => {
+      result[impact] = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([state]) => state);
+    });
+    return result;
   }, []);
 
   return (
@@ -195,7 +200,7 @@ export default function App() {
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      <TopImpactTiles regions={topOutageRegions} />
+      <TopImpactTiles impactRegions={topRegionsByImpact} />
 
       {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">
