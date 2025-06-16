@@ -205,7 +205,7 @@ export default function App() {
             )}
           </div>
 
-          <div className="grid grid-cols-5 gap-4 mb-4">
+          <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="col-span-2 bw">
               <KpiTable
                 sites={topSites}
@@ -219,8 +219,8 @@ export default function App() {
               <p className="text-xs text-gray-600 mt-1">Showing top 10 sites by severity</p>
 
             </div>
-            <div className="col-span-3 flex flex-col space-y-4">
-              <div className="h-80 border rounded">
+            <div className="flex flex-col space-y-4">
+              <div className="h-64 border rounded">
               <MapView
                 sites={filteredSites}
                 onSelect={handleSiteSelect}
