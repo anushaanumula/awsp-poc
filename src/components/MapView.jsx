@@ -22,7 +22,7 @@ const getIcon = (type, selected) =>
     iconAnchor: selected ? [8, 8] : [6, 6],
   });
 
-const MapView = ({ sites, onSelect, selected }) => {
+const MapView = ({ sites, onSelect, selected, stateFilter }) => {
   const center = [39.5, -97.5];
 
   const BoundsSetter = () => {
@@ -30,8 +30,8 @@ const MapView = ({ sites, onSelect, selected }) => {
     useEffect(() => {
       if (!sites.length) return;
       const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
-      map.fitBounds(bounds, { maxZoom: 6 });
-    }, [sites, map]);
+      map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 6 : 8 });
+    }, [sites, map, stateFilter]);
     return null;
   };
 

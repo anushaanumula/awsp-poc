@@ -220,7 +220,12 @@ export default function App() {
             </div>
             <div className="flex flex-col space-y-4">
               <div className="h-64 border rounded">
-                <MapView sites={filteredSites} onSelect={handleSiteSelect} selected={selectedSite} />
+              <MapView
+                sites={filteredSites}
+                onSelect={handleSiteSelect}
+                selected={selectedSite}
+                stateFilter={stateFilter}
+              />
               </div>
               <div className="h-64 border rounded overflow-auto bw">
                 <SiteDetails site={selectedSite} />
