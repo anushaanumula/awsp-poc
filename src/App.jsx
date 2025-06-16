@@ -20,12 +20,13 @@ const IMPACT_CATEGORIES = [
 ];
 
 const STATES = statesList;
+const DEFAULT_STATE = STATES[0];
 
 export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [stateFilter, setStateFilter] = useState('All');
+  const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
   const [activeFilters, setActiveFilters] = useState([]);
   const [sites, setSites] = useState(sitesData);
