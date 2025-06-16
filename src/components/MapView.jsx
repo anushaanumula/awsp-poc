@@ -30,13 +30,13 @@ const MapView = ({ sites, onSelect, selected, stateFilter }) => {
     useEffect(() => {
       if (!sites.length) return;
       const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
-      map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 6 : 8 });
+      map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 7 : 10 });
     }, [sites, map, stateFilter]);
     return null;
   };
 
   return (
-    <MapContainer center={center} zoom={4} scrollWheelZoom={true} className="w-full h-full">
+    <MapContainer center={center} zoom={6} scrollWheelZoom={true} className="w-full h-full">
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
