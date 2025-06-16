@@ -11,7 +11,12 @@ const TaskList = ({ tasks, onRemove }) => {
       <ul className="list-disc pl-6 space-y-1 text-sm">
         {tasks.map((task) => (
           <li key={task.id} className="flex justify-between">
-            <span>{task.title}</span>
+            <span>
+              {task.title}
+              {task.impactType && (
+                <span className="ml-1 text-gray-600">({task.impactType})</span>
+              )}
+            </span>
             <button
               onClick={() => onRemove(task.id)}
               className="text-black hover:underline ml-2 hover:text-gray-700"
