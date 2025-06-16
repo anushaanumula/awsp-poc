@@ -213,8 +213,8 @@ const topSitesByImpact = useMemo(() => {
                 onClick={() => toggleFilter(filter)}
                 className={`px-3 py-1 rounded border text-sm ${
                   activeFilters.includes(filter)
-                    ? 'bg-black text-white hover:bg-gray-800'
-                    : 'bg-white text-black hover:bg-gray-200'
+                    ? 'bg-black text-white'
+                    : 'bg-gray-200 text-black'
                 }`}
                 title={`Filter ${filter}`}
               >
