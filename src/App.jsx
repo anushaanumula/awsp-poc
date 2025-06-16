@@ -7,7 +7,7 @@ import TrendGraph from './components/TrendGraph';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
-import TopImpactTiles from './components/TopImpactTiles';
+import TopImpactPanels from './components/TopImpactPanels';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -50,6 +50,27 @@ const PRESELECTED_TOP_SITES = {
   'Broken Trends': ['TAM042', 'CHI043', 'OKL044'],
   'Sleepy Cells': ['OKL054', 'STL055', 'CHI053'],
 };
+
+const GRAYSCALE_SITES = [
+  'CHI003',
+  'OKL004',
+  'CHI008',
+  'CHI013',
+  'DAL016',
+  'STL020',
+  'DAL021',
+  'CHI023',
+  'OKL024',
+  'DAL031',
+  'OKL039',
+  'DAL036',
+  'TAM042',
+  'CHI043',
+  'OKL044',
+  'OKL054',
+  'STL055',
+  'CHI053',
+];
 
 const STATES = statesList;
 const DEFAULT_STATE = STATES[0];
@@ -194,72 +215,68 @@ export default function App() {
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      <TopImpactTiles impactRegions={topRegionsByImpact} />
+      <TopImpactPanels impactRegions={topRegionsByImpact} />
 
-      {/* State/Geo Filters */}
-      <div className="mb-4 flex items-center space-x-2 bw">
-        <label htmlFor="state" className="font-medium">
-          Market/Geofence:
-        </label>
-        <select
-          id="state"
-          value={stateFilter}
-          onChange={(e) => setStateFilter(e.target.value)}
-          className="border rounded px-2 py-1 text-sm bg-gray-200"
-        >
-          <option value="All">All</option>
-          {STATES.map((s) => (
-            <option key={s} value={s} title={`View ${s}`}>
-              {s}
-            </option>
-          ))}
-        </select>
-        {geoOptions.length > 0 && (
-          <>
-            <label htmlFor="geo" className="ml-4 font-medium">
-              Site:
-            </label>
-            <select
-              id="geo"
-              value={geoFilter}
-              onChange={(e) => setGeoFilter(e.target.value)}
-              className="border rounded px-2 py-1 text-sm bg-gray-200"
-            >
-              <option value="All">All</option>
-              {geoOptions.map((g) => (
-                <option key={g} value={g} title={`View ${g}`}>{g}</option>
-              ))}
-            </select>
-          </>
-        )}
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="flex space-x-4 mb-4 bw">
-        {TABS.map((tab, i) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(i)}
-            className={`btn px-4 py-2 ${
-              activeTab === i
-                ? 'bg-black text-white hover:bg-gray-800'
-                : 'bg-white text-black hover:bg-gray-200'
-            }`}
+      {/* Filters and Tabs */}
+      <div className="mb-4 flex justify-between items-center bw">
+        <div className="flex items-center space-x-2">
+          <label htmlFor="state" className="font-medium">
+            Market/Geofence:
+          </label>
+          <select
+            id="state"
+            value={stateFilter}
+            onChange={(e) => setStateFilter(e.target.value)}
+            className="border rounded px-2 py-1 text-sm bg-gray-200"
           >
-            {tab}
-          </button>
-        ))}
+            <option value="All">All</option>
+            {STATES.map((s) => (
+              <option key={s} value={s} title={`View ${s}`}> {s} </option>
+            ))}
+          </select>
+          {geoOptions.length > 0 && (
+            <>
+              <label htmlFor="geo" className="ml-4 font-medium"> Site: </label>
+              <select
+                id="geo"
+                value={geoFilter}
+                onChange={(e) => setGeoFilter(e.target.value)}
+                className="border rounded px-2 py-1 text-sm bg-gray-200"
+              >
+                <option value="All">All</option>
+                {geoOptions.map((g) => (
+                  <option key={g} value={g} title={`View ${g}`}>{g}</option>
+                ))}
+              </select>
+            </>
+          )}
+        </div>
+        <div className="flex space-x-4">
+          {TABS.map((tab, i) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(i)}
+              className={`btn bg-transparent ${
+                activeTab === i
+                  ? 'font-bold underline'
+                  : 'hover:underline'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Category Filters */}
       {(activeTab === 0 || activeTab === 3) && (
         <>
-          <div className="flex flex-wrap gap-2 mb-4 bw">
+          <div className="flex flex-wrap gap-2 overflow-x-auto whitespace-nowrap mb-4 bw">
             {IMPACT_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => toggleFilter(cat)}
-                className={`btn ${
+                className={`btn rounded-full ${
                   activeFilters.includes(cat)
                     ? 'bg-black text-white hover:bg-gray-800'
                     : 'bg-gray-200 text-black hover:bg-gray-300'
@@ -329,7 +346,7 @@ export default function App() {
       )}
 
       {activeTab === 1 && (
-        <div className="p-4 border rounded bw">
+        <div className="p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
@@ -338,11 +355,12 @@ export default function App() {
                 <div className="flex flex-wrap gap-2">
                   {sites.map((s) => {
                     const isSelected = selectedSite && selectedSite.geoId === s.geoId;
+                    const grayscale = GRAYSCALE_SITES.includes(s.geoId);
                     return (
                       <button
                         key={s.geoId}
                         onClick={() => handleSiteSelect(s)}
-                        className="btn"
+                        className={`btn${grayscale ? ' bw' : ''}`}
                         style={{
                           backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
                           color: isSelected ? '#fff' : '#000',
@@ -367,7 +385,11 @@ export default function App() {
                           zoomToSelected
                         />
                       </div>
-                      <div className="col-span-2 h-64 border rounded">
+                      <div className={`col-span-2 h-64 border rounded${
+                        GRAYSCALE_SITES.includes(selectedSite.geoId)
+                          ? ' bw'
+                          : ''
+                      }`}>
                         <TrendGraph site={selectedSite} />
                       </div>
                     </div>

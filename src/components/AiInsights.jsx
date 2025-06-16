@@ -87,7 +87,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
   };
 
   return (
-    <div className="p-4 border rounded bw">
+    <div className="p-4 border rounded">
       <h2 className="text-lg font-semibold mb-2">AI Insights</h2>
       <p className="text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
       <p className="mt-2"><strong>Suggested Action:</strong> {getAction()}</p>
