@@ -61,7 +61,12 @@ const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = fals
   };
 
   return (
-    <MapContainer center={center} zoom={zoom} scrollWheelZoom={true} className="w-full h-full">
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      scrollWheelZoom={true}
+      className="w-full h-full full-color"
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"

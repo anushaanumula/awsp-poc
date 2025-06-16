@@ -6,6 +6,7 @@ import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
+import TopImpactTiles from './components/TopImpactTiles';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -53,6 +54,7 @@ export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
+  const [dashboardMode, setDashboardMode] = useState('SP');
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
   const [activeFilters, setActiveFilters] = useState([]);
@@ -119,6 +121,9 @@ export default function App() {
 
   const clearFilters = () => setActiveFilters([]);
 
+  const toggleDashboardMode = () =>
+    setDashboardMode((prev) => (prev === 'SP' ? 'SE' : 'SP'));
+
 
   useEffect(() => {
     setGeoFilter('All');
@@ -159,13 +164,41 @@ export default function App() {
     return result;
   }, []);
 
+  const topRegionsByImpact = useMemo(() => {
+    const counts = {};
+    sitesData.forEach((s) => {
+      counts[s.kpiType] = counts[s.kpiType] || {};
+      counts[s.kpiType][s.state] = (counts[s.kpiType][s.state] || 0) + 1;
+    });
+    const result = {};
+    Object.entries(counts).forEach(([type, regions]) => {
+      result[type] = Object.entries(regions)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([region]) => region);
+    });
+    return result;
+  }, []);
+
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold bw">
+          AWSP AI Dashboard <span className="text-base font-normal ml-2">({dashboardMode})</span>
+        </h1>
+        <button
+          onClick={toggleDashboardMode}
+          className="btn px-4 py-2 bg-black text-white hover:bg-gray-800"
+        >
+          {dashboardMode === 'SP' ? 'Switch to SE' : 'Switch to SP'}
+        </button>
+      </div>
       {taskMessage && (
         <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
+
+      <TopImpactTiles data={topRegionsByImpact} />
 
       {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">

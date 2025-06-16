@@ -12,6 +12,11 @@ body {
   filter: grayscale(100%);
 }
 
+/* Allow elements to retain color even inside a bw container */
+.bw .full-color {
+  filter: none;
+}
+
 /* Round marker style for map */
 .map-marker {
   display: inline-block;
