@@ -18,8 +18,8 @@ const getIcon = (type, selected) =>
     html: `<span class="map-marker${selected ? ' selected' : ''}" style="--color:${
       COLORS[type] || '#000'
     }"></span>`,
-    iconSize: selected ? [16, 16] : [12, 12],
-    iconAnchor: selected ? [8, 8] : [6, 6],
+    iconSize: selected ? [18, 18] : [14, 14],
+    iconAnchor: selected ? [9, 9] : [7, 7],
   });
 
 const MapView = ({ sites, onSelect, selected, stateFilter }) => {
