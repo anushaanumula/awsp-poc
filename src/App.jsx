@@ -51,7 +51,26 @@ const PRESELECTED_TOP_SITES = {
   'Sleepy Cells': ['OKL054', 'STL055', 'CHI053'],
 };
 
-const GRAYSCALE_SITES = ['CHI003', 'OKL004', 'CHI008'];
+const GRAYSCALE_SITES = [
+  'CHI003',
+  'OKL004',
+  'CHI008',
+  'CHI013',
+  'DAL016',
+  'STL020',
+  'DAL021',
+  'CHI023',
+  'OKL024',
+  'DAL031',
+  'OKL039',
+  'DAL036',
+  'TAM042',
+  'CHI043',
+  'OKL044',
+  'OKL054',
+  'STL055',
+  'CHI053',
+];
 
 const STATES = statesList;
 const DEFAULT_STATE = STATES[0];
@@ -366,7 +385,11 @@ export default function App() {
                           zoomToSelected
                         />
                       </div>
-                      <div className="col-span-2 h-64 border rounded">
+                      <div className={`col-span-2 h-64 border rounded${
+                        GRAYSCALE_SITES.includes(selectedSite.geoId)
+                          ? ' bw'
+                          : ''
+                      }`}>
                         <TrendGraph site={selectedSite} />
                       </div>
                     </div>
