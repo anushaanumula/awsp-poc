@@ -7,6 +7,7 @@ import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
 import sitesData from './data/sites.json';
+import statesList from './data/states.json';
 
 const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
 const IMPACT_CATEGORIES = [
@@ -18,13 +19,14 @@ const IMPACT_CATEGORIES = [
   'Sleepy Cells'
 ];
 
-const MARKETS = ['Northeast', 'Southeast', 'Midwest', 'West'];
+const STATES = statesList;
 
 export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [market, setMarket] = useState(MARKETS[0]);
+  const [stateFilter, setStateFilter] = useState('All');
+  const [geoFilter, setGeoFilter] = useState('All');
   const [activeFilters, setActiveFilters] = useState([]);
   const [sites, setSites] = useState(sitesData);
   const [tasks, setTasks] = useState(() => {
@@ -71,9 +73,28 @@ export default function App() {
 
   const clearFilters = () => setActiveFilters([]);
 
+  useEffect(() => {
+    setGeoFilter('All');
+  }, [stateFilter]);
+
+  const geoOptions = useMemo(() => {
+    if (stateFilter === 'All') return [];
+    return sitesData
+      .filter((s) => s.state === stateFilter)
+      .map((s) => s.geoId);
+  }, [stateFilter]);
+
+  const filteredByState =
+    stateFilter === 'All' ? sites : sites.filter((s) => s.state === stateFilter);
+
+  const filteredByGeo =
+    geoFilter === 'All'
+      ? filteredByState
+      : filteredByState.filter((s) => s.geoId === geoFilter);
+
   const filteredSites = activeFilters.length
-    ? sites.filter((site) => activeFilters.includes(site.kpiType))
-    : sites;
+    ? filteredByGeo.filter((site) => activeFilters.includes(site.kpiType))
+    : filteredByGeo;
 
   const sortedSites = useMemo(
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
@@ -101,23 +122,42 @@ export default function App() {
       <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      {/* Market Selector */}
+      {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">
-        <label htmlFor="market" className="font-medium">
-          Market:
+        <label htmlFor="state" className="font-medium">
+          State:
         </label>
         <select
-          id="market"
-          value={market}
-          onChange={(e) => setMarket(e.target.value)}
+          id="state"
+          value={stateFilter}
+          onChange={(e) => setStateFilter(e.target.value)}
           className="border rounded px-2 py-1 text-sm bg-gray-200"
         >
-          {MARKETS.map((m) => (
-            <option key={m} value={m} title={`View ${m} market`}>
-              {m}
+          <option value="All">All</option>
+          {STATES.map((s) => (
+            <option key={s} value={s} title={`View ${s}`}>
+              {s}
             </option>
           ))}
         </select>
+        {geoOptions.length > 0 && (
+          <>
+            <label htmlFor="geo" className="ml-4 font-medium">
+              Geo ID:
+            </label>
+            <select
+              id="geo"
+              value={geoFilter}
+              onChange={(e) => setGeoFilter(e.target.value)}
+              className="border rounded px-2 py-1 text-sm bg-gray-200"
+            >
+              <option value="All">All</option>
+              {geoOptions.map((g) => (
+                <option key={g} value={g} title={`View ${g}`}>{g}</option>
+              ))}
+            </select>
+          </>
+        )}
       </div>
 
       {/* Tab Navigation */}
