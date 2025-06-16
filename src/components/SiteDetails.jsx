@@ -6,11 +6,23 @@ const SiteDetails = ({ site }) => {
   return (
     <div className="p-4 border rounded bw">
       <h2 className="text-lg font-semibold mb-2">Selected Site</h2>
-      <p><strong>Site:</strong> {site.geoId}</p>
-      <p><strong>eNodeB:</strong> {site.enodeb}</p>
-      <p><strong>Market/Geofence:</strong> {site.state}</p>
-      <p><strong>KPI:</strong> {site.kpi}</p>
-      <p><strong>Value:</strong> {site.value}</p>
+      <div className="flex space-x-4 text-sm">
+        <p>
+          <strong>Site:</strong> {site.geoId}
+        </p>
+        <p>
+          <strong>eNodeB:</strong> {site.enodeb}
+        </p>
+        <p>
+          <strong>Market/Geofence:</strong> {site.state}
+        </p>
+        <p>
+          <strong>KPI:</strong> {site.kpi}
+        </p>
+        <p>
+          <strong>Value:</strong> {site.value}
+        </p>
+      </div>
 
       {/* Sector Carrier Table */}
       {site.sectorInfo && site.sectorInfo.length > 0 && (
