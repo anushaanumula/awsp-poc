@@ -118,9 +118,9 @@ export default function App() {
   );
   const topSites = useMemo(() => sortedSites.slice(0, 10), [sortedSites]);
 
-const topSitesByImpact = useMemo(() => {
+  const topSitesByImpact = useMemo(() => {
     const groups = {};
-    sitesData.forEach((site) => {
+    filteredSites.forEach((site) => {
       if (!groups[site.kpiType]) groups[site.kpiType] = [];
       groups[site.kpiType].push(site);
     });
@@ -131,14 +131,14 @@ const topSitesByImpact = useMemo(() => {
         .slice(0, 3);
     });
     return result;
-}, []);
+  }, [filteredSites]);
 
   const heavyHitters = useMemo(() => {
-    return sitesData
+    return filteredSites
       .filter((s) => s.kpiType === 'Heavy Hitters')
       .sort((a, b) => b.severity - a.severity)
       .slice(0, 3);
-  }, []);
+  }, [filteredSites]);
 
   return (
     <div className="p-4">

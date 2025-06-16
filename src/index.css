@@ -31,5 +31,5 @@ body {
 
 /* Consistent button styling */
 .btn {
-  @apply px-3 py-1 rounded border text-sm;
+  @apply px-3 py-1 rounded border border-black text-sm;
 }
