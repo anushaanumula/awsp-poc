@@ -326,22 +326,8 @@ export default function App() {
           <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
           <SiteDetails site={selectedSite} />
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-          {selectedSite && (
-            <div className="grid grid-cols-3 gap-4 mt-4">
-              <div className="h-64 border rounded">
-                <MapView
-                  sites={[selectedSite]}
-                  onSelect={handleSiteSelect}
-                  selected={selectedSite}
-                  stateFilter={stateFilter}
-                  zoomToSelected
-                />
-              </div>
-              <div className="col-span-2 h-64 border rounded">
-                <TrendGraph site={selectedSite} />
-              </div>
-            </div>
-          )}
+          {/* Map and trend graph for the selected site are shown within the
+              "Predicted Top Sites" section to avoid duplication */}
           <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
