@@ -51,6 +51,8 @@ const PRESELECTED_TOP_SITES = {
   'Sleepy Cells': ['OKL054', 'STL055', 'CHI053'],
 };
 
+const GRAYSCALE_SITES = ['CHI003', 'OKL004', 'CHI008'];
+
 const STATES = statesList;
 const DEFAULT_STATE = STATES[0];
 
@@ -334,11 +336,12 @@ export default function App() {
                 <div className="flex flex-wrap gap-2">
                   {sites.map((s) => {
                     const isSelected = selectedSite && selectedSite.geoId === s.geoId;
+                    const grayscale = GRAYSCALE_SITES.includes(s.geoId);
                     return (
                       <button
                         key={s.geoId}
                         onClick={() => handleSiteSelect(s)}
-                        className="btn"
+                        className={`btn${grayscale ? ' bw' : ''}`}
                         style={{
                           backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
                           color: isSelected ? '#fff' : '#000',
