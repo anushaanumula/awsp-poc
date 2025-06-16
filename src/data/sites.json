@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "geoId": 103,
+    "geoId": "DAL001",
     "enodeb": 35258,
     "sector": 1,
     "carrier": 2,
@@ -10,8 +10,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 02:11",
-    "lat": 38.02283383612677,
-    "lng": -122.74775890817865,
+    "lat": 32.707642,
+    "lng": -96.885795,
     "sectorInfo": [
       {
         "cellId": "CELL6820",
@@ -37,11 +37,12 @@
         "edt": "Yes",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 2,
-    "geoId": 817,
+    "geoId": "TAM002",
     "enodeb": 46379,
     "sector": 4,
     "carrier": 7,
@@ -50,8 +51,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 01:02",
-    "lat": 37.90649391690048,
-    "lng": -122.34192374900657,
+    "lat": 28.142828,
+    "lng": -82.401042,
     "sectorInfo": [
       {
         "cellId": "CELL5256",
@@ -77,11 +78,12 @@
         "edt": "Yes",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 3,
-    "geoId": 697,
+    "geoId": "CHI003",
     "enodeb": 18305,
     "sector": 1,
     "carrier": 9,
@@ -90,8 +92,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 01:56",
-    "lat": 37.43675604197229,
-    "lng": -122.18857345728085,
+    "lat": 41.978123,
+    "lng": -87.744495,
     "sectorInfo": [
       {
         "cellId": "CELL8498",
@@ -101,11 +103,12 @@
         "edt": "Yes",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 4,
-    "geoId": 862,
+    "geoId": "OKL004",
     "enodeb": 26997,
     "sector": 5,
     "carrier": 9,
@@ -114,8 +117,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 01:48",
-    "lat": 38.150764395956315,
-    "lng": -122.51920768094585,
+    "lat": 35.664057,
+    "lng": -97.506386,
     "sectorInfo": [
       {
         "cellId": "CELL3219",
@@ -125,11 +128,12 @@
         "edt": "No",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 5,
-    "geoId": 759,
+    "geoId": "STL005",
     "enodeb": 13421,
     "sector": 2,
     "carrier": 3,
@@ -138,8 +142,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 00:49",
-    "lat": 38.05870653737109,
-    "lng": -122.40322441873384,
+    "lat": 38.731378,
+    "lng": -90.197268,
     "sectorInfo": [
       {
         "cellId": "CELL2726",
@@ -157,11 +161,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 6,
-    "geoId": 597,
+    "geoId": "DAL006",
     "enodeb": 34638,
     "sector": 3,
     "carrier": 8,
@@ -170,8 +175,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 01:56",
-    "lat": 37.6064423049224,
-    "lng": -122.70525790642576,
+    "lat": 32.924135,
+    "lng": -96.865373,
     "sectorInfo": [
       {
         "cellId": "CELL2776",
@@ -197,11 +202,12 @@
         "edt": "No",
         "tilt": "5\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 7,
-    "geoId": 398,
+    "geoId": "TAM007",
     "enodeb": 16034,
     "sector": 5,
     "carrier": 5,
@@ -210,8 +216,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 02:02",
-    "lat": 38.07944955593824,
-    "lng": -122.39950550045279,
+    "lat": 27.965044,
+    "lng": -82.331377,
     "sectorInfo": [
       {
         "cellId": "CELL4858",
@@ -229,11 +235,12 @@
         "edt": "Yes",
         "tilt": "4\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 8,
-    "geoId": 741,
+    "geoId": "CHI008",
     "enodeb": 11290,
     "sector": 4,
     "carrier": 4,
@@ -242,8 +249,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 00:22",
-    "lat": 38.036806661366825,
-    "lng": -122.11358711481154,
+    "lat": 42.004816,
+    "lng": -87.805377,
     "sectorInfo": [
       {
         "cellId": "CELL7627",
@@ -269,11 +276,12 @@
         "edt": "Yes",
         "tilt": "7\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 9,
-    "geoId": 765,
+    "geoId": "OKL009",
     "enodeb": 49018,
     "sector": 4,
     "carrier": 4,
@@ -282,8 +290,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 00:29",
-    "lat": 37.96920942632755,
-    "lng": -121.92752323016757,
+    "lat": 35.296502,
+    "lng": -97.50738,
     "sectorInfo": [
       {
         "cellId": "CELL4206",
@@ -309,11 +317,12 @@
         "edt": "No",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 10,
-    "geoId": 336,
+    "geoId": "STL010",
     "enodeb": 30363,
     "sector": 1,
     "carrier": 8,
@@ -322,8 +331,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 00:34",
-    "lat": 37.43865683820615,
-    "lng": -122.21176328264644,
+    "lat": 38.549925,
+    "lng": -90.34362,
     "sectorInfo": [
       {
         "cellId": "CELL6766",
@@ -349,11 +358,12 @@
         "edt": "Yes",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 11,
-    "geoId": 513,
+    "geoId": "DAL011",
     "enodeb": 18375,
     "sector": 1,
     "carrier": 6,
@@ -362,8 +372,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 00:18",
-    "lat": 37.94711281800613,
-    "lng": -122.66944741370048,
+    "lat": 32.631907,
+    "lng": -96.932692,
     "sectorInfo": [
       {
         "cellId": "CELL8405",
@@ -381,11 +391,12 @@
         "edt": "No",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 12,
-    "geoId": 458,
+    "geoId": "TAM012",
     "enodeb": 26479,
     "sector": 4,
     "carrier": 3,
@@ -394,8 +405,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 2,
     "updatedAt": "2025-06-08 00:19",
-    "lat": 37.7837525639506,
-    "lng": -122.6203991355859,
+    "lat": 27.849569,
+    "lng": -82.454101,
     "sectorInfo": [
       {
         "cellId": "CELL9917",
@@ -413,11 +424,12 @@
         "edt": "No",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 13,
-    "geoId": 490,
+    "geoId": "CHI013",
     "enodeb": 40404,
     "sector": 2,
     "carrier": 2,
@@ -426,8 +438,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 01:36",
-    "lat": 38.04779121506386,
-    "lng": -122.33139615233745,
+    "lat": 42.037375,
+    "lng": -87.480449,
     "sectorInfo": [
       {
         "cellId": "CELL8924",
@@ -453,11 +465,12 @@
         "edt": "No",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 14,
-    "geoId": 810,
+    "geoId": "OKL014",
     "enodeb": 19216,
     "sector": 2,
     "carrier": 9,
@@ -466,8 +479,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 2,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 37.47922679182739,
-    "lng": -122.53158496951771,
+    "lat": 35.282295,
+    "lng": -97.502737,
     "sectorInfo": [
       {
         "cellId": "CELL8704",
@@ -485,11 +498,12 @@
         "edt": "Yes",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 15,
-    "geoId": 888,
+    "geoId": "STL015",
     "enodeb": 27291,
     "sector": 5,
     "carrier": 7,
@@ -498,8 +512,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 3,
     "updatedAt": "2025-06-08 02:31",
-    "lat": 37.39620918102668,
-    "lng": -122.71819347052109,
+    "lat": 38.472664,
+    "lng": -90.377808,
     "sectorInfo": [
       {
         "cellId": "CELL1661",
@@ -517,11 +531,12 @@
         "edt": "Yes",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 16,
-    "geoId": 875,
+    "geoId": "DAL016",
     "enodeb": 32183,
     "sector": 3,
     "carrier": 6,
@@ -530,8 +545,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 00:08",
-    "lat": 38.037811299464046,
-    "lng": -122.851353680106,
+    "lat": 32.790584,
+    "lng": -96.656044,
     "sectorInfo": [
       {
         "cellId": "CELL7497",
@@ -549,11 +564,12 @@
         "edt": "No",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 17,
-    "geoId": 360,
+    "geoId": "TAM017",
     "enodeb": 48773,
     "sector": 5,
     "carrier": 8,
@@ -562,8 +578,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 02:02",
-    "lat": 37.64727024248295,
-    "lng": -122.45043402949547,
+    "lat": 27.81168,
+    "lng": -82.586151,
     "sectorInfo": [
       {
         "cellId": "CELL8056",
@@ -581,11 +597,12 @@
         "edt": "Yes",
         "tilt": "5\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 18,
-    "geoId": 796,
+    "geoId": "CHI018",
     "enodeb": 21750,
     "sector": 4,
     "carrier": 6,
@@ -594,8 +611,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 00:41",
-    "lat": 37.38829483111298,
-    "lng": -121.9950497962603,
+    "lat": 41.734674,
+    "lng": -87.805338,
     "sectorInfo": [
       {
         "cellId": "CELL6970",
@@ -605,11 +622,12 @@
         "edt": "No",
         "tilt": "4\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 19,
-    "geoId": 694,
+    "geoId": "OKL019",
     "enodeb": 24139,
     "sector": 5,
     "carrier": 9,
@@ -618,8 +636,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 3,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 37.459923790253896,
-    "lng": -122.5934361887511,
+    "lat": 35.373484,
+    "lng": -97.401172,
     "sectorInfo": [
       {
         "cellId": "CELL9560",
@@ -645,11 +663,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 20,
-    "geoId": 482,
+    "geoId": "STL020",
     "enodeb": 17479,
     "sector": 3,
     "carrier": 8,
@@ -658,8 +677,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 00:23",
-    "lat": 38.06315023054331,
-    "lng": -122.75681514187495,
+    "lat": 38.703608,
+    "lng": -90.195183,
     "sectorInfo": [
       {
         "cellId": "CELL9464",
@@ -677,11 +696,12 @@
         "edt": "No",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 21,
-    "geoId": 124,
+    "geoId": "DAL021",
     "enodeb": 11842,
     "sector": 2,
     "carrier": 2,
@@ -690,8 +710,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-08 00:48",
-    "lat": 37.410419789420395,
-    "lng": -122.48725877675184,
+    "lat": 32.698151,
+    "lng": -96.762363,
     "sectorInfo": [
       {
         "cellId": "CELL9721",
@@ -701,11 +721,12 @@
         "edt": "Yes",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 22,
-    "geoId": 204,
+    "geoId": "TAM022",
     "enodeb": 33146,
     "sector": 5,
     "carrier": 5,
@@ -714,8 +735,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 01:57",
-    "lat": 37.59696167868036,
-    "lng": -121.91433494049632,
+    "lat": 27.862883,
+    "lng": -82.344489,
     "sectorInfo": [
       {
         "cellId": "CELL9951",
@@ -725,11 +746,12 @@
         "edt": "Yes",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 23,
-    "geoId": 828,
+    "geoId": "CHI023",
     "enodeb": 33545,
     "sector": 2,
     "carrier": 4,
@@ -738,8 +760,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-07 23:55",
-    "lat": 37.703165363771994,
-    "lng": -122.50160561563085,
+    "lat": 41.679318,
+    "lng": -87.452592,
     "sectorInfo": [
       {
         "cellId": "CELL7478",
@@ -765,11 +787,12 @@
         "edt": "No",
         "tilt": "7\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 24,
-    "geoId": 715,
+    "geoId": "OKL024",
     "enodeb": 35890,
     "sector": 3,
     "carrier": 9,
@@ -778,8 +801,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 37.35441471738103,
-    "lng": -122.7511843149833,
+    "lat": 35.63624,
+    "lng": -97.585427,
     "sectorInfo": [
       {
         "cellId": "CELL9777",
@@ -789,11 +812,12 @@
         "edt": "No",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 25,
-    "geoId": 400,
+    "geoId": "STL025",
     "enodeb": 25591,
     "sector": 1,
     "carrier": 4,
@@ -802,8 +826,8 @@
     "kpiType": "High Runners",
     "severity": 3,
     "updatedAt": "2025-06-08 00:30",
-    "lat": 38.157839779195406,
-    "lng": -122.52113892056904,
+    "lat": 38.709329,
+    "lng": -90.246098,
     "sectorInfo": [
       {
         "cellId": "CELL2419",
@@ -829,11 +853,12 @@
         "edt": "No",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 26,
-    "geoId": 271,
+    "geoId": "DAL026",
     "enodeb": 24156,
     "sector": 1,
     "carrier": 5,
@@ -842,8 +867,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 02:29",
-    "lat": 37.60092984767626,
-    "lng": -122.78029615251332,
+    "lat": 32.845779,
+    "lng": -96.698777,
     "sectorInfo": [
       {
         "cellId": "CELL3786",
@@ -853,11 +878,12 @@
         "edt": "Yes",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 27,
-    "geoId": 642,
+    "geoId": "TAM027",
     "enodeb": 22602,
     "sector": 5,
     "carrier": 4,
@@ -866,8 +892,8 @@
     "kpiType": "High Runners",
     "severity": 1,
     "updatedAt": "2025-06-08 00:10",
-    "lat": 38.037534526532035,
-    "lng": -121.99065371130214,
+    "lat": 27.998666,
+    "lng": -82.303665,
     "sectorInfo": [
       {
         "cellId": "CELL8909",
@@ -877,11 +903,12 @@
         "edt": "No",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 28,
-    "geoId": 671,
+    "geoId": "CHI028",
     "enodeb": 38975,
     "sector": 5,
     "carrier": 1,
@@ -890,8 +917,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 01:43",
-    "lat": 38.070545146973984,
-    "lng": -122.68114459889414,
+    "lat": 41.679429,
+    "lng": -87.565206,
     "sectorInfo": [
       {
         "cellId": "CELL8380",
@@ -901,11 +928,12 @@
         "edt": "No",
         "tilt": "4\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 29,
-    "geoId": 316,
+    "geoId": "OKL029",
     "enodeb": 35113,
     "sector": 5,
     "carrier": 9,
@@ -914,8 +942,8 @@
     "kpiType": "High Runners",
     "severity": 1,
     "updatedAt": "2025-06-07 23:39",
-    "lat": 37.40962830553073,
-    "lng": -122.80297962420872,
+    "lat": 35.394998,
+    "lng": -97.660503,
     "sectorInfo": [
       {
         "cellId": "CELL9741",
@@ -925,11 +953,12 @@
         "edt": "Yes",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 30,
-    "geoId": 804,
+    "geoId": "STL030",
     "enodeb": 24170,
     "sector": 4,
     "carrier": 4,
@@ -938,8 +967,8 @@
     "kpiType": "High Runners",
     "severity": 3,
     "updatedAt": "2025-06-07 23:43",
-    "lat": 37.64049076980632,
-    "lng": -122.46187794869023,
+    "lat": 38.517955,
+    "lng": -90.219117,
     "sectorInfo": [
       {
         "cellId": "CELL3752",
@@ -949,11 +978,12 @@
         "edt": "No",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 31,
-    "geoId": 812,
+    "geoId": "DAL031",
     "enodeb": 17086,
     "sector": 1,
     "carrier": 3,
@@ -962,8 +992,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 5,
     "updatedAt": "2025-06-08 01:34",
-    "lat": 38.050852273544635,
-    "lng": -122.4628124809345,
+    "lat": 32.593736,
+    "lng": -96.898632,
     "sectorInfo": [
       {
         "cellId": "CELL7936",
@@ -973,11 +1003,12 @@
         "edt": "Yes",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 32,
-    "geoId": 317,
+    "geoId": "TAM032",
     "enodeb": 32077,
     "sector": 1,
     "carrier": 2,
@@ -986,8 +1017,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:06",
-    "lat": 37.89840891445848,
-    "lng": -122.88671254368369,
+    "lat": 27.89297,
+    "lng": -82.469719,
     "sectorInfo": [
       {
         "cellId": "CELL3140",
@@ -1005,11 +1036,12 @@
         "edt": "Yes",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 33,
-    "geoId": 860,
+    "geoId": "CHI033",
     "enodeb": 34239,
     "sector": 3,
     "carrier": 5,
@@ -1018,8 +1050,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:06",
-    "lat": 37.25825466125875,
-    "lng": -122.01739554176336,
+    "lat": 41.927628,
+    "lng": -87.72747,
     "sectorInfo": [
       {
         "cellId": "CELL3483",
@@ -1037,11 +1069,12 @@
         "edt": "Yes",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 34,
-    "geoId": 429,
+    "geoId": "OKL034",
     "enodeb": 38425,
     "sector": 3,
     "carrier": 8,
@@ -1050,8 +1083,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 2,
     "updatedAt": "2025-06-08 00:00",
-    "lat": 38.024055137443035,
-    "lng": -122.09766288786581,
+    "lat": 35.57599,
+    "lng": -97.688931,
     "sectorInfo": [
       {
         "cellId": "CELL3026",
@@ -1061,11 +1094,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 35,
-    "geoId": 360,
+    "geoId": "STL035",
     "enodeb": 43395,
     "sector": 4,
     "carrier": 9,
@@ -1074,8 +1108,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:33",
-    "lat": 37.39484628236638,
-    "lng": -122.32269252944592,
+    "lat": 38.812266,
+    "lng": -90.012263,
     "sectorInfo": [
       {
         "cellId": "CELL1109",
@@ -1101,11 +1135,12 @@
         "edt": "Yes",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 36,
-    "geoId": 238,
+    "geoId": "DAL036",
     "enodeb": 45162,
     "sector": 1,
     "carrier": 9,
@@ -1114,8 +1149,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 00:31",
-    "lat": 37.268659013869005,
-    "lng": -122.0714896945768,
+    "lat": 32.744415,
+    "lng": -96.633817,
     "sectorInfo": [
       {
         "cellId": "CELL2461",
@@ -1125,11 +1160,12 @@
         "edt": "No",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 37,
-    "geoId": 823,
+    "geoId": "TAM037",
     "enodeb": 11239,
     "sector": 3,
     "carrier": 3,
@@ -1138,8 +1174,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 3,
     "updatedAt": "2025-06-08 00:25",
-    "lat": 37.299267520980656,
-    "lng": -122.38505136816204,
+    "lat": 27.78932,
+    "lng": -82.293718,
     "sectorInfo": [
       {
         "cellId": "CELL2956",
@@ -1157,11 +1193,12 @@
         "edt": "Yes",
         "tilt": "9\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 38,
-    "geoId": 676,
+    "geoId": "CHI038",
     "enodeb": 27290,
     "sector": 2,
     "carrier": 2,
@@ -1170,8 +1207,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 01:30",
-    "lat": 37.25915621724585,
-    "lng": -121.98853699728548,
+    "lat": 41.838906,
+    "lng": -87.673886,
     "sectorInfo": [
       {
         "cellId": "CELL9555",
@@ -1181,11 +1218,12 @@
         "edt": "Yes",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 39,
-    "geoId": 815,
+    "geoId": "OKL039",
     "enodeb": 20375,
     "sector": 2,
     "carrier": 4,
@@ -1194,8 +1232,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 5,
     "updatedAt": "2025-06-08 01:06",
-    "lat": 38.017098408672794,
-    "lng": -122.21460929995756,
+    "lat": 35.606282,
+    "lng": -97.453879,
     "sectorInfo": [
       {
         "cellId": "CELL1254",
@@ -1213,11 +1251,12 @@
         "edt": "Yes",
         "tilt": "4\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 40,
-    "geoId": 101,
+    "geoId": "STL040",
     "enodeb": 15323,
     "sector": 3,
     "carrier": 9,
@@ -1226,8 +1265,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 01:22",
-    "lat": 37.43269913166741,
-    "lng": -121.92277335414863,
+    "lat": 38.805335,
+    "lng": -90.167366,
     "sectorInfo": [
       {
         "cellId": "CELL2119",
@@ -1237,11 +1276,12 @@
         "edt": "No",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 41,
-    "geoId": 736,
+    "geoId": "DAL041",
     "enodeb": 26926,
     "sector": 5,
     "carrier": 3,
@@ -1250,8 +1290,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 01:07",
-    "lat": 37.96553036268564,
-    "lng": -122.40975870908882,
+    "lat": 32.822951,
+    "lng": -96.93963,
     "sectorInfo": [
       {
         "cellId": "CELL2081",
@@ -1277,11 +1317,12 @@
         "edt": "Yes",
         "tilt": "9\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 42,
-    "geoId": 519,
+    "geoId": "TAM042",
     "enodeb": 20072,
     "sector": 4,
     "carrier": 9,
@@ -1290,8 +1331,8 @@
     "kpiType": "Broken Trends",
     "severity": 5,
     "updatedAt": "2025-06-08 01:29",
-    "lat": 37.92150150338267,
-    "lng": -122.35296906670493,
+    "lat": 27.758168,
+    "lng": -82.371435,
     "sectorInfo": [
       {
         "cellId": "CELL3546",
@@ -1309,11 +1350,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 43,
-    "geoId": 506,
+    "geoId": "CHI043",
     "enodeb": 25213,
     "sector": 2,
     "carrier": 9,
@@ -1322,8 +1364,8 @@
     "kpiType": "Broken Trends",
     "severity": 5,
     "updatedAt": "2025-06-08 00:13",
-    "lat": 37.23851029450698,
-    "lng": -122.31601946824573,
+    "lat": 42.072494,
+    "lng": -87.662426,
     "sectorInfo": [
       {
         "cellId": "CELL8071",
@@ -1333,11 +1375,12 @@
         "edt": "Yes",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 44,
-    "geoId": 669,
+    "geoId": "OKL044",
     "enodeb": 45418,
     "sector": 5,
     "carrier": 4,
@@ -1346,8 +1389,8 @@
     "kpiType": "Broken Trends",
     "severity": 4,
     "updatedAt": "2025-06-08 01:44",
-    "lat": 37.9865916744515,
-    "lng": -122.7960406374051,
+    "lat": 35.288497,
+    "lng": -97.608746,
     "sectorInfo": [
       {
         "cellId": "CELL1373",
@@ -1357,11 +1400,12 @@
         "edt": "No",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 45,
-    "geoId": 596,
+    "geoId": "STL045",
     "enodeb": 25335,
     "sector": 3,
     "carrier": 4,
@@ -1370,8 +1414,8 @@
     "kpiType": "Broken Trends",
     "severity": 3,
     "updatedAt": "2025-06-08 02:03",
-    "lat": 38.12810945368356,
-    "lng": -122.06912607180111,
+    "lat": 38.442812,
+    "lng": -90.190296,
     "sectorInfo": [
       {
         "cellId": "CELL5363",
@@ -1397,11 +1441,12 @@
         "edt": "Yes",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 46,
-    "geoId": 814,
+    "geoId": "DAL046",
     "enodeb": 31799,
     "sector": 5,
     "carrier": 3,
@@ -1410,8 +1455,8 @@
     "kpiType": "Broken Trends",
     "severity": 1,
     "updatedAt": "2025-06-08 01:03",
-    "lat": 38.057307984605174,
-    "lng": -122.57321921302963,
+    "lat": 32.642153,
+    "lng": -96.922972,
     "sectorInfo": [
       {
         "cellId": "CELL5393",
@@ -1437,11 +1482,12 @@
         "edt": "No",
         "tilt": "9\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 47,
-    "geoId": 492,
+    "geoId": "TAM047",
     "enodeb": 41934,
     "sector": 2,
     "carrier": 7,
@@ -1450,8 +1496,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 02:11",
-    "lat": 37.47438218267218,
-    "lng": -122.75792109632626,
+    "lat": 27.984828,
+    "lng": -82.403471,
     "sectorInfo": [
       {
         "cellId": "CELL4238",
@@ -1469,11 +1515,12 @@
         "edt": "Yes",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 48,
-    "geoId": 743,
+    "geoId": "CHI048",
     "enodeb": 14198,
     "sector": 4,
     "carrier": 6,
@@ -1482,8 +1529,8 @@
     "kpiType": "Broken Trends",
     "severity": 3,
     "updatedAt": "2025-06-07 23:55",
-    "lat": 37.541276570600346,
-    "lng": -122.50377236040428,
+    "lat": 41.681112,
+    "lng": -87.645163,
     "sectorInfo": [
       {
         "cellId": "CELL5181",
@@ -1509,11 +1556,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 49,
-    "geoId": 689,
+    "geoId": "OKL049",
     "enodeb": 30139,
     "sector": 1,
     "carrier": 9,
@@ -1522,8 +1570,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 01:53",
-    "lat": 37.49572236527263,
-    "lng": -122.66497037456236,
+    "lat": 35.487049,
+    "lng": -97.473655,
     "sectorInfo": [
       {
         "cellId": "CELL9440",
@@ -1541,11 +1589,12 @@
         "edt": "No",
         "tilt": "9\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 50,
-    "geoId": 732,
+    "geoId": "STL050",
     "enodeb": 22267,
     "sector": 3,
     "carrier": 5,
@@ -1554,8 +1603,8 @@
     "kpiType": "Broken Trends",
     "severity": 1,
     "updatedAt": "2025-06-08 02:04",
-    "lat": 37.27818363745041,
-    "lng": -122.67430427811384,
+    "lat": 38.576061,
+    "lng": -90.375711,
     "sectorInfo": [
       {
         "cellId": "CELL5641",
@@ -1573,11 +1622,12 @@
         "edt": "No",
         "tilt": "8\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 51,
-    "geoId": 182,
+    "geoId": "DAL051",
     "enodeb": 35962,
     "sector": 2,
     "carrier": 5,
@@ -1586,8 +1636,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 1,
     "updatedAt": "2025-06-08 00:52",
-    "lat": 37.39458196096134,
-    "lng": -122.52134189890953,
+    "lat": 32.943926,
+    "lng": -96.807003,
     "sectorInfo": [
       {
         "cellId": "CELL1449",
@@ -1613,11 +1663,12 @@
         "edt": "No",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 52,
-    "geoId": 776,
+    "geoId": "TAM052",
     "enodeb": 33949,
     "sector": 1,
     "carrier": 3,
@@ -1626,8 +1677,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 2,
     "updatedAt": "2025-06-08 01:33",
-    "lat": 37.50655897075414,
-    "lng": -122.34709335994472,
+    "lat": 28.007702,
+    "lng": -82.60145,
     "sectorInfo": [
       {
         "cellId": "CELL7399",
@@ -1637,11 +1688,12 @@
         "edt": "No",
         "tilt": "3\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 53,
-    "geoId": 294,
+    "geoId": "CHI053",
     "enodeb": 17197,
     "sector": 1,
     "carrier": 2,
@@ -1650,8 +1702,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 4,
     "updatedAt": "2025-06-08 00:04",
-    "lat": 38.17142104473882,
-    "lng": -122.02064946500005,
+    "lat": 41.926002,
+    "lng": -87.468437,
     "sectorInfo": [
       {
         "cellId": "CELL7053",
@@ -1669,11 +1721,12 @@
         "edt": "Yes",
         "tilt": "5\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 54,
-    "geoId": 471,
+    "geoId": "OKL054",
     "enodeb": 39937,
     "sector": 2,
     "carrier": 3,
@@ -1682,8 +1735,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 5,
     "updatedAt": "2025-06-07 23:51",
-    "lat": 37.47335377509357,
-    "lng": -122.64608855663046,
+    "lat": 35.40547,
+    "lng": -97.444802,
     "sectorInfo": [
       {
         "cellId": "CELL6540",
@@ -1693,11 +1746,12 @@
         "edt": "Yes",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 55,
-    "geoId": 383,
+    "geoId": "STL055",
     "enodeb": 49846,
     "sector": 4,
     "carrier": 4,
@@ -1706,8 +1760,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 5,
     "updatedAt": "2025-06-08 01:46",
-    "lat": 37.27424366495616,
-    "lng": -122.17557398654628,
+    "lat": 38.512807,
+    "lng": -90.080431,
     "sectorInfo": [
       {
         "cellId": "CELL4895",
@@ -1733,11 +1787,12 @@
         "edt": "No",
         "tilt": "6\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   },
   {
     "id": 56,
-    "geoId": 838,
+    "geoId": "DAL056",
     "enodeb": 39447,
     "sector": 4,
     "carrier": 8,
@@ -1746,8 +1801,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 01:32",
-    "lat": 37.490227758490896,
-    "lng": -122.52031452050964,
+    "lat": 32.731729,
+    "lng": -96.702222,
     "sectorInfo": [
       {
         "cellId": "CELL5296",
@@ -1765,11 +1820,12 @@
         "edt": "No",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Dallas"
   },
   {
     "id": 57,
-    "geoId": 888,
+    "geoId": "TAM057",
     "enodeb": 12008,
     "sector": 1,
     "carrier": 9,
@@ -1778,8 +1834,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 00:16",
-    "lat": 38.084675788971886,
-    "lng": -122.13469832618041,
+    "lat": 28.057815,
+    "lng": -82.586924,
     "sectorInfo": [
       {
         "cellId": "CELL7769",
@@ -1805,11 +1861,12 @@
         "edt": "Yes",
         "tilt": "5\u00b0"
       }
-    ]
+    ],
+    "state": "Tampa"
   },
   {
     "id": 58,
-    "geoId": 446,
+    "geoId": "CHI058",
     "enodeb": 36411,
     "sector": 3,
     "carrier": 7,
@@ -1818,8 +1875,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 02:30",
-    "lat": 37.804018231642964,
-    "lng": -122.31595705002466,
+    "lat": 41.929716,
+    "lng": -87.609349,
     "sectorInfo": [
       {
         "cellId": "CELL7458",
@@ -1837,11 +1894,12 @@
         "edt": "No",
         "tilt": "2\u00b0"
       }
-    ]
+    ],
+    "state": "Chicago"
   },
   {
     "id": 59,
-    "geoId": 117,
+    "geoId": "OKL059",
     "enodeb": 25496,
     "sector": 5,
     "carrier": 4,
@@ -1850,8 +1908,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 2,
     "updatedAt": "2025-06-08 00:34",
-    "lat": 37.343415091812645,
-    "lng": -121.9493149122473,
+    "lat": 35.350245,
+    "lng": -97.487869,
     "sectorInfo": [
       {
         "cellId": "CELL9988",
@@ -1877,11 +1935,12 @@
         "edt": "Yes",
         "tilt": "10\u00b0"
       }
-    ]
+    ],
+    "state": "Oklahoma City"
   },
   {
     "id": 60,
-    "geoId": 396,
+    "geoId": "STL060",
     "enodeb": 20481,
     "sector": 1,
     "carrier": 8,
@@ -1890,8 +1949,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 4,
     "updatedAt": "2025-06-08 00:03",
-    "lat": 37.9168008774618,
-    "lng": -122.36985397758231,
+    "lat": 38.53932,
+    "lng": -90.281378,
     "sectorInfo": [
       {
         "cellId": "CELL9770",
@@ -1901,6 +1960,7 @@
         "edt": "No",
         "tilt": "1\u00b0"
       }
-    ]
+    ],
+    "state": "St Louis"
   }
 ]

@@ -6,6 +6,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
       <tr className="bg-gray-700 text-white">
         <th className="border p-2">Geo ID</th>
         <th className="border p-2">eNodeB</th>
+        <th className="border p-2">State</th>
         <th className="border p-2">Sector</th>
         <th className="border p-2">Carrier</th>
         <th className="border p-2">KPI Name</th>
@@ -39,6 +40,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
           >
           <td className="border p-2">{site.geoId}</td>
           <td className="border p-2">{site.enodeb}</td>
+          <td className="border p-2">{site.state}</td>
           <td className="border p-2">{site.sector}</td>
           <td className="border p-2">{site.carrier}</td>
           <td className="border p-2">{site.kpi}</td>
