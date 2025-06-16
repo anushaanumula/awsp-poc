@@ -325,7 +325,7 @@ export default function App() {
       )}
 
       {activeTab === 1 && (
-        <div className="p-4 border rounded bw">
+        <div className="p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
