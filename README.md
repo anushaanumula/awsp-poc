@@ -25,7 +25,7 @@ npm run build
 ## Mock Data
 
 Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). Each entry represents a network site with fields such as `geoId`, `enodeb`, `sector`, current KPI value, and severity. The coordinates included in the file allow the map view to show markers for each site.
-The app now selects the first entry in [`src/data/states.json`](src/data/states.json) as the initial region, so the map loads zoomed in on that state by default.
+The app selects the first entry in [`src/data/states.json`](src/data/states.json) as the initial region, so the map loads zoomed in on that state by default. The zoom level has been increased for a closer view of sites when the page first loads.
 
 ## Features
 
