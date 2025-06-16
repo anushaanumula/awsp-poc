@@ -37,7 +37,14 @@ export default function App() {
       return [];
     }
   });
+  const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
+
+  useEffect(() => {
+    if (!taskMessage) return;
+    const timer = setTimeout(() => setTaskMessage(''), 3000);
+    return () => clearTimeout(timer);
+  }, [taskMessage]);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -63,7 +70,14 @@ export default function App() {
 
   const handleSiteSelect = (site) => setSelectedSite(site);
 
-  const handleTaskCreate = (task) => setTasks((prev) => [...prev, task]);
+  const handleTaskCreate = (task) => {
+    if (tasks.some((t) => t.siteId === task.siteId)) {
+      setTaskMessage('Task already exists for this site.');
+      return;
+    }
+    setTasks((prev) => [...prev, task]);
+    setTaskMessage('Task created.');
+  };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
 
   const toggleFilter = (filter) => {
@@ -121,6 +135,9 @@ export default function App() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
+      {taskMessage && (
+        <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
+      )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
       {/* State/Geo Filters */}
