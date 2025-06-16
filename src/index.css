@@ -12,17 +12,18 @@ body {
   filter: grayscale(100%);
 }
 
-/* Simple pointer style for map markers */
-.map-pointer {
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 14px solid var(--color, #000);
+/* Round marker style for map */
+.map-marker {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: var(--color, #000);
+  border-radius: 50%;
+  border: 2px solid #fff;
 }
 
-.map-pointer.selected {
-  border-top-width: 18px;
-  border-left-width: 9px;
-  border-right-width: 9px;
+.map-marker.selected {
+  width: 16px;
+  height: 16px;
+  border-width: 3px;
 }

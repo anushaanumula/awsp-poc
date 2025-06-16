@@ -8,6 +8,7 @@ const SiteDetails = ({ site }) => {
       <h2 className="text-lg font-semibold mb-2">Selected Site</h2>
       <p><strong>Geo ID:</strong> {site.geoId}</p>
       <p><strong>eNodeB:</strong> {site.enodeb}</p>
+      <p><strong>State:</strong> {site.state}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
 
