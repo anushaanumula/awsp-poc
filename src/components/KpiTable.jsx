@@ -37,6 +37,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
               }
             }}
             className={`cursor-pointer ${selected?.id === site.id ? 'bg-gray-300' : severityClass}`}
+            title={`Impact: ${site.kpiType} | Severity: ${site.severity}`}
           >
           <td className="border p-2">{site.geoId}</td>
           <td className="border p-2">{site.enodeb}</td>

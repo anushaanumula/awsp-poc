@@ -1,4 +1,5 @@
 import React from 'react';
+import TrendGraph from './TrendGraph';
 
 const SiteDetails = ({ site }) => {
   if (!site) return <div className="p-4 border">Select a site to view details</div>;
@@ -11,6 +12,9 @@ const SiteDetails = ({ site }) => {
       <p><strong>Market/Geofence:</strong> {site.state}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
+      <div className="mt-3">
+        <TrendGraph value={site.value} />
+      </div>
 
       {/* Sector Carrier Table */}
       {site.sectorInfo && site.sectorInfo.length > 0 && (

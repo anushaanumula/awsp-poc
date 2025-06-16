@@ -1,4 +1,5 @@
 import React from 'react';
+import TrendGraph from './TrendGraph';
 
 // This component currently relies on hand-tuned rules to emulate what a machine
 // learning model might produce. Each KPI is checked against basic threshold
@@ -86,16 +87,24 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
     onApprove(task);
   };
 
+  const riskColor =
+    site.severity >= 4 ? 'bg-red-600' : site.severity >= 2 ? 'bg-yellow-500' : 'bg-green-600';
+
   return (
-    <div className="p-4 border rounded bw">
-      <h2 className="text-lg font-semibold mb-2">AI Insights</h2>
+    <div className="p-4 border rounded bw space-y-2">
+      <div className={`p-2 text-white rounded ${riskColor}`} title="Severity rating">
+        Severity {site.severity}
+      </div>
       <p><strong>Site:</strong> {site.geoId}</p>
       <p><strong>eNodeB:</strong> {site.enodeb}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
-      <p className="mt-2 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
-      <p className="mt-2"><strong>Suggested Action:</strong> {getAction()}</p>
-      <div className="mt-4 flex gap-2">
+      <div className="my-2">
+        <TrendGraph value={site.value} />
+      </div>
+      <p className="mt-1 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
+      <p className="mt-1"><strong>Suggested Action:</strong> {getAction()}</p>
+      <div className="mt-2 flex gap-2">
         <button
           onClick={handleApprove}
           className="px-3 py-1 bg-black text-white rounded text-sm hover:bg-gray-800"

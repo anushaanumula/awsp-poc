@@ -6,6 +6,7 @@ import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
+import ImpactTiles from './components/ImpactTiles';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -117,7 +118,7 @@ export default function App() {
   );
   const topSites = useMemo(() => sortedSites.slice(0, 10), [sortedSites]);
 
-  const topSitesByImpact = useMemo(() => {
+const topSitesByImpact = useMemo(() => {
     const groups = {};
     sitesData.forEach((site) => {
       if (!groups[site.kpiType]) groups[site.kpiType] = [];
@@ -130,6 +131,13 @@ export default function App() {
         .slice(0, 3);
     });
     return result;
+}, []);
+
+  const heavyHitters = useMemo(() => {
+    return sitesData
+      .filter((s) => s.kpiType === 'Heavy Hitters')
+      .sort((a, b) => b.severity - a.severity)
+      .slice(0, 3);
   }, []);
 
   return (
@@ -208,6 +216,7 @@ export default function App() {
                     ? 'bg-black text-white hover:bg-gray-800'
                     : 'bg-white text-black hover:bg-gray-200'
                 }`}
+                title={`Filter ${filter}`}
               >
                 {filter}
               </button>
@@ -221,6 +230,8 @@ export default function App() {
               </button>
             )}
           </div>
+
+          <ImpactTiles sites={filteredSites} />
 
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="col-span-2 bw">
@@ -272,10 +283,28 @@ export default function App() {
       )}
 
       {activeTab === 1 && (
-        <div className="p-4 border rounded bw">
-          <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
+        <div className="p-4 border rounded bw space-y-4">
+          <h2 className="text-xl font-semibold">Predicted Issues</h2>
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-          <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
+          {heavyHitters.length > 0 && (
+            <p className="text-sm" title="Sites generating the most trouble">Top Heavy Hitters: {heavyHitters.map((s) => s.geoId).join(', ')}</p>
+          )}
+
+          <div className="grid grid-cols-3 gap-4">
+            <div className="col-span-2 h-64 border rounded">
+              <MapView
+                sites={filteredSites}
+                onSelect={handleSiteSelect}
+                selected={selectedSite}
+                stateFilter={stateFilter}
+              />
+            </div>
+            <div className="h-64 border rounded overflow-auto">
+              <SiteDetails site={selectedSite} />
+            </div>
+          </div>
+
+          <h2 className="text-xl font-semibold">Predicted Top Sites by Impact Type</h2>
           <ul className="list-disc pl-6 space-y-1 text-sm">
             {Object.entries(topSitesByImpact).map(([type, sites]) => (
               <li key={type}>
@@ -283,7 +312,8 @@ export default function App() {
               </li>
             ))}
           </ul>
-          <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
+
+          <h2 className="text-xl font-semibold">Recommended Actions and Generated Flow</h2>
           <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
