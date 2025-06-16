@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GuideBanner = ({ onClose }) => (
-  <div className="p-3 mb-4 bg-blue-50 border border-blue-200 rounded flex justify-between items-start text-sm">
+  <div className="p-3 mb-4 bg-gray-100 border border-gray-300 rounded flex justify-between items-start text-sm bw">
     <p>
       New here? Select a market then pick a site from the table below. Use the
       category filters to focus on the most severe issues and create a task when
@@ -10,7 +10,7 @@ const GuideBanner = ({ onClose }) => (
     <button
       onClick={onClose}
       aria-label="Dismiss guidance"
-      className="ml-2 text-blue-700 hover:underline"
+      className="ml-2 text-black hover:underline hover:text-gray-700"
     >
       ×
     </button>

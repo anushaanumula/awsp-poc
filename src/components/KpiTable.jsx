@@ -1,9 +1,9 @@
 import React from 'react';
 
 const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
-  <table className="w-full mt-4 border text-sm">
+  <table className="w-full mt-4 border text-sm bw">
     <thead>
-      <tr className="bg-gray-100">
+      <tr className="bg-gray-700 text-white">
         <th className="border p-2">Geo ID</th>
         <th className="border p-2">eNodeB</th>
         <th className="border p-2">Sector</th>
@@ -35,7 +35,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
                 onSelect(site);
               }
             }}
-            className={`cursor-pointer ${selected?.id === site.id ? 'bg-blue-100' : severityClass}`}
+            className={`cursor-pointer ${selected?.id === site.id ? 'bg-gray-300' : severityClass}`}
           >
           <td className="border p-2">{site.geoId}</td>
           <td className="border p-2">{site.enodeb}</td>
@@ -50,7 +50,7 @@ const KpiTable = ({ sites, onSelect, selected, onCreateTask }) => (
                 e.stopPropagation();
                 onCreateTask(site);
               }}
-              className="text-blue-600 hover:underline text-xs"
+              className="text-black hover:underline text-xs hover:text-gray-700"
               title="Create Task"
             >
               +Task
