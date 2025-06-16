@@ -39,6 +39,8 @@ const IMPACT_COLORS = {
   'Sleepy Cells': '#3182ce',
 };
 
+const DEFAULT_TILE_COLOR = '#4a5568';
+
 const PRESELECTED_TOP_SITES = {
   'Top n Offenders': ['CHI003', 'OKL004', 'CHI008'],
   'Heavy Hitters': ['CHI013', 'DAL016', 'STL020'],
@@ -329,17 +331,22 @@ export default function App() {
               <div key={type} className="space-y-2">
                 <div className="mb-1 font-medium">{type}</div>
                 <div className="flex flex-wrap gap-2">
-                  {sites.map((s) => (
-                    <button
-                      key={s.geoId}
-                      onClick={() => handleSiteSelect(s)}
-                      className="btn text-white"
-                      style={{ backgroundColor: IMPACT_COLORS[type] }}
-                      title={`View ${s.geoId}`}
-                    >
-                      {s.geoId}
-                    </button>
-                  ))}
+                  {sites.map((s) => {
+                    const isSelected = selectedSite && selectedSite.geoId === s.geoId;
+                    return (
+                      <button
+                        key={s.geoId}
+                        onClick={() => handleSiteSelect(s)}
+                        className="btn text-white"
+                        style={{
+                          backgroundColor: isSelected ? IMPACT_COLORS[type] : DEFAULT_TILE_COLOR,
+                        }}
+                        title={`View ${s.geoId}`}
+                      >
+                        {s.geoId}
+                      </button>
+                    );
+                  })}
                 </div>
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
                   <>
