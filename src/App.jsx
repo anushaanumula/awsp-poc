@@ -6,7 +6,6 @@ import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
-import ImpactTiles from './components/ImpactTiles';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -27,6 +26,24 @@ const IMPACT_INFO = {
   'Micro/Macro Outage': 'Currently unreachable',
   'Broken Trends': 'KPIs trending down',
   'Sleepy Cells': 'Low traffic or inactive',
+};
+
+const IMPACT_COLORS = {
+  'Top n Offenders': '#e53e3e',
+  'Heavy Hitters': '#dd6b20',
+  'High Runners': '#38a169',
+  'Micro/Macro Outage': '#805ad5',
+  'Broken Trends': '#718096',
+  'Sleepy Cells': '#3182ce',
+};
+
+const PRESELECTED_TOP_SITES = {
+  'Top n Offenders': ['CHI003', 'OKL004', 'CHI008'],
+  'Heavy Hitters': ['CHI013', 'DAL016', 'STL020'],
+  'High Runners': ['DAL021', 'CHI023', 'OKL024'],
+  'Micro/Macro Outage': ['DAL031', 'OKL039', 'DAL036'],
+  'Broken Trends': ['TAM042', 'CHI043', 'OKL044'],
+  'Sleepy Cells': ['OKL054', 'STL055', 'CHI053'],
 };
 
 const STATES = statesList;
@@ -129,17 +146,11 @@ export default function App() {
   );
   const topSites = useMemo(() => sortedSites.slice(0, 10), [sortedSites]);
 
-  const topSitesByImpact = useMemo(() => {
-    const groups = {};
-    sitesData.forEach((site) => {
-      if (!groups[site.kpiType]) groups[site.kpiType] = [];
-      groups[site.kpiType].push(site);
-    });
+  const predictedSitesByImpact = useMemo(() => {
+    const byId = Object.fromEntries(sitesData.map((s) => [s.geoId, s]));
     const result = {};
-    Object.keys(groups).forEach((type) => {
-      result[type] = groups[type]
-        .sort((a, b) => b.severity - a.severity)
-        .slice(0, 3);
+    Object.entries(PRESELECTED_TOP_SITES).forEach(([type, ids]) => {
+      result[type] = ids.map((id) => byId[id]).filter(Boolean);
     });
     return result;
   }, []);
@@ -287,29 +298,46 @@ export default function App() {
       {activeTab === 1 && (
         <div className="p-4 border rounded bw space-y-4">
           <h2 className="text-xl font-semibold">AI Insights</h2>
-          <ImpactTiles sites={filteredSites} />
-          <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-          <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2 h-64 border rounded">
-              <MapView
-                sites={filteredSites}
-                onSelect={handleSiteSelect}
-                selected={selectedSite}
-                stateFilter={stateFilter}
-              />
-            </div>
-            <div className="h-64 border rounded overflow-auto">
-              <SiteDetails site={selectedSite} />
-            </div>
-          </div>
-          <h2 className="text-xl font-semibold">Predicted Top Sites by Impact Type</h2>
-          <ul className="list-disc pl-6 space-y-1 text-sm">
-            {Object.entries(topSitesByImpact).map(([type, sites]) => (
-              <li key={type}>
-                <strong>{type}:</strong> {sites.map((s) => s.geoId).join(', ')}
-              </li>
+          <h3 className="font-semibold">Predicted Top Sites by Impact Type</h3>
+          <div className="space-y-3">
+            {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
+              <div key={type}>
+                <div className="mb-1 font-medium">{type}</div>
+                <div className="flex flex-wrap gap-2">
+                  {sites.map((s) => (
+                    <button
+                      key={s.geoId}
+                      onClick={() => handleSiteSelect(s)}
+                      className="btn text-white"
+                      style={{ backgroundColor: IMPACT_COLORS[type] }}
+                      title={`View ${s.geoId}`}
+                    >
+                      {s.geoId}
+                    </button>
+                  ))}
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
+          {selectedSite && (
+            <>
+              <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+              <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-2 h-64 border rounded">
+                  <MapView
+                    sites={[selectedSite]}
+                    onSelect={handleSiteSelect}
+                    selected={selectedSite}
+                    stateFilter={stateFilter}
+                    zoomToSelected
+                  />
+                </div>
+                <div className="h-64 border rounded overflow-auto">
+                  <SiteDetails site={selectedSite} />
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
 
