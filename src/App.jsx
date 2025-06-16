@@ -6,6 +6,7 @@ import AiInsights from './components/AiInsights';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
+import TopImpactTiles from './components/TopImpactTiles';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -159,6 +160,24 @@ export default function App() {
     return result;
   }, []);
 
+  // Determine the most common regions for each impact category
+  const topRegionsByImpact = useMemo(() => {
+    const countsByImpact = {};
+    sitesData.forEach((s) => {
+      const impact = s.kpiType;
+      countsByImpact[impact] = countsByImpact[impact] || {};
+      countsByImpact[impact][s.state] =
+        (countsByImpact[impact][s.state] || 0) + 1;
+    });
+    const result = {};
+    Object.entries(countsByImpact).forEach(([impact, counts]) => {
+      result[impact] = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([state]) => state);
+    });
+    return result;
+  }, []);
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
@@ -166,6 +185,8 @@ export default function App() {
         <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
+
+      <TopImpactTiles impactRegions={topRegionsByImpact} />
 
       {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">
