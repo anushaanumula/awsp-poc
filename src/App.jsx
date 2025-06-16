@@ -103,6 +103,10 @@ export default function App() {
       return;
     }
     setTasks((prev) => [...prev, task]);
+    setSites((prev) => prev.filter((s) => s.id !== task.siteId));
+    if (selectedSite?.id === task.siteId) {
+      setSelectedSite(null);
+    }
     setTaskMessage('Task created.');
   };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
