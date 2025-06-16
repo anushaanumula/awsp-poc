@@ -7,7 +7,7 @@ import TrendGraph from './components/TrendGraph';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
-import TopImpactTiles from './components/TopImpactTiles';
+import TopImpactPanels from './components/TopImpactPanels';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
@@ -194,7 +194,7 @@ export default function App() {
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      <TopImpactTiles impactRegions={topRegionsByImpact} />
+      <TopImpactPanels impactRegions={topRegionsByImpact} />
 
       {/* State/Geo Filters */}
       <div className="mb-4 flex items-center space-x-2 bw">
