@@ -1,5 +1,4 @@
 import React from 'react';
-import TrendGraph from './TrendGraph';
 
 // This component currently relies on hand-tuned rules to emulate what a machine
 // learning model might produce. Each KPI is checked against basic threshold
@@ -99,9 +98,6 @@ const handleApprove = () => {
       <p><strong>eNodeB:</strong> {site.enodeb}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
-      <div className="my-2">
-        <TrendGraph value={site.value} />
-      </div>
       <p className="mt-1 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
       <p className="mt-1"><strong>Suggested Action:</strong> {getAction()}</p>
       <div className="mt-2 flex gap-2">

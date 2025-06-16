@@ -20,6 +20,15 @@ const IMPACT_CATEGORIES = [
   'Sleepy Cells'
 ];
 
+const IMPACT_INFO = {
+  'Top n Offenders': 'Worst KPI performance sites',
+  'Heavy Hitters': 'High traffic impact',
+  'High Runners': 'Consistently high usage',
+  'Micro/Macro Outage': 'Currently unreachable',
+  'Broken Trends': 'KPIs trending down',
+  'Sleepy Cells': 'Low traffic or inactive',
+};
+
 const STATES = statesList;
 const DEFAULT_STATE = STATES[0];
 
@@ -29,7 +38,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
-  const [activeFilters, setActiveFilters] = useState([]);
   const [sites, setSites] = useState(sitesData);
   const [tasks, setTasks] = useState(() => {
     try {
@@ -81,13 +89,6 @@ export default function App() {
   };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
 
-  const toggleFilter = (filter) => {
-    setActiveFilters((prev) =>
-      prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
-    );
-  };
-
-  const clearFilters = () => setActiveFilters([]);
 
   useEffect(() => {
     setGeoFilter('All');
@@ -108,9 +109,7 @@ export default function App() {
       ? filteredByState
       : filteredByState.filter((s) => s.geoId === geoFilter);
 
-  const filteredSites = activeFilters.length
-    ? filteredByGeo.filter((site) => activeFilters.includes(site.kpiType))
-    : filteredByGeo;
+  const filteredSites = filteredByGeo;
 
   const sortedSites = useMemo(
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
@@ -200,28 +199,15 @@ export default function App() {
       {(activeTab === 0 || activeTab === 3) && (
         <>
           <div className="flex flex-wrap gap-2 mb-4 bw">
-            {IMPACT_CATEGORIES.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => toggleFilter(filter)}
-                className={`btn ${
-                  activeFilters.includes(filter)
-                    ? 'bg-black text-white'
-                    : 'bg-gray-200 text-black'
-                }`}
-                title={`Filter ${filter}`}
+            {IMPACT_CATEGORIES.map((cat) => (
+              <span
+                key={cat}
+                className="btn bg-gray-200 text-black cursor-default"
+                title={IMPACT_INFO[cat]}
               >
-                {filter}
-              </button>
+                {cat}
+              </span>
             ))}
-            {activeFilters.length > 0 && (
-              <button
-                onClick={clearFilters}
-                className="btn bg-black text-white hover:bg-gray-800"
-              >
-                Clear Filters
-              </button>
-            )}
           </div>
 
           <div className="grid grid-cols-3 gap-4 mb-4">
