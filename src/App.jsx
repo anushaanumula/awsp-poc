@@ -54,7 +54,6 @@ export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [dashboardMode, setDashboardMode] = useState('SP');
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
   const [activeFilters, setActiveFilters] = useState([]);
@@ -121,9 +120,6 @@ export default function App() {
 
   const clearFilters = () => setActiveFilters([]);
 
-  const toggleDashboardMode = () =>
-    setDashboardMode((prev) => (prev === 'SP' ? 'SE' : 'SP'));
-
 
   useEffect(() => {
     setGeoFilter('All');
@@ -184,17 +180,7 @@ export default function App() {
 
   return (
     <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold bw">
-          AWSP AI Dashboard <span className="text-base font-normal ml-2">({dashboardMode})</span>
-        </h1>
-        <button
-          onClick={toggleDashboardMode}
-          className="btn px-4 py-2 bg-black text-white hover:bg-gray-800"
-        >
-          {dashboardMode === 'SP' ? 'Switch to SE' : 'Switch to SP'}
-        </button>
-      </div>
+      <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
       {taskMessage && (
         <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
       )}
