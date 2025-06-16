@@ -73,7 +73,7 @@ const AiInsights = ({ site, onApprove = () => {} }) => {
     }
   };
 
-const handleApprove = () => {
+  const handleApprove = () => {
     // Approving creates a simple task object using the rule-based suggestion.
     const task = {
       id: Date.now(),
@@ -84,23 +84,18 @@ const handleApprove = () => {
       createdAt: new Date().toISOString(),
     };
     onApprove(task);
-};
+  };
 
   return (
-    <div className="p-4 border rounded bw space-y-2">
-      <div
-        className={`p-2 text-white rounded ${site.severity >= 4 ? 'bg-red-600' : site.severity >= 2 ? 'bg-yellow-500' : 'bg-green-600'}`}
-        title="Severity rating"
-      >
-        Severity {site.severity}
-      </div>
+    <div className="p-4 border rounded bw">
+      <h2 className="text-lg font-semibold mb-2">AI Insights</h2>
       <p><strong>Site:</strong> {site.geoId}</p>
       <p><strong>eNodeB:</strong> {site.enodeb}</p>
       <p><strong>KPI:</strong> {site.kpi}</p>
       <p><strong>Value:</strong> {site.value}</p>
-      <p className="mt-1 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
-      <p className="mt-1"><strong>Suggested Action:</strong> {getAction()}</p>
-      <div className="mt-2 flex gap-2">
+      <p className="mt-2 text-black"><strong>Predicted Insight:</strong> {getPrediction()}</p>
+      <p className="mt-2"><strong>Suggested Action:</strong> {getAction()}</p>
+      <div className="mt-4 flex gap-2">
         <button onClick={handleApprove} className="btn bg-black text-white hover:bg-gray-800">
           Approve
         </button>

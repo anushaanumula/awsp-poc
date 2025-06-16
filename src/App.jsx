@@ -296,10 +296,11 @@ export default function App() {
       )}
 
       {activeTab === 1 && (
-        <div className="p-4 border rounded bw space-y-4">
-          <h2 className="text-xl font-semibold">AI Insights</h2>
-          <h3 className="font-semibold">Predicted Top Sites by Impact Type</h3>
-          <div className="space-y-3">
+        <div className="p-4 border rounded bw">
+          <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
+          <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+          <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
+          <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
               <div key={type}>
                 <div className="mb-1 font-medium">{type}</div>
@@ -320,24 +321,23 @@ export default function App() {
             ))}
           </div>
           {selectedSite && (
-            <>
-              <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2 h-64 border rounded">
-                  <MapView
-                    sites={[selectedSite]}
-                    onSelect={handleSiteSelect}
-                    selected={selectedSite}
-                    stateFilter={stateFilter}
-                    zoomToSelected
-                  />
-                </div>
-                <div className="h-64 border rounded overflow-auto">
-                  <SiteDetails site={selectedSite} />
-                </div>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              <div className="col-span-2 h-64 border rounded">
+                <MapView
+                  sites={[selectedSite]}
+                  onSelect={handleSiteSelect}
+                  selected={selectedSite}
+                  stateFilter={stateFilter}
+                  zoomToSelected
+                />
               </div>
-            </>
+              <div className="h-64 border rounded overflow-auto">
+                <SiteDetails site={selectedSite} />
+              </div>
+            </div>
           )}
+          <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
+          <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
 
