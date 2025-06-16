@@ -3,6 +3,7 @@ import MapView from './components/MapView';
 import KpiTable from './components/KpiTable';
 import SiteDetails from './components/SiteDetails';
 import AiInsights from './components/AiInsights';
+import TrendGraph from './components/TrendGraph';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
@@ -323,7 +324,24 @@ export default function App() {
       {activeTab === 1 && (
         <div className="p-4 border rounded bw">
           <h2 className="text-xl font-semibold mb-2">Predicted Issues (Site-wise KPI degradation, Outages, etc.)</h2>
+          <SiteDetails site={selectedSite} />
           <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+          {selectedSite && (
+            <div className="grid grid-cols-3 gap-4 mt-4">
+              <div className="h-64 border rounded">
+                <MapView
+                  sites={[selectedSite]}
+                  onSelect={handleSiteSelect}
+                  selected={selectedSite}
+                  stateFilter={stateFilter}
+                  zoomToSelected
+                />
+              </div>
+              <div className="col-span-2 h-64 border rounded">
+                <TrendGraph site={selectedSite} />
+              </div>
+            </div>
+          )}
           <h2 className="text-xl font-semibold mt-6 mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
             {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
@@ -344,7 +362,7 @@ export default function App() {
                 </div>
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
                   <div className="grid grid-cols-3 gap-4 mt-2">
-                    <div className="col-span-2 h-64 border rounded">
+                    <div className="h-64 border rounded">
                       <MapView
                         sites={[selectedSite]}
                         onSelect={handleSiteSelect}
@@ -353,8 +371,8 @@ export default function App() {
                         zoomToSelected
                       />
                     </div>
-                    <div className="h-64 border rounded overflow-auto">
-                      <SiteDetails site={selectedSite} />
+                    <div className="col-span-2 h-64 border rounded">
+                      <TrendGraph site={selectedSite} />
                     </div>
                   </div>
                 )}
