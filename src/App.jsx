@@ -344,7 +344,8 @@ export default function App() {
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
                   <>
                     <div className="grid grid-cols-3 gap-4 mt-2">
-                      <div className="h-64 border rounded">
+                      {/* Keep map in default color */}
+                      <div className="h-64 border rounded full-color">
                         <MapView
                           sites={[selectedSite]}
                           onSelect={handleSiteSelect}
