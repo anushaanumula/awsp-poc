@@ -13,14 +13,12 @@ const TopImpactPanels = ({ impactRegions, months = 3 }) => {
 
   return (
     <div className="mb-4">
-      <p className="font-semibold mb-2">
-        In the last {months} months, the top
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <p className="font-semibold mb-2">In the last {months} months, the top</p>
+      <div className="flex space-x-4 overflow-x-auto">
         {orderedTypes.map((type) => {
           const regions = impactRegions[type] || [];
           return (
-            <div key={type} className="p-3 border rounded text-sm bw">
+            <div key={type} className="p-3 border rounded text-sm bw min-w-[12rem]">
               <p className="font-semibold mb-1">
                 {type} regions:
               </p>
