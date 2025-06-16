@@ -38,6 +38,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
+  const [activeFilters, setActiveFilters] = useState([]);
   const [sites, setSites] = useState(sitesData);
   const [tasks, setTasks] = useState(() => {
     try {
@@ -89,6 +90,14 @@ export default function App() {
   };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
 
+  const toggleFilter = (filter) => {
+    setActiveFilters((prev) =>
+      prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
+    );
+  };
+
+  const clearFilters = () => setActiveFilters([]);
+
 
   useEffect(() => {
     setGeoFilter('All');
@@ -109,7 +118,10 @@ export default function App() {
       ? filteredByState
       : filteredByState.filter((s) => s.geoId === geoFilter);
 
-  const filteredSites = filteredByGeo;
+  const filteredSites =
+    activeFilters.length > 0
+      ? filteredByGeo.filter((site) => activeFilters.includes(site.kpiType))
+      : filteredByGeo;
 
   const sortedSites = useMemo(
     () => [...filteredSites].sort((a, b) => b.severity - a.severity),
@@ -200,14 +212,27 @@ export default function App() {
         <>
           <div className="flex flex-wrap gap-2 mb-4 bw">
             {IMPACT_CATEGORIES.map((cat) => (
-              <span
+              <button
                 key={cat}
-                className="btn bg-gray-200 text-black cursor-default"
+                onClick={() => toggleFilter(cat)}
+                className={`btn ${
+                  activeFilters.includes(cat)
+                    ? 'bg-black text-white hover:bg-gray-800'
+                    : 'bg-gray-200 text-black hover:bg-gray-300'
+                }`}
                 title={IMPACT_INFO[cat]}
               >
                 {cat}
-              </span>
+              </button>
             ))}
+            {activeFilters.length > 0 && (
+              <button
+                onClick={clearFilters}
+                className="btn bg-black text-white hover:bg-gray-800"
+              >
+                Clear Filters
+              </button>
+            )}
           </div>
 
           <div className="grid grid-cols-3 gap-4 mb-4">
