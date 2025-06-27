@@ -418,21 +418,22 @@ export default function App() {
         <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
 
-      {showDashboard && (
-        <div className="fixed bottom-20 right-4 w-full md:w-1/2 lg:w-1/3 h-[500px] md:h-[560px] bg-white z-[2000] border rounded shadow-xl overflow-auto p-4">
-          <button
-            className="absolute top-2 right-2 text-gray-700"
-            onClick={() => setShowDashboard(false)}
-          >
-            <XMarkIcon className="w-5 h-5" />
-          </button>
-          <ConversationalDashboard />
-        </div>
-      )}
+      <div
+        className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l shadow-xl overflow-auto p-4 transform transition-transform duration-300 ${showDashboard ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
+      >
+        <button
+          className="absolute top-2 right-2 text-gray-700"
+          onClick={() => setShowDashboard(false)}
+        >
+          <XMarkIcon className="w-5 h-5" />
+        </button>
+        <ConversationalDashboard />
+      </div>
 
       <button
-        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200]"
-        onClick={() => setShowDashboard(true)}
+        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200] hover:bg-blue-700 transition" 
+        onClick={() => setShowDashboard((prev) => !prev)}
+        aria-label="Toggle network chat"
       >
         <ChatBubbleLeftRightIcon className="w-6 h-6" />
       </button>

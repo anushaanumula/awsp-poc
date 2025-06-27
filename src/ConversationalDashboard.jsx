@@ -117,7 +117,7 @@ export default function ConversationalDashboard() {
           {kpiData.map((kpi) => (
             <div
               key={kpi.title}
-              className="bg-gray-100 rounded border p-4 flex flex-col items-center w-1/3 mx-1"
+              className="bg-gray-100 rounded border p-4 flex flex-col items-center w-1/3 mx-1 hover:shadow-md transition"
             >
               <div className="text-sm text-gray-600">{kpi.title}</div>
               <div className="text-xl font-semibold">{kpi.value}</div>
