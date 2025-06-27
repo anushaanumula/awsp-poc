@@ -16,6 +16,15 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import kpiData from './data/kpis.json';
+import reports from './data/reports.json';
+import questions from './data/questions.js';
+import {
+  lineOptions,
+  lineData,
+  barOptions,
+  barData,
+} from './data/chartData.js';
 
 ChartJS.register(
   CategoryScale,
@@ -28,91 +37,37 @@ ChartJS.register(
   Legend
 );
 
-const kpiData = [
-  { title: 'Throughput', value: '450 Mbps', delta: '+5%', trend: 'up' },
-  { title: 'Latency', value: '12 ms', delta: '-2%', trend: 'down' },
-  { title: 'Coverage Quality', value: '95.2%', delta: '+1%', trend: 'up' },
-];
-
-const markets = ['All Markets', 'Midwest', 'Northeast', 'South'];
-
-const lineOptions = {
-  responsive: true,
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-};
-
-const barOptions = {
-  responsive: true,
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-};
-
-const lineData = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  datasets: [
-    {
-      data: [400, 420, 440, 430, 450, 460, 455],
-      borderColor: '#0ea5e9',
-      backgroundColor: 'rgba(14, 165, 233, 0.3)',
-      fill: true,
-    },
-  ],
-};
-
-const barData = {
-  labels: ['1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a', '10a', '11a', '12p'],
-  datasets: [
-    {
-      data: [80, 75, 70, 85, 90, 95, 70, 60, 50, 55, 65, 70],
-      backgroundColor: '#34d399',
-    },
-  ],
-};
-
-const reports = [
-  { title: 'Daily 5G Throughput', freq: 'Daily', status: 'paused', time: '8:00 AM' },
-  { title: 'Weekly Coverage Availability', freq: 'Weekly', status: 'active', time: 'Sun 1:00 AM' },
-  { title: 'Monthly Capacity Planning', freq: 'Monthly', status: 'paused', time: '1st 12:00 AM' },
-  { title: 'Hourly Latency Monitor', freq: 'Hourly', status: 'paused', time: 'Top of hour' },
-];
 
 export default function ConversationalDashboard() {
-  const [market, setMarket] = useState(markets[0]);
   const [input, setInput] = useState('');
+  const [messages, setMessages] = useState([
+    { sender: 'assistant', text: "Hi! I'm your RF Assistant. What would you like to analyze today?" },
+    { sender: 'user', text: 'Can you tell me more about latency issues in Oklahoma?' },
+    { sender: 'assistant', text: "Latency for Oklahoma averages 75ms. Here are the details:", charts: true },
+  ]);
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    const userMessage = { sender: 'user', text: input.trim() };
+    let response = "Sorry, I don't have data on that yet.";
+    let charts = false;
+    const lower = input.toLowerCase();
+    const match = questions.find((q) =>
+      q.keywords.some((kw) => lower.includes(kw.toLowerCase()))
+    );
+    if (match) {
+      response = match.answer;
+      charts = !!match.charts;
+    }
+    const assistantMessage = { sender: 'assistant', text: response, charts };
+    setMessages((prev) => [...prev, userMessage, assistantMessage]);
+    setInput('');
+  };
 
   return (
     <div className="h-full bg-white text-black p-4 space-y-4 flex flex-col">
       {/* KPI Row */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-2 lg:space-y-0">
-        <div className="flex items-center space-x-2">
-          <label className="text-sm font-medium">Market:</label>
-          <select
-            value={market}
-            onChange={(e) => setMarket(e.target.value)}
-            className="border rounded p-1 text-sm"
-          >
-            {markets.map((m) => (
-              <option key={m}>{m}</option>
-            ))}
-          </select>
-        </div>
         <div className="flex flex-1 justify-around">
           {kpiData.map((kpi) => (
             <div
@@ -143,33 +98,55 @@ export default function ConversationalDashboard() {
         <div className="lg:flex-1 space-y-4">
           <div className="border rounded p-4 space-y-2 h-[520px] flex flex-col">
             <div className="flex-1 overflow-auto space-y-4">
-              <div className="bg-gray-100 p-3 rounded self-start">
-                Hello! I'm your RF Analytics Assistant. How can I help you today?
-              </div>
-              <div className="bg-blue-100 p-3 rounded self-end">
-                Can you tell me more about latency issues in Oklahoma?
-              </div>
-              <div className="bg-gray-100 p-3 rounded self-start">
-                Based on recent data, Oklahoma's latency is averaging 75ms across most sites.
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="h-40">
-                  <Line options={lineOptions} data={lineData} />
+              {messages.map((m, idx) => (
+                <div
+                  key={idx}
+                  className={`p-3 rounded w-fit ${
+                    m.sender === 'user' ? 'bg-blue-100 self-end' : 'bg-gray-100 self-start'
+                  }`}
+                >
+                  {m.text}
+                  {m.charts && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                      <div className="h-40">
+                        <Line options={lineOptions} data={lineData} />
+                      </div>
+                      <div className="h-40">
+                        <Bar options={barOptions} data={barData} />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="h-40">
-                  <Bar options={barOptions} data={barData} />
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="mt-2 flex">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="flex-1 border rounded-l p-2 text-sm"
-                placeholder="Type your question..."
-              />
-              <button className="border border-l-0 rounded-r px-4">Send</button>
+            <div className="mt-2 space-y-2">
+              <div className="flex">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                  className="flex-1 border rounded-l p-2 text-sm"
+                  placeholder="Type your question..."
+                />
+                <button
+                  onClick={handleSend}
+                  className="border border-l-0 rounded-r px-4"
+                >
+                  Send
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {questions.map((q, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setInput(q.preset)}
+                    className="text-xs bg-gray-200 rounded px-2 py-1 hover:bg-gray-300"
+                  >
+                    {q.preset}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
