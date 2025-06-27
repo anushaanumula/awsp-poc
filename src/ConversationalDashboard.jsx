@@ -98,7 +98,7 @@ export default function ConversationalDashboard() {
   const [input, setInput] = useState('');
 
   return (
-    <div className="min-h-screen bg-white text-black p-4 space-y-4">
+    <div className="h-full bg-white text-black p-4 space-y-4 flex flex-col">
       {/* KPI Row */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-2 lg:space-y-0">
         <div className="flex items-center space-x-2">

@@ -419,19 +419,19 @@ export default function App() {
       )}
 
       {showDashboard && (
-        <div className="fixed inset-0 bg-white z-50 overflow-auto p-4">
+        <div className="fixed bottom-20 right-4 w-full max-w-md h-[600px] bg-white z-[1200] border rounded shadow-xl overflow-auto p-4">
           <button
-            className="absolute top-4 right-4 text-gray-700"
+            className="absolute top-2 right-2 text-gray-700"
             onClick={() => setShowDashboard(false)}
           >
-            <XMarkIcon className="w-6 h-6" />
+            <XMarkIcon className="w-5 h-5" />
           </button>
           <ConversationalDashboard />
         </div>
       )}
 
       <button
-        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200]"
         onClick={() => setShowDashboard(true)}
       >
         <ChatBubbleLeftRightIcon className="w-6 h-6" />
