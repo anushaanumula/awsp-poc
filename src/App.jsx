@@ -419,7 +419,7 @@ export default function App() {
       )}
 
       {showDashboard && (
-        <div className="fixed bottom-20 right-4 w-full max-w-md h-[600px] bg-white z-[1200] border rounded shadow-xl overflow-auto p-4">
+        <div className="fixed bottom-20 right-4 w-full md:w-1/2 lg:w-1/3 h-[500px] md:h-[560px] bg-white z-[2000] border rounded shadow-xl overflow-auto p-4">
           <button
             className="absolute top-2 right-2 text-gray-700"
             onClick={() => setShowDashboard(false)}
