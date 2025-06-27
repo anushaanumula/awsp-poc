@@ -10,6 +10,8 @@ import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
+import ConversationalDashboard from './ConversationalDashboard.jsx';
+import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
 const IMPACT_CATEGORIES = [
@@ -92,6 +94,7 @@ export default function App() {
   });
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
     if (!taskMessage) return;
@@ -414,6 +417,25 @@ export default function App() {
       {activeTab === 2 && (
         <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
+
+      {showDashboard && (
+        <div className="fixed inset-0 bg-white z-50 overflow-auto p-4">
+          <button
+            className="absolute top-4 right-4 text-gray-700"
+            onClick={() => setShowDashboard(false)}
+          >
+            <XMarkIcon className="w-6 h-6" />
+          </button>
+          <ConversationalDashboard />
+        </div>
+      )}
+
+      <button
+        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg"
+        onClick={() => setShowDashboard(true)}
+      >
+        <ChatBubbleLeftRightIcon className="w-6 h-6" />
+      </button>
     </div>
   );
 }
