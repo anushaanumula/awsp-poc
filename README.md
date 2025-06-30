@@ -22,6 +22,21 @@ To generate a production build:
 npm run build
 ```
 
+## Backend Assistant API
+
+The `server` directory contains a small Flask service that powers the
+conversational assistant. Start it separately from the React app:
+
+```bash
+cd server
+pip install -r requirements.txt
+python app.py
+```
+
+POST a JSON body `{"prompt": "Why is CQI bad in Dallas?"}` to
+`/assistant/prompt-query` to receive a reply, chart data and recommended
+actions based on the sample dataset.
+
 ## Mock Data
 
 Sample site metrics are stored in [`src/data/sites.json`](src/data/sites.json). Each entry represents a network site with fields such as `geoId`, `enodeb`, `sector`, current KPI value, and severity. The coordinates included in the file allow the map view to show markers for each site.
