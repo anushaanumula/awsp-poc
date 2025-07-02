@@ -10,6 +10,8 @@ import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
+import ConversationalDashboard from './ConversationalDashboard.jsx';
+import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
 const IMPACT_CATEGORIES = [
@@ -92,6 +94,7 @@ export default function App() {
   });
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
     if (!taskMessage) return;
@@ -414,6 +417,26 @@ export default function App() {
       {activeTab === 2 && (
         <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
+
+      <div
+        className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l shadow-xl overflow-auto p-4 transform transition-transform duration-300 ${showDashboard ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
+      >
+        <button
+          className="absolute top-2 right-2 text-gray-700"
+          onClick={() => setShowDashboard(false)}
+        >
+          <XMarkIcon className="w-5 h-5" />
+        </button>
+        <ConversationalDashboard />
+      </div>
+
+      <button
+        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200] hover:bg-blue-700 transition" 
+        onClick={() => setShowDashboard((prev) => !prev)}
+        aria-label="Toggle network chat"
+      >
+        <ChatBubbleLeftRightIcon className="w-6 h-6" />
+      </button>
     </div>
   );
 }

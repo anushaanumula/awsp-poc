@@ -1,0 +1,5 @@
+[
+  { "title": "Throughput", "value": "450 Mbps", "delta": "+15%", "trend": "up" },
+  { "title": "Network Latency", "value": "12 ms", "delta": "-5%", "trend": "down" },
+  { "title": "Coverage Quality", "value": "95.2%", "delta": "+2.2%", "trend": "up" }
+]
