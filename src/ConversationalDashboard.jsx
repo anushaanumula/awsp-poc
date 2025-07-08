@@ -99,19 +99,140 @@ export default function ConversationalDashboard() {
     setSummary(enodebSummary);
   };
 
+  function generateDynamicResponse(question, site, summary) {
+    const lower = question.toLowerCase();
+    if (!site) return null;
+
+    // Example: Drop Rate
+    if (lower.match(/drop|fail|disconnect|lost/i)) {
+      const drop = summary?.kpis?.['Bearer Drop Rate'] ?? summary?.kpis?.['Bearer Drop %'];
+      let msg = `Bearer drop rate for ${site.geoId} is ${drop ?? 'N/A'}%. `;
+      if (drop > 2) {
+        msg += "This is above the normal threshold and may indicate radio link instability or interference. ";
+        msg += "You may want to check for recent hardware alarms, interference sources, or congestion in the area. ";
+        msg += "Would you like to see a trend graph or get recommended actions?";
+      } else {
+        msg += "This is within the normal range. ";
+        msg += "No immediate action is required, but you can monitor this KPI for any sudden changes.";
+      }
+      return msg;
+    }
+
+    // Example: Paging
+    if (lower.includes('paging')) {
+      const paging = summary?.kpis?.['Paging Success Rate'];
+      let msg = `Paging success rate for ${site.geoId} is ${paging ?? 'N/A'}%. `;
+      if (paging < 97) {
+        msg += "A low paging rate may affect mobile-terminated call performance. ";
+        msg += "Consider checking S1AP and RRC signaling for anomalies. ";
+        msg += "Would you like to see related KPIs or troubleshooting steps?";
+      } else {
+        msg += "Paging KPIs look healthy. ";
+        msg += "No action needed at this time.";
+      }
+      return msg;
+    }
+
+    // Example: CQI
+    if (lower.match(/cqi|quality|modulation/i)) {
+      const cqi = summary?.kpis?.CQI;
+      let msg = `CQI for ${site.geoId} is ${cqi ?? 'N/A'}. `;
+      if (cqi < 8) {
+        msg += "Low CQI suggests poor radio conditions or interference. ";
+        msg += "You might want to check for external interference, suboptimal antenna tilt, or high user density. ";
+        msg += "Would you like to see a coverage map or get optimization tips?";
+      } else {
+        msg += "CQI is healthy. ";
+        msg += "No immediate optimization needed.";
+      }
+      return msg;
+    }
+
+    // Example: Throughput
+    if (lower.match(/throughput|speed|capacity/i)) {
+      const tp = summary?.kpis?.Throughput;
+      let msg = `Throughput for ${site.geoId} is ${tp ?? 'N/A'} Mbps. `;
+      if (tp < 10) {
+        msg += "This is below the expected value for this site. ";
+        msg += "Potential causes include high PRB utilization, interference, or backhaul congestion. ";
+        msg += "Would you like to see PRB utilization or backhaul stats?";
+      } else {
+        msg += "Throughput is within expected range.";
+      }
+      return msg;
+    }
+
+    // Example: Combine KPIs for health
+    if (lower.match(/health|status|overall/i)) {
+      const drop = summary?.kpis?.['Bearer Drop Rate'] ?? summary?.kpis?.['Bearer Drop %'];
+      const cqi = summary?.kpis?.CQI;
+      const prb = summary?.kpis?.['PRB Utilization'];
+      let health = 'good';
+      let msg = `Overall health for ${site.geoId}: `;
+      if (drop > 2 || cqi < 8 || prb > 85) {
+        health = 'needs attention';
+        msg += "Some KPIs are outside normal thresholds. ";
+        if (drop > 2) msg += "High drop rate. ";
+        if (cqi < 8) msg += "Low CQI. ";
+        if (prb > 85) msg += "High PRB utilization. ";
+        msg += "Would you like recommended actions or a detailed breakdown?";
+      } else {
+        msg += "All major KPIs are within normal range. ";
+        msg += "No immediate action required.";
+      }
+      return msg;
+    }
+
+    // Example: Actions/Recommendations
+    if (lower.match(/recommend|action|suggest|mitigate|fix/i)) {
+      let actions = [];
+      if (summary?.kpis?.['Bearer Drop Rate'] > 2) {
+        actions.push("Investigate high bearer drop rate: check hardware alarms and interference.");
+      }
+      if (summary?.kpis?.CQI < 8) {
+        actions.push("Low CQI: check for external interference or optimize antenna tilt.");
+      }
+      if (summary?.kpis?.['PRB Utilization'] > 85) {
+        actions.push("High PRB Utilization: consider offloading traffic or optimizing scheduling parameters.");
+      }
+      if (actions.length === 0) {
+        return `No critical actions recommended for ${site.geoId} at this time.`;
+      }
+      return `Recommended actions for ${site.geoId}: ${actions.join(' ')} Would you like to create a task or see more details?`;
+    }
+
+    // Default fallback
+    return "I'm analyzing your question. Could you specify which KPI or issue you'd like to discuss?";
+  }
+
   const handleSend = () => {
     if (!input.trim()) return;
     const userMessage = { sender: 'user', text: input.trim() };
-    let response = "Sorry, I don't have data on that yet.";
+    let response = generateDynamicResponse(input, selectedSite, summary);
     let charts = false;
-    const lower = input.toLowerCase();
-    const match = questions.find((q) =>
-      q.keywords.some((kw) => lower.includes(kw.toLowerCase()))
-    );
-    if (match) {
-      response = match.answer;
-      charts = !!match.charts;
+
+    if (!response) {
+      // fallback to canned Q&A
+      const lower = input.toLowerCase();
+      // Dynamic: If a site is selected and the question mentions "cqi"
+      if (selectedSite && lower.includes('cqi')) {
+        response = `CQI for ${selectedSite.geoId} is ${summary?.kpis?.CQI ?? 'N/A'}.`;
+        charts = true;
+      } else if (selectedSite && lower.includes('throughput')) {
+        response = `Throughput for ${selectedSite.geoId} is ${summary?.kpis?.Throughput ?? 'N/A'} Mbps.`;
+        charts = true;
+      } else {
+        // Fallback to canned Q&A
+        const match = questions.find((q) =>
+          q.keywords.some((kw) => lower.includes(kw.toLowerCase()))
+        );
+        if (match) {
+          response = match.answer;
+          charts = !!match.charts;
+        }
+      }
     }
+
     const assistantMessage = { sender: 'assistant', text: response, charts };
     setMessages((prev) => [...prev, userMessage, assistantMessage]);
     setInput('');
