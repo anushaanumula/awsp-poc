@@ -1,7 +1,7 @@
 [
   { "title": "CQI", "value": "3.2", "delta": "-8%", "trend": "down" },
   { "title": "Bearer Drop %", "value": "1.2%", "delta": "+0.3%", "trend": "up" },
-  { "title": "RRC Setup Failure", "value": "2.5%", "delta": "-0.5%", "trend": "down" }
+  { "title": "RRC Setup Failure", "value": "2.5%", "delta": "-0.5%", "trend": "down" },
   { "title": "Throughput", "value": "450 Mbps", "delta": "+15%", "trend": "up" },
   { "title": "Network Latency", "value": "12 ms", "delta": "-5%", "trend": "down" },
   { "title": "Coverage Quality", "value": "95.2%", "delta": "+2.2%", "trend": "up" }

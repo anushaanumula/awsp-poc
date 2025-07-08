@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SiteDetails = ({ site }) => {
+const SiteDetails = ({ site, onViewPath, onAskAssistant }) => {
   if (!site) return <div className="p-4 border">Select a site to view details</div>;
 
   return (
@@ -56,6 +56,22 @@ const SiteDetails = ({ site }) => {
           </div>
         </div>
       )}
+
+      {/* Action Buttons */}
+      <div className="flex gap-2 mt-2">
+        <button
+          className="btn bg-blue-600 text-white"
+          onClick={() => onViewPath && onViewPath(site)}
+        >
+          View End-to-End Path
+        </button>
+        <button
+          className="btn bg-green-600 text-white"
+          onClick={() => onAskAssistant && onAskAssistant(site)}
+        >
+          Ask Assistant
+        </button>
+      </div>
     </div>
   );
 };

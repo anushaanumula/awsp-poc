@@ -76,6 +76,7 @@ export default [
     keywords: ['voice', 'call drop', 'cs drop'],
     answer: 'Voice call drops stay below 1% across the network.'
   },
+  {
     preset: 'Latency in Oklahoma',
     keywords: ['latency', 'oklahoma'],
     answer: "Latency for Oklahoma averages 75ms across most sites.",

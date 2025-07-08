@@ -5,7 +5,8 @@ import React from 'react';
 // values to generate a short prediction and recommended action. The values were
 // chosen purely for demonstration and do not reflect a real model.
 
-const AiInsights = ({ site, onApprove = () => {} }) => {
+const AiInsights = ({ context, onApprove = () => {}, onViewPath, onAskAssistant }) => {
+  const site = context.siteObj;
   if (!site) return <div className="p-4 border">Select a site to view AI insights</div>;
 
   const getPrediction = () => {

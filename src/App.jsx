@@ -8,18 +8,14 @@ import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
-import ConversationalDashboard from './ConversationalDashboard';
 import IssueSummary from './pages/IssueSummary';
 import UserInsights from './pages/UserInsights';
 import EndToEndView from './pages/EndToEndView';
-import {
-  ChatBubbleLeftRightIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/solid';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 import ConversationalDashboard from './ConversationalDashboard.jsx';
 import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { useRef } from 'react';
 
 const TABS = [
   'Live Map & KPI',
@@ -112,6 +108,15 @@ export default function App() {
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
   const [showDashboard, setShowDashboard] = useState(false);
+  const [showAssistant, setShowAssistant] = useState(false);
+  const [selectedContext, setSelectedContext] = useState({
+    market: null,
+    site: null,
+    enb: null,
+    sector: null,
+    carrier: null,
+    siteObj: null, // full site object if needed
+  });
 
   useEffect(() => {
     if (!taskMessage) return;
@@ -141,8 +146,14 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSiteSelect = (site) => {
-    setSelectedSite((prev) => (prev && prev.geoId === site.geoId ? null : site));
+  const handleSiteSelect = (siteObj) => {
+    setSelectedContext({
+      ...selectedContext,
+      market: siteObj.state,
+      site: siteObj.geoId,
+      enb: siteObj.enodeb,
+      siteObj,
+    });
   };
 
   const handleTaskCreate = (task) => {
@@ -203,6 +214,34 @@ export default function App() {
   }, []);
 
 
+  // Helper to jump to a tab and set context
+  const goToTabWithSite = (tabIdx, site) => {
+    setSelectedSite(site);
+    setActiveTab(tabIdx);
+  };
+
+  // Tab indices (adjust as per your TABS array)
+  const TAB_AI_INSIGHTS = 1;
+  const TAB_END_TO_END = 6;
+  const TAB_CONVERSATIONAL = 3;
+
+  useEffect(() => {
+    const handleGotoAiInsights = (e) => {
+      setSelectedSite(e.detail);
+      setActiveTab(TAB_AI_INSIGHTS); // Make sure this is the correct tab index for AI Insights
+    };
+    const handleGotoEndToEnd = (e) => {
+      setSelectedSite(e.detail);
+      setActiveTab(TAB_END_TO_END); // Make sure this is the correct tab index for End-to-End View
+    };
+    window.addEventListener('gotoAiInsights', handleGotoAiInsights);
+    window.addEventListener('gotoEndToEnd', handleGotoEndToEnd);
+    return () => {
+      window.removeEventListener('gotoAiInsights', handleGotoAiInsights);
+      window.removeEventListener('gotoEndToEnd', handleGotoEndToEnd);
+    };
+  }, []);
+
   return (
     <>
     <div className="p-4">
@@ -210,7 +249,7 @@ export default function App() {
       {taskMessage && (
         <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
       )}
-      {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
+      {/* {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />} */}
 
       {activeTab === 0 && <TopImpactPanels />}
 
@@ -295,15 +334,13 @@ export default function App() {
             <div className="col-span-2 bw">
               <KpiTable
                 sites={topSites}
-                onSelect={handleSiteSelect}
+                onSelect={(site) => setSelectedSite(site)} // Only select, don't switch tab
                 selected={selectedSite}
                 onCreateTask={(site) => {
                   setSelectedSite(site);
                   setShowTaskModal(true);
                 }}
               />
-              <p className="text-xs text-gray-600 mt-1">Showing top 10 sites by severity</p>
-
             </div>
             <div className="flex flex-col space-y-4">
               <div className="h-64 border rounded">
@@ -315,7 +352,17 @@ export default function App() {
               />
               </div>
               <div className="h-64 border rounded overflow-auto bw">
-                <SiteDetails site={selectedSite} />
+                <SiteDetails
+                  site={selectedSite}
+                  onViewPath={() => {
+                    setSelectedSite(selectedSite);
+                    setActiveTab(TAB_END_TO_END);
+                  }}
+                  onAskAssistant={() => {
+                    setSelectedSite(selectedSite);
+                    setActiveTab(TAB_CONVERSATIONAL);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -340,7 +387,7 @@ export default function App() {
         </>
       )}
 
-      {activeTab === 1 && (
+      {activeTab === TAB_AI_INSIGHTS && (
         <div className="p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
@@ -348,50 +395,52 @@ export default function App() {
               <div key={type} className="space-y-2">
                 <div className="mb-1 font-medium">{type}</div>
                 <div className="flex flex-wrap gap-2">
-                  {sites.map((s) => {
-                    const isSelected = selectedSite && selectedSite.geoId === s.geoId;
-                    const grayscale = GRAYSCALE_SITES.includes(s.geoId);
-                    return (
-                      <button
-                        key={s.geoId}
-                        onClick={() => handleSiteSelect(s)}
-                        className={`btn${grayscale ? ' bw' : ''}`}
-                        style={{
-                          backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
-                          color: isSelected ? '#fff' : '#000',
-                        }}
-                        title={`View ${s.geoId}`}
-                      >
-                        {s.geoId}
-                      </button>
-                    );
-                  })}
+                  {sites.map((s) => (
+                    <button
+                      key={s.geoId}
+                      className={`border rounded px-2 py-1 text-xs ${
+                        selectedSite && selectedSite.geoId === s.geoId
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-100'
+                      }`}
+                      onClick={() => setSelectedSite(s)}
+                    >
+                      {s.geoId}
+                    </button>
+                  ))}
                 </div>
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
                   <>
                     <div className="grid grid-cols-3 gap-4 mt-2">
-                      {/* Keep map in default color */}
                       <div className="h-64 border rounded full-color">
                         <MapView
                           sites={[selectedSite]}
-                          onSelect={handleSiteSelect}
+                          onSelect={setSelectedSite}
                           selected={selectedSite}
-                          stateFilter={stateFilter}
+                          stateFilter={selectedSite.state}
                           zoomToSelected
                         />
                       </div>
-                      <div className={`col-span-2 h-64 border rounded${
-                        GRAYSCALE_SITES.includes(selectedSite.geoId) ? ' bw' : ''
-                      }`}>
+                      <div className="col-span-2 h-64 border rounded">
                         <TrendGraph site={selectedSite} />
                       </div>
                     </div>
+                    {/* Show AI Insights and below it the selected site table */}
                     <div className="grid grid-cols-3 gap-4 mt-4">
                       <div className="h-64 border rounded overflow-auto">
-                        <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
+                        <AiInsights
+                          context={{ siteObj: selectedSite }}
+                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
+                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
+                          onApprove={handleTaskCreate}
+                        />
                       </div>
                       <div className="col-span-2 h-64 border rounded overflow-auto">
-                        <SiteDetails site={selectedSite} />
+                        <SiteDetails
+                          site={selectedSite}
+                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
+                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
+                        />
                       </div>
                     </div>
                   </>
@@ -399,8 +448,6 @@ export default function App() {
               </div>
             ))}
           </div>
-          <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
-          <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
 
@@ -411,7 +458,10 @@ export default function App() {
       {activeTab === 3 && <ConversationalDashboard />}
       {activeTab === 4 && <IssueSummary />}
       {activeTab === 5 && <UserInsights />}
-      {activeTab === 6 && <EndToEndView />}
+      {activeTab === 6 && <EndToEndView
+        context={selectedContext}
+        onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
+      />}
       <div
         className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l shadow-xl overflow-auto p-4 transform transition-transform duration-300 ${showDashboard ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
       >
@@ -430,6 +480,7 @@ export default function App() {
         aria-label="Toggle network chat"
       >
         <ChatBubbleLeftRightIcon className="w-6 h-6" />
+      </button>
     </div>
     <button
       onClick={() => setShowAssistant(true)}
@@ -447,7 +498,10 @@ export default function App() {
           >
             <XMarkIcon className="w-6 h-6" />
           </button>
-          <ConversationalDashboard />
+          <ConversationalDashboard
+            context={selectedContext}
+            onSelectSite={handleSiteSelect}
+          />
         </div>
       </div>
     )}
