@@ -1,0 +1,18 @@
+{
+  "logins": [
+    { "date": "2025-07-01", "users": 34 },
+    { "date": "2025-07-02", "users": 45 },
+    { "date": "2025-07-03", "users": 41 },
+    { "date": "2025-07-04", "users": 37 }
+  ],
+  "features": [
+    { "feature": "Map", "count": 102 },
+    { "feature": "Chat", "count": 89 },
+    { "feature": "RCA", "count": 75 }
+  ],
+  "markets": [
+    { "market": "Texas", "searches": 12 },
+    { "market": "Oklahoma", "searches": 8 },
+    { "market": "Florida", "searches": 5 }
+  ]
+}

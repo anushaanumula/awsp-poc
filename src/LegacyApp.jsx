@@ -8,26 +8,10 @@ import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
-import ConversationalDashboard from './ConversationalDashboard';
-import IssueSummary from './pages/IssueSummary';
-import UserInsights from './pages/UserInsights';
-import EndToEndView from './pages/EndToEndView';
-import {
-  ChatBubbleLeftRightIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/solid';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
 
-const TABS = [
-  'Live Map & KPI',
-  'AI Insights',
-  'Task List',
-  'Conversational UI',
-  'Issue Summary',
-  'User Insights',
-  'End-to-End View'
-];
+const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
 const IMPACT_CATEGORIES = [
   'Top n Offenders',
   'Heavy Hitters',
@@ -94,7 +78,6 @@ const DEFAULT_STATE = STATES[0];
 export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
-  // Start on the Live Map tab by default
   const [activeTab, setActiveTab] = useState(0);
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
@@ -109,7 +92,6 @@ export default function App() {
   });
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
-  const [showAssistant, setShowAssistant] = useState(false);
 
   useEffect(() => {
     if (!taskMessage) return;
@@ -140,7 +122,9 @@ export default function App() {
   }, []);
 
   const handleSiteSelect = (site) => {
-    setSelectedSite((prev) => (prev && prev.geoId === site.geoId ? null : site));
+    setSelectedSite((prev) =>
+      prev && prev.geoId === site.geoId ? null : site
+    );
   };
 
   const handleTaskCreate = (task) => {
@@ -165,20 +149,25 @@ export default function App() {
 
   const clearFilters = () => setActiveFilters([]);
 
+
   useEffect(() => {
     setGeoFilter('All');
   }, [stateFilter]);
 
   const geoOptions = useMemo(() => {
     if (stateFilter === 'All') return [];
-    return sitesData.filter((s) => s.state === stateFilter).map((s) => s.geoId);
+    return sitesData
+      .filter((s) => s.state === stateFilter)
+      .map((s) => s.geoId);
   }, [stateFilter]);
 
   const filteredByState =
     stateFilter === 'All' ? sites : sites.filter((s) => s.state === stateFilter);
 
   const filteredByGeo =
-    geoFilter === 'All' ? filteredByState : filteredByState.filter((s) => s.geoId === geoFilter);
+    geoFilter === 'All'
+      ? filteredByState
+      : filteredByState.filter((s) => s.geoId === geoFilter);
 
   const filteredSites =
     activeFilters.length > 0
@@ -200,9 +189,25 @@ export default function App() {
     return result;
   }, []);
 
+  // Determine the most common regions for each impact category
+  const topRegionsByImpact = useMemo(() => {
+    const countsByImpact = {};
+    sitesData.forEach((s) => {
+      const impact = s.kpiType;
+      countsByImpact[impact] = countsByImpact[impact] || {};
+      countsByImpact[impact][s.state] =
+        (countsByImpact[impact][s.state] || 0) + 1;
+    });
+    const result = {};
+    Object.entries(countsByImpact).forEach(([impact, counts]) => {
+      result[impact] = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([state]) => state);
+    });
+    return result;
+  }, []);
 
   return (
-    <>
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
       {taskMessage && (
@@ -210,7 +215,7 @@ export default function App() {
       )}
       {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      {activeTab === 0 && <TopImpactPanels />}
+      <TopImpactPanels impactRegions={topRegionsByImpact} />
 
       {/* Filters and Tabs */}
       <div className="mb-4 flex justify-between items-center bw">
@@ -252,7 +257,9 @@ export default function App() {
               key={tab}
               onClick={() => setActiveTab(i)}
               className={`btn bg-transparent ${
-                activeTab === i ? 'font-bold underline' : 'hover:underline'
+                activeTab === i
+                  ? 'font-bold underline'
+                  : 'hover:underline'
               }`}
             >
               {tab}
@@ -262,7 +269,7 @@ export default function App() {
       </div>
 
       {/* Category Filters */}
-      {activeTab === 0 && (
+      {(activeTab === 0 || activeTab === 3) && (
         <>
           <div className="flex flex-wrap gap-2 overflow-x-auto whitespace-nowrap mb-4 bw">
             {IMPACT_CATEGORIES.map((cat) => (
@@ -379,7 +386,9 @@ export default function App() {
                         />
                       </div>
                       <div className={`col-span-2 h-64 border rounded${
-                        GRAYSCALE_SITES.includes(selectedSite.geoId) ? ' bw' : ''
+                        GRAYSCALE_SITES.includes(selectedSite.geoId)
+                          ? ' bw'
+                          : ''
                       }`}>
                         <TrendGraph site={selectedSite} />
                       </div>
@@ -405,33 +414,6 @@ export default function App() {
       {activeTab === 2 && (
         <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
-
-      {activeTab === 3 && <ConversationalDashboard />}
-      {activeTab === 4 && <IssueSummary />}
-      {activeTab === 5 && <UserInsights />}
-      {activeTab === 6 && <EndToEndView />}
     </div>
-    <button
-      onClick={() => setShowAssistant(true)}
-      className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 z-40"
-      title="Open Assistant"
-    >
-      <ChatBubbleLeftRightIcon className="w-6 h-6" />
-    </button>
-    {showAssistant && (
-      <div className="fixed inset-0 flex items-end justify-end bg-black bg-opacity-30 z-[1200]">
-        <div className="bg-white w-full sm:max-w-md md:max-w-lg h-[80vh] shadow-xl relative m-4 rounded-lg">
-          <button
-            className="absolute top-2 right-2 text-gray-600 hover:text-black"
-            onClick={() => setShowAssistant(false)}
-          >
-            <XMarkIcon className="w-6 h-6" />
-          </button>
-          <ConversationalDashboard />
-        </div>
-      </div>
-    )}
-    </>
   );
 }
-

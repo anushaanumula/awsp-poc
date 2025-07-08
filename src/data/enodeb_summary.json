@@ -1,0 +1,18 @@
+{
+  "kpis": {
+    "Throughput": "450 Mbps",
+    "Network Latency": "75 ms",
+    "Coverage Quality": "95.2%",
+    "Bearer Drop %": "1.1%",
+    "RRC Setup Failure": "2.6%"
+  },
+  "trends": {
+    "Throughput": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [410,420,430,425,435,440,450] },
+    "Network Latency": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [70,72,75,68,66,64,65] },
+    "CQI": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [3.2,3.3,3.4,3.6,3.8,4.0,4.2] },
+    "Availability": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [99.1,99.2,98.8,99.5,99.0,99.3,99.4] },
+    "Users": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [300,320,310,330,340,350,360] },
+    "Utilization": { "labels": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "data": [60,62,65,63,64,66,68] }
+  },
+  "analysis": "Overall performance remains strong with average latency around 75 ms. Bearer drops are below 1.2% and RRC setup failures stay under 3%. Throughput peaked at 450 Mbps during the last week."
+}

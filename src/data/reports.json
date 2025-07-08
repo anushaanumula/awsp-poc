@@ -1,0 +1,6 @@
+[
+  { "title": "Daily 5G Throughput", "freq": "Daily", "status": "paused", "time": "8:00 AM" },
+  { "title": "Weekly Coverage Availability", "freq": "Weekly", "status": "active", "time": "Sun 1:00 AM" },
+  { "title": "Monthly Capacity Planning", "freq": "Monthly", "status": "paused", "time": "1st 12:00 AM" },
+  { "title": "Hourly Latency Monitor", "freq": "Hourly", "status": "paused", "time": "Top of hour" }
+]
