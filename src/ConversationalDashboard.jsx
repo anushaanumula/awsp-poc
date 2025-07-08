@@ -85,6 +85,11 @@ export default function ConversationalDashboard() {
     setSummary(enodebSummary);
   };
 
+    { sender: 'assistant', text: "Hi! I'm your RF Assistant. What would you like to analyze today?" },
+    { sender: 'user', text: 'Can you tell me more about latency issues in Oklahoma?' },
+    { sender: 'assistant', text: "Latency for Oklahoma averages 75ms. Here are the details:", charts: true },
+  ]);
+
   const handleSend = () => {
     if (!input.trim()) return;
     const userMessage = { sender: 'user', text: input.trim() };
@@ -225,7 +230,6 @@ export default function ConversationalDashboard() {
           </div>
         )}
       </div>
-
       <div className="lg:flex lg:space-x-4">
         {/* Chat Section */}
         <div className="lg:flex-1 space-y-4">
