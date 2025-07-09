@@ -1,18 +1,42 @@
 {
-  "logins": [
-    { "date": "2025-07-01", "users": 34 },
-    { "date": "2025-07-02", "users": 45 },
-    { "date": "2025-07-03", "users": 41 },
-    { "date": "2025-07-04", "users": 37 }
-  ],
   "features": [
-    { "feature": "Map", "count": 102 },
+    { "feature": "Map", "count": 120 },
     { "feature": "Chat", "count": 89 },
-    { "feature": "RCA", "count": 75 }
+    { "feature": "RCA", "count": 75 },
+    { "feature": "Insights", "count": 65 },
+    { "feature": "Tasks", "count": 52 }
   ],
   "markets": [
-    { "market": "Texas", "searches": 12 },
-    { "market": "Oklahoma", "searches": 8 },
-    { "market": "Florida", "searches": 5 }
+    { "market": "Texas", "searches": 22 },
+    { "market": "Oklahoma", "searches": 18 },
+    { "market": "Florida", "searches": 15 },
+    { "market": "California", "searches": 12 },
+    { "market": "Illinois", "searches": 10 }
+  ],
+  "searches": [
+    { "term": "eNB123", "count": 25 },
+    { "term": "High Runners", "count": 20 },
+    { "term": "Sleepy Cells", "count": 18 },
+    { "term": "CQI", "count": 16 },
+    { "term": "RRC Failure", "count": 14 }
+  ],
+  "devices": [
+    { "type": "Desktop", "count": 120 },
+    { "type": "Mobile", "count": 80 },
+    { "type": "Tablet", "count": 30 }
+  ],
+  "loginHours": [
+    { "hour": "08:00", "logins": 10 },
+    { "hour": "10:00", "logins": 25 },
+    { "hour": "12:00", "logins": 18 },
+    { "hour": "14:00", "logins": 30 },
+    { "hour": "16:00", "logins": 22 },
+    { "hour": "18:00", "logins": 15 }
+  ],
+  "topUsers": [
+    { "name": "Alex", "market": "Texas", "logins": 23 },
+    { "name": "Nina", "market": "Florida", "logins": 19 },
+    { "name": "Ravi", "market": "California", "logins": 17 },
+    { "name": "Sarah", "market": "Oklahoma", "logins": 16 }
   ]
 }
