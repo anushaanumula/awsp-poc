@@ -1,0 +1,67 @@
+{
+  "markets": [
+    {
+      "name": "Dallas",
+      "sites": [
+        {
+          "id": "DAL001",
+          "enbs": ["35258"]
+        },
+        {
+          "id": "DAL002",
+          "enbs": ["32183"]
+        }
+      ]
+    },
+    {
+      "name": "Oklahoma City",
+      "sites": [
+        {
+          "id": "OKL004",
+          "enbs": ["26997"]
+        }
+      ]
+    }
+  ],
+  "enbDetails": {
+    "35258": {
+      "cellIds": ["CELL6820", "CELL3365", "CELL5842"],
+      "sectors": [
+        {
+          "id": "1",
+          "carriers": ["LTE 700", "NR 2600"],
+          "kpis": {"throughput": 40, "cqi": 10, "prbUtil": 75, "drops": 0.5},
+          "trend": [38, 40, 42, 41, 43]
+        },
+        {
+          "id": "2",
+          "carriers": ["LTE 700"],
+          "kpis": {"throughput": 35, "cqi": 9, "prbUtil": 60, "drops": 0.4},
+          "trend": [34, 35, 36, 37, 36]
+        }
+      ]
+    },
+    "32183": {
+      "cellIds": ["CELL7497", "CELL1515"],
+      "sectors": [
+        {
+          "id": "1",
+          "carriers": ["LTE 700", "NR 2600"],
+          "kpis": {"throughput": 42, "cqi": 11, "prbUtil": 65, "drops": 0.3},
+          "trend": [40, 41, 43, 44, 42]
+        }
+      ]
+    },
+    "26997": {
+      "cellIds": ["CELL3219"],
+      "sectors": [
+        {
+          "id": "1",
+          "carriers": ["NR 2600"],
+          "kpis": {"throughput": 25, "cqi": 8, "prbUtil": 55, "drops": 0.6},
+          "trend": [24, 25, 25, 26, 25]
+        }
+      ]
+    }
+  }
+}

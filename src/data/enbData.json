@@ -1,0 +1,7 @@
+[
+  {"enodeb": "134", "geoId": "DAL001", "lat": 32.75, "lng": -96.77, "market": "Texas"},
+  {"enodeb": "456", "geoId": "DAL002", "lat": 32.78, "lng": -96.8, "market": "Texas"},
+  {"enodeb": "789", "geoId": "OKL003", "lat": 35.47, "lng": -97.52, "market": "Oklahoma"},
+  {"enodeb": "321", "geoId": "FLA004", "lat": 27.96, "lng": -82.45, "market": "Florida"},
+  {"enodeb": "654", "geoId": "CHI005", "lat": 41.88, "lng": -87.63, "market": "Illinois"}
+]

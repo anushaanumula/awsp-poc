@@ -1,0 +1,7 @@
+[
+  { "type": "Battery", "count": 43 },
+  { "type": "Config", "count": 27 },
+  { "type": "Core", "count": 18 },
+  { "type": "RAN", "count": 15 },
+  { "type": "Backhaul", "count": 9 }
+]

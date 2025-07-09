@@ -1,20 +1,26 @@
 export const lineOptions = {
   responsive: true,
-  scales: { y: { beginAtZero: true } },
+  scales: {
+    x: { title: { display: true, text: 'Time' } },
+    y: { beginAtZero: true, title: { display: true, text: 'Value' } },
+  },
   plugins: { legend: { display: false } },
 };
 
 export const barOptions = {
   responsive: true,
-  scales: { y: { beginAtZero: true } },
+  scales: {
+    x: { title: { display: true, text: 'Hour' } },
+    y: { beginAtZero: true, title: { display: true, text: 'Value' } },
+  },
   plugins: { legend: { display: false } },
 };
 
 export const lineData = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  labels: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10'],
   datasets: [
     {
-      data: [400, 420, 440, 430, 450, 460, 455],
+      data: [3.5, 3.4, 3.6, 3.2, 3.1, 3.3, 3.4, 3.5, 3.6, 3.7],
       borderColor: '#0ea5e9',
       backgroundColor: 'rgba(14, 165, 233, 0.3)',
       fill: true,

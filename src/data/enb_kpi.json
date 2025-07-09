@@ -1,0 +1,9 @@
+{
+  "eNB": "134",
+  "market": "Texas",
+  "throughput": "85 Mbps",
+  "rrcFailure": "4.1%",
+  "bearerDrop": "1.2%",
+  "avgCqi": "7.9",
+  "handoverSuccess": "92.4%"
+}

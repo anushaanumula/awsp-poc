@@ -8,24 +8,10 @@ import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
 import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
-import IssueSummary from './pages/IssueSummary';
-import UserInsights from './pages/UserInsights';
-import EndToEndView from './pages/EndToEndView';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
-import ConversationalDashboard from './ConversationalDashboard.jsx';
-import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { useRef } from 'react';
 
-const TABS = [
-  'Live Map & KPI',
-  'AI Insights',
-  'Task List',
-  'Conversational UI',
-  'Issue Summary',
-  'User Insights',
-  'End-to-End View'
-];
+const TABS = ['Live Map & KPI', 'AI Insights', 'Task List'];
 const IMPACT_CATEGORIES = [
   'Top n Offenders',
   'Heavy Hitters',
@@ -92,7 +78,6 @@ const DEFAULT_STATE = STATES[0];
 export default function App() {
   const [selectedSite, setSelectedSite] = useState(null);
   const [showTaskModal, setShowTaskModal] = useState(false);
-  // Start on the Live Map tab by default
   const [activeTab, setActiveTab] = useState(0);
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
@@ -107,16 +92,6 @@ export default function App() {
   });
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [showAssistant, setShowAssistant] = useState(false);
-  const [selectedContext, setSelectedContext] = useState({
-    market: null,
-    site: null,
-    enb: null,
-    sector: null,
-    carrier: null,
-    siteObj: null, // full site object if needed
-  });
 
   useEffect(() => {
     if (!taskMessage) return;
@@ -146,14 +121,10 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSiteSelect = (siteObj) => {
-    setSelectedContext({
-      ...selectedContext,
-      market: siteObj.state,
-      site: siteObj.geoId,
-      enb: siteObj.enodeb,
-      siteObj,
-    });
+  const handleSiteSelect = (site) => {
+    setSelectedSite((prev) =>
+      prev && prev.geoId === site.geoId ? null : site
+    );
   };
 
   const handleTaskCreate = (task) => {
@@ -178,20 +149,25 @@ export default function App() {
 
   const clearFilters = () => setActiveFilters([]);
 
+
   useEffect(() => {
     setGeoFilter('All');
   }, [stateFilter]);
 
   const geoOptions = useMemo(() => {
     if (stateFilter === 'All') return [];
-    return sitesData.filter((s) => s.state === stateFilter).map((s) => s.geoId);
+    return sitesData
+      .filter((s) => s.state === stateFilter)
+      .map((s) => s.geoId);
   }, [stateFilter]);
 
   const filteredByState =
     stateFilter === 'All' ? sites : sites.filter((s) => s.state === stateFilter);
 
   const filteredByGeo =
-    geoFilter === 'All' ? filteredByState : filteredByState.filter((s) => s.geoId === geoFilter);
+    geoFilter === 'All'
+      ? filteredByState
+      : filteredByState.filter((s) => s.geoId === geoFilter);
 
   const filteredSites =
     activeFilters.length > 0
@@ -213,45 +189,33 @@ export default function App() {
     return result;
   }, []);
 
-
-  // Helper to jump to a tab and set context
-  const goToTabWithSite = (tabIdx, site) => {
-    setSelectedSite(site);
-    setActiveTab(tabIdx);
-  };
-
-  // Tab indices (adjust as per your TABS array)
-  const TAB_AI_INSIGHTS = 1;
-  const TAB_END_TO_END = 6;
-  const TAB_CONVERSATIONAL = 3;
-
-  useEffect(() => {
-    const handleGotoAiInsights = (e) => {
-      setSelectedSite(e.detail);
-      setActiveTab(TAB_AI_INSIGHTS); // Make sure this is the correct tab index for AI Insights
-    };
-    const handleGotoEndToEnd = (e) => {
-      setSelectedSite(e.detail);
-      setActiveTab(TAB_END_TO_END); // Make sure this is the correct tab index for End-to-End View
-    };
-    window.addEventListener('gotoAiInsights', handleGotoAiInsights);
-    window.addEventListener('gotoEndToEnd', handleGotoEndToEnd);
-    return () => {
-      window.removeEventListener('gotoAiInsights', handleGotoAiInsights);
-      window.removeEventListener('gotoEndToEnd', handleGotoEndToEnd);
-    };
+  // Determine the most common regions for each impact category
+  const topRegionsByImpact = useMemo(() => {
+    const countsByImpact = {};
+    sitesData.forEach((s) => {
+      const impact = s.kpiType;
+      countsByImpact[impact] = countsByImpact[impact] || {};
+      countsByImpact[impact][s.state] =
+        (countsByImpact[impact][s.state] || 0) + 1;
+    });
+    const result = {};
+    Object.entries(countsByImpact).forEach(([impact, counts]) => {
+      result[impact] = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([state]) => state);
+    });
+    return result;
   }, []);
 
   return (
-    <>
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
       {taskMessage && (
         <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
       )}
-      {/* {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />} */}
+      {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />}
 
-      {activeTab === 0 && <TopImpactPanels />}
+      <TopImpactPanels impactRegions={topRegionsByImpact} />
 
       {/* Filters and Tabs */}
       <div className="mb-4 flex justify-between items-center bw">
@@ -293,7 +257,9 @@ export default function App() {
               key={tab}
               onClick={() => setActiveTab(i)}
               className={`btn bg-transparent ${
-                activeTab === i ? 'font-bold underline' : 'hover:underline'
+                activeTab === i
+                  ? 'font-bold underline'
+                  : 'hover:underline'
               }`}
             >
               {tab}
@@ -303,7 +269,7 @@ export default function App() {
       </div>
 
       {/* Category Filters */}
-      {activeTab === 0 && (
+      {(activeTab === 0 || activeTab === 3) && (
         <>
           <div className="flex flex-wrap gap-2 overflow-x-auto whitespace-nowrap mb-4 bw">
             {IMPACT_CATEGORIES.map((cat) => (
@@ -334,13 +300,15 @@ export default function App() {
             <div className="col-span-2 bw">
               <KpiTable
                 sites={topSites}
-                onSelect={(site) => setSelectedSite(site)} // Only select, don't switch tab
+                onSelect={handleSiteSelect}
                 selected={selectedSite}
                 onCreateTask={(site) => {
                   setSelectedSite(site);
                   setShowTaskModal(true);
                 }}
               />
+              <p className="text-xs text-gray-600 mt-1">Showing top 10 sites by severity</p>
+
             </div>
             <div className="flex flex-col space-y-4">
               <div className="h-64 border rounded">
@@ -352,17 +320,7 @@ export default function App() {
               />
               </div>
               <div className="h-64 border rounded overflow-auto bw">
-                <SiteDetails
-                  site={selectedSite}
-                  onViewPath={() => {
-                    setSelectedSite(selectedSite);
-                    setActiveTab(TAB_END_TO_END);
-                  }}
-                  onAskAssistant={() => {
-                    setSelectedSite(selectedSite);
-                    setActiveTab(TAB_CONVERSATIONAL);
-                  }}
-                />
+                <SiteDetails site={selectedSite} />
               </div>
             </div>
           </div>
@@ -387,7 +345,7 @@ export default function App() {
         </>
       )}
 
-      {activeTab === TAB_AI_INSIGHTS && (
+      {activeTab === 1 && (
         <div className="p-4 border rounded">
           <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
           <div className="space-y-3 mb-4">
@@ -395,52 +353,52 @@ export default function App() {
               <div key={type} className="space-y-2">
                 <div className="mb-1 font-medium">{type}</div>
                 <div className="flex flex-wrap gap-2">
-                  {sites.map((s) => (
-                    <button
-                      key={s.geoId}
-                      className={`border rounded px-2 py-1 text-xs ${
-                        selectedSite && selectedSite.geoId === s.geoId
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100'
-                      }`}
-                      onClick={() => setSelectedSite(s)}
-                    >
-                      {s.geoId}
-                    </button>
-                  ))}
+                  {sites.map((s) => {
+                    const isSelected = selectedSite && selectedSite.geoId === s.geoId;
+                    const grayscale = GRAYSCALE_SITES.includes(s.geoId);
+                    return (
+                      <button
+                        key={s.geoId}
+                        onClick={() => handleSiteSelect(s)}
+                        className={`btn${grayscale ? ' bw' : ''}`}
+                        style={{
+                          backgroundColor: isSelected ? SELECTED_TILE_COLOR : DEFAULT_TILE_COLOR,
+                          color: isSelected ? '#fff' : '#000',
+                        }}
+                        title={`View ${s.geoId}`}
+                      >
+                        {s.geoId}
+                      </button>
+                    );
+                  })}
                 </div>
                 {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
                   <>
                     <div className="grid grid-cols-3 gap-4 mt-2">
+                      {/* Keep map in default color */}
                       <div className="h-64 border rounded full-color">
                         <MapView
                           sites={[selectedSite]}
-                          onSelect={setSelectedSite}
+                          onSelect={handleSiteSelect}
                           selected={selectedSite}
-                          stateFilter={selectedSite.state}
+                          stateFilter={stateFilter}
                           zoomToSelected
                         />
                       </div>
-                      <div className="col-span-2 h-64 border rounded">
+                      <div className={`col-span-2 h-64 border rounded${
+                        GRAYSCALE_SITES.includes(selectedSite.geoId)
+                          ? ' bw'
+                          : ''
+                      }`}>
                         <TrendGraph site={selectedSite} />
                       </div>
                     </div>
-                    {/* Show AI Insights and below it the selected site table */}
                     <div className="grid grid-cols-3 gap-4 mt-4">
                       <div className="h-64 border rounded overflow-auto">
-                        <AiInsights
-                          context={{ siteObj: selectedSite }}
-                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
-                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
-                          onApprove={handleTaskCreate}
-                        />
+                        <AiInsights site={selectedSite} onApprove={handleTaskCreate} />
                       </div>
                       <div className="col-span-2 h-64 border rounded overflow-auto">
-                        <SiteDetails
-                          site={selectedSite}
-                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
-                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
-                        />
+                        <SiteDetails site={selectedSite} />
                       </div>
                     </div>
                   </>
@@ -448,64 +406,14 @@ export default function App() {
               </div>
             ))}
           </div>
+          <h2 className="text-xl font-semibold mt-6 mb-2">Recommended Actions and Generated Flow</h2>
+          <p>If risk is high, suggest proactive mitigation steps. If low, suggest monitoring only.</p>
         </div>
       )}
 
       {activeTab === 2 && (
         <TaskList tasks={tasks} onRemove={handleTaskRemove} />
       )}
-
-      {activeTab === 3 && <ConversationalDashboard />}
-      {activeTab === 4 && <IssueSummary />}
-      {activeTab === 5 && <UserInsights />}
-      {activeTab === 6 && <EndToEndView
-        context={selectedContext}
-        onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
-      />}
-      <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l shadow-xl overflow-auto p-4 transform transition-transform duration-300 ${showDashboard ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
-      >
-        <button
-          className="absolute top-2 right-2 text-gray-700"
-          onClick={() => setShowDashboard(false)}
-        >
-          <XMarkIcon className="w-5 h-5" />
-        </button>
-        <ConversationalDashboard />
-      </div>
-
-      <button
-        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200] hover:bg-blue-700 transition" 
-        onClick={() => setShowDashboard((prev) => !prev)}
-        aria-label="Toggle network chat"
-      >
-        <ChatBubbleLeftRightIcon className="w-6 h-6" />
-      </button>
     </div>
-    <button
-      onClick={() => setShowAssistant(true)}
-      className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 z-40"
-      title="Open Assistant"
-    >
-      <ChatBubbleLeftRightIcon className="w-6 h-6" />
-    </button>
-    {showAssistant && (
-      <div className="fixed inset-0 flex items-end justify-end bg-black bg-opacity-30 z-[1200]">
-        <div className="bg-white w-full sm:max-w-md md:max-w-lg h-[80vh] shadow-xl relative m-4 rounded-lg">
-          <button
-            className="absolute top-2 right-2 text-gray-600 hover:text-black"
-            onClick={() => setShowAssistant(false)}
-          >
-            <XMarkIcon className="w-6 h-6" />
-          </button>
-          <ConversationalDashboard
-            context={selectedContext}
-            onSelectSite={handleSiteSelect}
-          />
-        </div>
-      </div>
-    )}
-    </>
   );
 }
-
