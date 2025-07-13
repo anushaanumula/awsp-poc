@@ -233,27 +233,9 @@ const AIKPIDashboard = ({
         </div>
       )}
 
-      {/* Conditional: AI Panels and Action Buttons (only after site selection) */}
+      {/* Conditional: AI Panels (only after site selection) */}
       {selectedSite && (
         <>
-          {/* Action Buttons */}
-          <div className="flex space-x-4 p-4 bg-verizon-concrete border border-verizon-black rounded-lg">
-            <button
-              onClick={() => onViewPath && onViewPath(selectedSite)}
-              className="flex items-center space-x-2 px-4 py-2 bg-verizon-red text-white rounded-md hover:bg-red-700 transition-colors"
-            >
-              <ChartBarIcon className="h-5 w-5" />
-              <span>View End to End</span>
-            </button>
-            <button
-              onClick={() => onAskAssistant && onAskAssistant(selectedSite)}
-              className="flex items-center space-x-2 px-4 py-2 bg-verizon-blue text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              <ChatBubbleLeftRightIcon className="h-5 w-5" />
-              <span>Ask Assistant</span>
-            </button>
-          </div>
-
           {/* AI Panels Grid */}
           <div className="grid grid-cols-2 gap-6">
             {/* AI Insights Panel */}
