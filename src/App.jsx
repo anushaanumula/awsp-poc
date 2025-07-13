@@ -3,24 +3,31 @@ import MapView from './components/MapView';
 import KpiTable from './components/KpiTable';
 import SiteDetails from './components/SiteDetails';
 import AiInsights from './components/AiInsights';
+import KPICorrelation from './components/KPICorrelation';
+import AIKPIDashboard from './components/AIKPIDashboard';
+import AIInsightsEngineering from './components/AIInsightsEngineering';
+import AIStatusHeader from './components/AIStatusHeader';
 import TrendGraph from './components/TrendGraph';
 import TaskModal from './components/TaskModal';
 import TaskList from './components/TaskList';
+import AITaskDashboard from './components/AITaskDashboard';
 import GuideBanner from './components/GuideBanner';
 import TopImpactPanels from './components/TopImpactPanels';
+import { ToasterProvider } from './components/Toaster';
 import IssueSummary from './pages/IssueSummary';
 import UserInsights from './pages/UserInsights';
 import EndToEndView from './pages/EndToEndView';
 import sitesData from './data/sites.json';
 import statesList from './data/states.json';
-import ConversationalDashboard from './ConversationalDashboard.jsx';
+import ConversationalUI from './components/ConversationalUI';
 import { ChatBubbleLeftRightIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { useRef } from 'react';
 
 const TABS = [
   'Live Map & KPI',
   'AI Insights',
-  'Task List',
+  'KPI Correlation',
+  'AI Task Intelligence',
   'Conversational UI',
   'Issue Summary',
   'User Insights',
@@ -97,10 +104,63 @@ export default function App() {
   const [stateFilter, setStateFilter] = useState(DEFAULT_STATE);
   const [geoFilter, setGeoFilter] = useState('All');
   const [activeFilters, setActiveFilters] = useState([]);
+  // New state for TopImpactPanels filtering
+  const [selectedMarketFromPanels, setSelectedMarketFromPanels] = useState(null);
+  const [selectedKpiCategory, setSelectedKpiCategory] = useState(null);
   const [sites, setSites] = useState(sitesData);
   const [tasks, setTasks] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem('tasks')) || [];
+      const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      // Add some sample AI-generated tasks if no tasks exist
+      if (storedTasks.length === 0) {
+        return [
+          {
+            id: Date.now() + 1,
+            title: 'Optimize DAL001 antenna tilt for capacity improvement',
+            description: 'AI detected suboptimal antenna configuration causing 15% throughput reduction',
+            siteId: 'DAL001',
+            priority: 'critical',
+            status: 'pending',
+            assignee: 'RF Engineering Team',
+            createdAt: new Date().toISOString(),
+            dueDate: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString()
+          },
+          {
+            id: Date.now() + 2,
+            title: 'Preemptive load balancing for TAM042 predicted congestion',
+            description: 'ML model predicts 40% traffic surge in next 2 hours based on event patterns',
+            siteId: 'TAM042',
+            priority: 'high',
+            status: 'in-progress',
+            assignee: 'Network Operations',
+            createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+            dueDate: new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString()
+          },
+          {
+            id: Date.now() + 3,
+            title: 'Auto-remediate CHI023 interference pattern',
+            description: 'AI identified recurring interference source, implementing automated mitigation',
+            siteId: 'CHI023',
+            priority: 'medium',
+            status: 'completed',
+            assignee: 'AI Automation System',
+            createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+            dueDate: new Date(Date.now() - 30 * 60 * 1000).toISOString()
+          },
+          {
+            id: Date.now() + 4,
+            title: 'Capacity expansion analysis for STL020 market growth',
+            description: 'Data analytics suggest need for additional carriers based on subscriber growth trends',
+            siteId: 'STL020',
+            priority: 'low',
+            status: 'pending',
+            assignee: 'Capacity Planning',
+            createdAt: new Date().toISOString(),
+            dueDate: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString()
+          }
+        ];
+      }
+      return storedTasks;
     } catch {
       return [];
     }
@@ -108,7 +168,6 @@ export default function App() {
   const [taskMessage, setTaskMessage] = useState('');
   const [showGuide, setShowGuide] = useState(true);
   const [showDashboard, setShowDashboard] = useState(false);
-  const [showAssistant, setShowAssistant] = useState(false);
   const [selectedContext, setSelectedContext] = useState({
     market: null,
     site: null,
@@ -147,6 +206,7 @@ export default function App() {
   }, []);
 
   const handleSiteSelect = (siteObj) => {
+    setSelectedSite(siteObj); // Add this line to fix site selection
     setSelectedContext({
       ...selectedContext,
       market: siteObj.state,
@@ -170,13 +230,67 @@ export default function App() {
   };
   const handleTaskRemove = (id) => setTasks((prev) => prev.filter((t) => t.id !== id));
 
+  // Handlers for TopImpactPanels market and KPI category selection
+  const handleMarketSelectFromPanels = (market) => {
+    setSelectedMarketFromPanels(market);
+    if (market) {
+      setStateFilter(market); // Also update the main state filter
+    }
+  };
+
+  const handleKpiCategorySelect = (category) => {
+    setSelectedKpiCategory(category);
+    // Clear existing filters and set the new category filter
+    if (category) {
+      const mappedCategory = mapKpiCategoryToFilter(category);
+      setActiveFilters([mappedCategory]);
+    } else {
+      setActiveFilters([]);
+    }
+  };
+
+  // Map KPI category names from TopImpactPanels to filter names
+  const mapKpiCategoryToFilter = (category) => {
+    const mapping = {
+      'Sleepy Cells': 'Sleepy Cells',
+      'Broken Trends': 'Broken Trends', 
+      'High Runners': 'High Runners',
+      'Heavy Hitters': 'Heavy Hitters',
+      'Top n Offenders': 'Top n Offenders',
+      'Micro/Macro': 'Micro/Macro Outage'
+    };
+    return mapping[category] || category;
+  };
+
+  // Handle filter changes from AIKPIDashboard
+  const handleFiltersChange = (newFilters) => {
+    setActiveFilters(newFilters);
+    // If filters are cleared, also clear the selected category
+    if (newFilters.length === 0) {
+      setSelectedKpiCategory(null);
+    }
+  };
+
+  // Clear TopImpactPanels selection when state filter is manually changed
+  useEffect(() => {
+    if (stateFilter !== selectedMarketFromPanels && selectedMarketFromPanels) {
+      setSelectedMarketFromPanels(null);
+      setSelectedKpiCategory(null);
+    }
+  }, [stateFilter, selectedMarketFromPanels]);
+
   const toggleFilter = (filter) => {
     setActiveFilters((prev) =>
       prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
     );
+    // Clear TopImpactPanels selection if manually toggling filters
+    setSelectedKpiCategory(null);
   };
 
-  const clearFilters = () => setActiveFilters([]);
+  const clearFilters = () => {
+    setActiveFilters([]);
+    setSelectedKpiCategory(null);
+  };
 
   useEffect(() => {
     setGeoFilter('All');
@@ -222,8 +336,9 @@ export default function App() {
 
   // Tab indices (adjust as per your TABS array)
   const TAB_AI_INSIGHTS = 1;
-  const TAB_END_TO_END = 6;
-  const TAB_CONVERSATIONAL = 3;
+  const TAB_KPI_CORRELATION = 2;
+  const TAB_END_TO_END = 7;
+  const TAB_CONVERSATIONAL = 4;
 
   useEffect(() => {
     const handleGotoAiInsights = (e) => {
@@ -243,43 +358,57 @@ export default function App() {
   }, []);
 
   return (
-    <>
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4 bw">AWSP AI Dashboard</h1>
+    <ToasterProvider>
+      <div className="p-4 bg-neutral min-h-screen">
+      {/* AI Status Header */}
+      <AIStatusHeader 
+        sitesCount={sites.length}
+        alertsCount={sites.filter(s => s.severity > 3).length}
+        activeInsights={12}
+      />
+      
       {taskMessage && (
-        <div className="mb-4 text-sm text-blue-600 bw">{taskMessage}</div>
+        <div className="mb-4 text-sm text-secondary bw">{taskMessage}</div>
       )}
       {/* {showGuide && <GuideBanner onClose={() => setShowGuide(false)} />} */}
 
-      {activeTab === 0 && <TopImpactPanels />}
+      {activeTab === 0 && (
+        <TopImpactPanels 
+          onMarketSelect={handleMarketSelectFromPanels}
+          onKpiCategorySelect={handleKpiCategorySelect}
+          selectedMarket={selectedMarketFromPanels}
+          selectedCategory={selectedKpiCategory}
+          filteredSitesCount={filteredSites.length}
+        />
+      )}
 
       {/* Filters and Tabs */}
-      <div className="mb-4 flex justify-between items-center bw">
+      <div className="mb-6 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <label htmlFor="state" className="font-medium">
+          <label htmlFor="state" className="font-medium text-base-content">
             Market/Geofence:
           </label>
           <select
             id="state"
             value={stateFilter}
             onChange={(e) => setStateFilter(e.target.value)}
-            className="border rounded px-2 py-1 text-sm bg-gray-200"
+            className="border border-base-content rounded-lg px-3 py-2 text-sm bg-white shadow-sm focus:border-secondary focus:ring-1 focus:ring-secondary"
           >
-            <option value="All">All</option>
+            <option value="All">All Markets</option>
             {STATES.map((s) => (
               <option key={s} value={s} title={`View ${s}`}> {s} </option>
             ))}
           </select>
           {geoOptions.length > 0 && (
             <>
-              <label htmlFor="geo" className="ml-4 font-medium"> Site: </label>
+              <label htmlFor="geo" className="ml-4 font-medium text-base-content"> Site: </label>
               <select
                 id="geo"
                 value={geoFilter}
                 onChange={(e) => setGeoFilter(e.target.value)}
-                className="border rounded px-2 py-1 text-sm bg-gray-200"
+                className="border border-base-content rounded-lg px-3 py-2 text-sm bg-white shadow-sm focus:border-secondary focus:ring-1 focus:ring-secondary"
               >
-                <option value="All">All</option>
+                <option value="All">All Sites</option>
                 {geoOptions.map((g) => (
                   <option key={g} value={g} title={`View ${g}`}>{g}</option>
                 ))}
@@ -287,13 +416,17 @@ export default function App() {
             </>
           )}
         </div>
-        <div className="flex space-x-4">
+        
+        {/* Enhanced Tab Navigation */}
+        <div className="flex space-x-1 bg-base-content p-1 rounded-lg">
           {TABS.map((tab, i) => (
             <button
               key={tab}
               onClick={() => setActiveTab(i)}
-              className={`btn bg-transparent ${
-                activeTab === i ? 'font-bold underline' : 'hover:underline'
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                activeTab === i
+                  ? 'bg-primary text-white shadow-md'
+                  : 'text-neutral hover:text-white hover:bg-secondary'
               }`}
             >
               {tab}
@@ -305,77 +438,39 @@ export default function App() {
       {/* Category Filters */}
       {activeTab === 0 && (
         <>
-          <div className="flex flex-wrap gap-2 overflow-x-auto whitespace-nowrap mb-4 bw">
-            {IMPACT_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => toggleFilter(cat)}
-                className={`btn rounded-full ${
-                  activeFilters.includes(cat)
-                    ? 'bg-black text-white hover:bg-gray-800'
-                    : 'bg-gray-200 text-black hover:bg-gray-300'
-                }`}
-                title={IMPACT_INFO[cat]}
-              >
-                {cat}
-              </button>
-            ))}
-            {activeFilters.length > 0 && (
-              <button
-                onClick={clearFilters}
-                className="btn bg-black text-white hover:bg-gray-800"
-              >
-                Clear Filters
-              </button>
-            )}
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 mb-4">
-            <div className="col-span-2 bw">
-              <KpiTable
-                sites={topSites}
-                onSelect={(site) => setSelectedSite(site)} // Only select, don't switch tab
-                selected={selectedSite}
-                onCreateTask={(site) => {
-                  setSelectedSite(site);
-                  setShowTaskModal(true);
-                }}
-              />
-            </div>
-            <div className="flex flex-col space-y-4">
-              <div className="h-64 border rounded">
-              <MapView
-                sites={filteredSites}
-                onSelect={handleSiteSelect}
-                selected={selectedSite}
-                stateFilter={stateFilter}
-              />
-              </div>
-              <div className="h-64 border rounded overflow-auto bw">
-                <SiteDetails
-                  site={selectedSite}
-                  onViewPath={() => {
-                    setSelectedSite(selectedSite);
-                    setActiveTab(TAB_END_TO_END);
-                  }}
-                  onAskAssistant={() => {
-                    setSelectedSite(selectedSite);
-                    setActiveTab(TAB_CONVERSATIONAL);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-4 bw">
-            <button
-              className="btn px-4 py-2 bg-black text-white disabled:opacity-50 hover:bg-gray-800"
-              disabled={!selectedSite}
-              onClick={() => setShowTaskModal(true)}
-            >
-              Create Task
-            </button>
-          </div>
+          {/* AI-Native KPI Dashboard */}
+          <AIKPIDashboard
+            sites={filteredSites}
+            selectedSite={selectedSite}
+            onSiteSelect={handleSiteSelect}
+            onCreateTask={(site, action) => {
+              setSelectedSite(site);
+              setTaskMessage(`Task created: ${action}`);
+              const newTask = {
+                id: Date.now(),
+                title: action,
+                description: `AI-recommended action for site ${site.geoId}`,
+                siteId: site.geoId,
+                priority: site.severity > 3 ? 'high' : 'medium',
+                status: 'pending',
+                assignee: 'RF Engineer',
+                createdAt: new Date().toISOString(),
+                dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+              };
+              setTasks(prev => [newTask, ...prev]);
+            }}
+            stateFilter={stateFilter}
+            externalActiveFilters={activeFilters}
+            onFiltersChange={handleFiltersChange}
+            onViewPath={(site) => {
+              setSelectedSite(site);
+              setActiveTab(TAB_END_TO_END);
+            }}
+            onAskAssistant={(site) => {
+              setSelectedSite(site);
+              setActiveTab(TAB_CONVERSATIONAL);
+            }}
+          />
 
           {showTaskModal && (
             <TaskModal
@@ -388,124 +483,107 @@ export default function App() {
       )}
 
       {activeTab === TAB_AI_INSIGHTS && (
-        <div className="p-4 border rounded">
-          <h2 className="text-xl font-semibold mb-2">Predicted Top Sites by Impact Type</h2>
-          <div className="space-y-3 mb-4">
-            {Object.entries(predictedSitesByImpact).map(([type, sites]) => (
-              <div key={type} className="space-y-2">
-                <div className="mb-1 font-medium">{type}</div>
-                <div className="flex flex-wrap gap-2">
-                  {sites.map((s) => (
-                    <button
-                      key={s.geoId}
-                      className={`border rounded px-2 py-1 text-xs ${
-                        selectedSite && selectedSite.geoId === s.geoId
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100'
-                      }`}
-                      onClick={() => setSelectedSite(s)}
-                    >
-                      {s.geoId}
-                    </button>
-                  ))}
-                </div>
-                {selectedSite && sites.some((x) => x.geoId === selectedSite.geoId) && (
-                  <>
-                    <div className="grid grid-cols-3 gap-4 mt-2">
-                      <div className="h-64 border rounded full-color">
-                        <MapView
-                          sites={[selectedSite]}
-                          onSelect={setSelectedSite}
-                          selected={selectedSite}
-                          stateFilter={selectedSite.state}
-                          zoomToSelected
-                        />
-                      </div>
-                      <div className="col-span-2 h-64 border rounded">
-                        <TrendGraph site={selectedSite} />
-                      </div>
-                    </div>
-                    {/* Show AI Insights and below it the selected site table */}
-                    <div className="grid grid-cols-3 gap-4 mt-4">
-                      <div className="h-64 border rounded overflow-auto">
-                        <AiInsights
-                          context={{ siteObj: selectedSite }}
-                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
-                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
-                          onApprove={handleTaskCreate}
-                        />
-                      </div>
-                      <div className="col-span-2 h-64 border rounded overflow-auto">
-                        <SiteDetails
-                          site={selectedSite}
-                          onViewPath={() => setActiveTab(TAB_END_TO_END)}
-                          onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+        <AIInsightsEngineering
+          sites={filteredSites}
+          selectedSite={selectedSite}
+          onSiteSelect={handleSiteSelect}
+          onCreateTask={(site, action) => {
+            if (site.geoId === 'MARKET') {
+              setTaskMessage(`Market-level AI task created: ${action}`);
+            } else {
+              setSelectedSite(site);
+              setTaskMessage(`AI optimization task created: ${action}`);
+            }
+            const newTask = {
+              id: Date.now(),
+              title: action,
+              description: site.geoId === 'MARKET' 
+                ? `Market-level AI action for ${stateFilter}: ${action}`
+                : `AI-driven optimization for site ${site.geoId}: ${action}`,
+              siteId: site.geoId,
+              priority: 'high',
+              status: 'in-progress', // Start in progress for AI workflows
+              assignee: 'RF Engineering Team',
+              createdAt: new Date().toISOString(),
+              dueDate: new Date(Date.now() + 4 * 60 * 60 * 1000).toISOString(), // 4 hours
+              aiWorkflow: true,
+              workflowType: action.toLowerCase().includes('execute') ? 'execute' : 
+                           action.toLowerCase().includes('auto') ? 'auto' :
+                           action.toLowerCase().includes('prevent') ? 'prevent' : 'optimization'
+            };
+            setTasks(prev => [newTask, ...prev]);
+          }}
+          stateFilter={stateFilter}
+          onViewPath={(site) => {
+            setSelectedSite(site);
+            setActiveTab(TAB_END_TO_END);
+          }}
+          onAskAssistant={(site) => {
+            setSelectedSite(site);
+            setActiveTab(TAB_CONVERSATIONAL);
+          }}
+          predictedSitesByImpact={predictedSitesByImpact}
+        />
       )}
 
       {activeTab === 2 && (
-        <TaskList tasks={tasks} onRemove={handleTaskRemove} />
+        <KPICorrelation 
+          context={{ siteObj: selectedSite }}
+          onCreateTask={handleTaskCreate}
+        />
       )}
 
-      {activeTab === 3 && <ConversationalDashboard />}
-      {activeTab === 4 && <IssueSummary />}
-      {activeTab === 5 && <UserInsights />}
-      {activeTab === 6 && <EndToEndView
+      {activeTab === 3 && (
+        <AITaskDashboard 
+          tasks={tasks} 
+          onRemove={handleTaskRemove}
+          onUpdateTask={(taskId, updates) => {
+            setTasks(prev => prev.map(task => 
+              task.id === taskId ? { ...task, ...updates } : task
+            ));
+          }}
+          onAddTask={(newTask) => {
+            setTasks(prev => [newTask, ...prev]);
+          }}
+          stateFilter={stateFilter}
+        />
+      )}
+
+      {activeTab === 4 && (
+        <ConversationalUI
+          context={selectedContext}
+          onSelectSite={handleSiteSelect}
+        />
+      )}
+      {activeTab === 5 && <IssueSummary />}
+      {activeTab === 6 && <UserInsights />}
+      {activeTab === 7 && <EndToEndView
         context={selectedContext}
         onAskAssistant={() => setActiveTab(TAB_CONVERSATIONAL)}
       />}
       <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l shadow-xl overflow-auto p-4 transform transition-transform duration-300 ${showDashboard ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
+        className={`fixed top-0 right-0 h-full w-full md:w-[60%] lg:w-[60%] bg-white z-[2000] border-l-2 border-primary shadow-2xl overflow-auto transform transition-all duration-300 ease-in-out ${showDashboard ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'}`}
       >
-        <button
-          className="absolute top-2 right-2 text-gray-700"
-          onClick={() => setShowDashboard(false)}
-        >
-          <XMarkIcon className="w-5 h-5" />
-        </button>
-        <ConversationalDashboard />
+        <ConversationalUI
+          context={selectedContext}
+          onSelectSite={handleSiteSelect}
+          onClose={() => setShowDashboard(false)}
+        />
       </div>
 
-      <button
-        className="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full shadow-lg z-[1200] hover:bg-blue-700 transition" 
-        onClick={() => setShowDashboard((prev) => !prev)}
-        aria-label="Toggle network chat"
-      >
-        <ChatBubbleLeftRightIcon className="w-6 h-6" />
-      </button>
+      {/* Single chat button */}
+      {!showDashboard && (
+        <button
+          className="fixed bottom-6 right-6 p-4 bg-gradient-to-r from-primary to-red-700 text-white rounded-full shadow-xl z-[1200] hover:from-red-700 hover:to-primary transition-all duration-300 hover:scale-110 hover:shadow-2xl group" 
+          onClick={() => setShowDashboard(true)}
+          aria-label="Open Network AI Assistant"
+        >
+          <ChatBubbleLeftRightIcon className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
+          <div className="absolute -top-2 -right-2 w-3 h-3 bg-secondary rounded-full animate-pulse"></div>
+        </button>
+      )}
     </div>
-    <button
-      onClick={() => setShowAssistant(true)}
-      className="fixed bottom-4 right-4 bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 z-40"
-      title="Open Assistant"
-    >
-      <ChatBubbleLeftRightIcon className="w-6 h-6" />
-    </button>
-    {showAssistant && (
-      <div className="fixed inset-0 flex items-end justify-end bg-black bg-opacity-30 z-[1200]">
-        <div className="bg-white w-full sm:max-w-md md:max-w-lg h-[80vh] shadow-xl relative m-4 rounded-lg">
-          <button
-            className="absolute top-2 right-2 text-gray-600 hover:text-black"
-            onClick={() => setShowAssistant(false)}
-          >
-            <XMarkIcon className="w-6 h-6" />
-          </button>
-          <ConversationalDashboard
-            context={selectedContext}
-            onSelectSite={handleSiteSelect}
-          />
-        </div>
-      </div>
-    )}
-    </>
+    </ToasterProvider>
   );
 }
 

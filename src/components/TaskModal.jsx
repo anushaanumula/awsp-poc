@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const TaskModal = ({ site, onClose, onCreate }) => {
+const TaskModal = ({ site, onClose, onCreate, initialTitle }) => {
   const [title, setTitle] = useState(
-    `Check ${site.kpi} (${site.kpiType}) at site ${site.geoId}`
+    initialTitle || `Check ${site.kpi} (${site.kpiType}) at site ${site.geoId}`
   );
   const [description, setDescription] = useState(
     `Investigate ${site.kpi} issue on site ${site.geoId} (eNodeB: ${site.enodeb}). Current value is ${site.value}.`
