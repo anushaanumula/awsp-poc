@@ -323,11 +323,14 @@ const KPICorrelation = ({ context, onCreateTask }) => {
           <div className="space-y-4">
             <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6 border-2 border-dashed border-blue-200">
               <img 
-                src={`/graphs/${visualizations.find(v => v.id === activeVisualization).image}`}
+                src={`${import.meta.env.BASE_URL}graphs/${visualizations.find(v => v.id === activeVisualization).image}`}
                 alt={visualizations.find(v => v.id === activeVisualization).title}
                 className="max-w-full h-auto mx-auto rounded-lg shadow-md"
                 style={{ maxHeight: '500px' }}
+                onLoad={() => console.log('Image loaded successfully:', `${import.meta.env.BASE_URL}graphs/${visualizations.find(v => v.id === activeVisualization).image}`)}
                 onError={(e) => {
+                  console.error('Image failed to load:', e.target.src);
+                  console.error('BASE_URL:', import.meta.env.BASE_URL);
                   e.target.style.display = 'none';
                   e.target.nextSibling.style.display = 'block';
                 }}

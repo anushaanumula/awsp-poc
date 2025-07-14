@@ -10,8 +10,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 02:11",
-    "lat": 32.707642,
-    "lng": -96.885795,
+    "lat": 32.706199,
+    "lng": -96.878356,
     "sectorInfo": [
       {
         "cellId": "CELL6820",
@@ -19,7 +19,7 @@
         "azimuth": 270,
         "cl": 117,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL3365",
@@ -27,7 +27,7 @@
         "azimuth": 90,
         "cl": 131,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       },
       {
         "cellId": "CELL5842",
@@ -35,7 +35,7 @@
         "azimuth": 180,
         "cl": 70,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "Dallas"
@@ -51,8 +51,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 01:02",
-    "lat": 28.142828,
-    "lng": -82.401042,
+    "lat": 27.852787,
+    "lng": -82.513117,
     "sectorInfo": [
       {
         "cellId": "CELL5256",
@@ -60,7 +60,7 @@
         "azimuth": 0,
         "cl": 142,
         "edt": "No",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       },
       {
         "cellId": "CELL9438",
@@ -68,7 +68,7 @@
         "azimuth": 0,
         "cl": 144,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL3587",
@@ -76,7 +76,7 @@
         "azimuth": 180,
         "cl": 68,
         "edt": "Yes",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "Tampa"
@@ -92,8 +92,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 01:56",
-    "lat": 41.978123,
-    "lng": -87.744495,
+    "lat": 41.880333,
+    "lng": -87.627753,
     "sectorInfo": [
       {
         "cellId": "CELL8498",
@@ -101,7 +101,7 @@
         "azimuth": 90,
         "cl": 84,
         "edt": "Yes",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "Chicago"
@@ -117,8 +117,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 01:48",
-    "lat": 35.664057,
-    "lng": -97.506386,
+    "lat": 35.461007,
+    "lng": -97.480597,
     "sectorInfo": [
       {
         "cellId": "CELL3219",
@@ -126,7 +126,7 @@
         "azimuth": 0,
         "cl": 120,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Oklahoma City"
@@ -142,8 +142,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 00:49",
-    "lat": 38.731378,
-    "lng": -90.197268,
+    "lat": 38.550597,
+    "lng": -90.140059,
     "sectorInfo": [
       {
         "cellId": "CELL2726",
@@ -151,7 +151,7 @@
         "azimuth": 90,
         "cl": 100,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       },
       {
         "cellId": "CELL6211",
@@ -159,7 +159,7 @@
         "azimuth": 180,
         "cl": 104,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "St Louis"
@@ -175,8 +175,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 01:56",
-    "lat": 32.924135,
-    "lng": -96.865373,
+    "lat": 32.858431,
+    "lng": -96.777841,
     "sectorInfo": [
       {
         "cellId": "CELL2776",
@@ -184,7 +184,7 @@
         "azimuth": 180,
         "cl": 75,
         "edt": "No",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       },
       {
         "cellId": "CELL9810",
@@ -192,7 +192,7 @@
         "azimuth": 180,
         "cl": 127,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL3603",
@@ -200,7 +200,7 @@
         "azimuth": 270,
         "cl": 70,
         "edt": "No",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       }
     ],
     "state": "Dallas"
@@ -216,8 +216,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 02:02",
-    "lat": 27.965044,
-    "lng": -82.331377,
+    "lat": 27.992306,
+    "lng": -82.377661,
     "sectorInfo": [
       {
         "cellId": "CELL4858",
@@ -225,7 +225,7 @@
         "azimuth": 180,
         "cl": 147,
         "edt": "Yes",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL5538",
@@ -233,7 +233,7 @@
         "azimuth": 270,
         "cl": 120,
         "edt": "Yes",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       }
     ],
     "state": "Tampa"
@@ -249,8 +249,8 @@
     "kpiType": "Top n Offenders",
     "severity": 5,
     "updatedAt": "2025-06-08 00:22",
-    "lat": 42.004816,
-    "lng": -87.805377,
+    "lat": 41.948035,
+    "lng": -87.65528,
     "sectorInfo": [
       {
         "cellId": "CELL7627",
@@ -258,7 +258,7 @@
         "azimuth": 180,
         "cl": 115,
         "edt": "Yes",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL2729",
@@ -266,7 +266,7 @@
         "azimuth": 180,
         "cl": 108,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       },
       {
         "cellId": "CELL3015",
@@ -274,7 +274,7 @@
         "azimuth": 0,
         "cl": 106,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       }
     ],
     "state": "Chicago"
@@ -290,8 +290,8 @@
     "kpiType": "Top n Offenders",
     "severity": 4,
     "updatedAt": "2025-06-08 00:29",
-    "lat": 35.296502,
-    "lng": -97.50738,
+    "lat": 35.458563,
+    "lng": -97.564302,
     "sectorInfo": [
       {
         "cellId": "CELL4206",
@@ -299,7 +299,7 @@
         "azimuth": 0,
         "cl": 134,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       },
       {
         "cellId": "CELL7569",
@@ -307,7 +307,7 @@
         "azimuth": 90,
         "cl": 113,
         "edt": "Yes",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       },
       {
         "cellId": "CELL6021",
@@ -315,7 +315,7 @@
         "azimuth": 0,
         "cl": 130,
         "edt": "No",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Oklahoma City"
@@ -331,8 +331,8 @@
     "kpiType": "Top n Offenders",
     "severity": 1,
     "updatedAt": "2025-06-08 00:34",
-    "lat": 38.549925,
-    "lng": -90.34362,
+    "lat": 38.588659,
+    "lng": -90.217889,
     "sectorInfo": [
       {
         "cellId": "CELL6766",
@@ -340,7 +340,7 @@
         "azimuth": 90,
         "cl": 136,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       },
       {
         "cellId": "CELL2530",
@@ -348,7 +348,7 @@
         "azimuth": 180,
         "cl": 137,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL9427",
@@ -356,7 +356,7 @@
         "azimuth": 270,
         "cl": 104,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "St Louis"
@@ -372,8 +372,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 00:18",
-    "lat": 32.631907,
-    "lng": -96.932692,
+    "lat": 32.823437,
+    "lng": -96.733465,
     "sectorInfo": [
       {
         "cellId": "CELL8405",
@@ -381,7 +381,7 @@
         "azimuth": 270,
         "cl": 64,
         "edt": "No",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       },
       {
         "cellId": "CELL4062",
@@ -389,7 +389,7 @@
         "azimuth": 90,
         "cl": 129,
         "edt": "No",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Dallas"
@@ -405,8 +405,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 2,
     "updatedAt": "2025-06-08 00:19",
-    "lat": 27.849569,
-    "lng": -82.454101,
+    "lat": 27.869812,
+    "lng": -82.377405,
     "sectorInfo": [
       {
         "cellId": "CELL9917",
@@ -414,7 +414,7 @@
         "azimuth": 270,
         "cl": 83,
         "edt": "Yes",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       },
       {
         "cellId": "CELL6821",
@@ -422,7 +422,7 @@
         "azimuth": 270,
         "cl": 114,
         "edt": "No",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "Tampa"
@@ -438,8 +438,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 01:36",
-    "lat": 42.037375,
-    "lng": -87.480449,
+    "lat": 41.841265,
+    "lng": -87.682023,
     "sectorInfo": [
       {
         "cellId": "CELL8924",
@@ -447,7 +447,7 @@
         "azimuth": 270,
         "cl": 59,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       },
       {
         "cellId": "CELL8425",
@@ -455,7 +455,7 @@
         "azimuth": 0,
         "cl": 58,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL4883",
@@ -463,7 +463,7 @@
         "azimuth": 0,
         "cl": 97,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "Chicago"
@@ -479,8 +479,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 2,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 35.282295,
-    "lng": -97.502737,
+    "lat": 35.376674,
+    "lng": -97.55631,
     "sectorInfo": [
       {
         "cellId": "CELL8704",
@@ -488,7 +488,7 @@
         "azimuth": 270,
         "cl": 82,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL1974",
@@ -496,7 +496,7 @@
         "azimuth": 180,
         "cl": 104,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Oklahoma City"
@@ -512,8 +512,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 3,
     "updatedAt": "2025-06-08 02:31",
-    "lat": 38.472664,
-    "lng": -90.377808,
+    "lat": 38.645766,
+    "lng": -90.14076,
     "sectorInfo": [
       {
         "cellId": "CELL1661",
@@ -521,7 +521,7 @@
         "azimuth": 0,
         "cl": 50,
         "edt": "No",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL3057",
@@ -529,7 +529,7 @@
         "azimuth": 0,
         "cl": 113,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "St Louis"
@@ -545,8 +545,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 00:08",
-    "lat": 32.790584,
-    "lng": -96.656044,
+    "lat": 32.812979,
+    "lng": -96.774263,
     "sectorInfo": [
       {
         "cellId": "CELL7497",
@@ -554,7 +554,7 @@
         "azimuth": 0,
         "cl": 126,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL1515",
@@ -562,7 +562,7 @@
         "azimuth": 0,
         "cl": 135,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "Dallas"
@@ -578,8 +578,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 02:02",
-    "lat": 27.81168,
-    "lng": -82.586151,
+    "lat": 27.928086,
+    "lng": -82.497919,
     "sectorInfo": [
       {
         "cellId": "CELL8056",
@@ -587,7 +587,7 @@
         "azimuth": 270,
         "cl": 144,
         "edt": "Yes",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL5148",
@@ -595,7 +595,7 @@
         "azimuth": 0,
         "cl": 144,
         "edt": "Yes",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       }
     ],
     "state": "Tampa"
@@ -611,8 +611,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 1,
     "updatedAt": "2025-06-08 00:41",
-    "lat": 41.734674,
-    "lng": -87.805338,
+    "lat": 41.918491,
+    "lng": -87.677083,
     "sectorInfo": [
       {
         "cellId": "CELL6970",
@@ -620,7 +620,7 @@
         "azimuth": 90,
         "cl": 100,
         "edt": "No",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       }
     ],
     "state": "Chicago"
@@ -636,8 +636,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 3,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 35.373484,
-    "lng": -97.401172,
+    "lat": 35.478778,
+    "lng": -97.601535,
     "sectorInfo": [
       {
         "cellId": "CELL9560",
@@ -645,7 +645,7 @@
         "azimuth": 90,
         "cl": 117,
         "edt": "Yes",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       },
       {
         "cellId": "CELL3583",
@@ -653,7 +653,7 @@
         "azimuth": 0,
         "cl": 83,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL5093",
@@ -661,7 +661,7 @@
         "azimuth": 90,
         "cl": 55,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Oklahoma City"
@@ -677,8 +677,8 @@
     "kpiType": "Heavy Hitters",
     "severity": 4,
     "updatedAt": "2025-06-08 00:23",
-    "lat": 38.703608,
-    "lng": -90.195183,
+    "lat": 38.635453,
+    "lng": -90.111741,
     "sectorInfo": [
       {
         "cellId": "CELL9464",
@@ -686,7 +686,7 @@
         "azimuth": 0,
         "cl": 53,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL5710",
@@ -694,7 +694,7 @@
         "azimuth": 270,
         "cl": 62,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "St Louis"
@@ -710,8 +710,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-08 00:48",
-    "lat": 32.698151,
-    "lng": -96.762363,
+    "lat": 32.713142,
+    "lng": -96.840948,
     "sectorInfo": [
       {
         "cellId": "CELL9721",
@@ -719,7 +719,7 @@
         "azimuth": 270,
         "cl": 148,
         "edt": "Yes",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "Dallas"
@@ -735,8 +735,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 01:57",
-    "lat": 27.862883,
-    "lng": -82.344489,
+    "lat": 28.044077,
+    "lng": -82.454198,
     "sectorInfo": [
       {
         "cellId": "CELL9951",
@@ -744,7 +744,7 @@
         "azimuth": 0,
         "cl": 77,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Tampa"
@@ -760,8 +760,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-07 23:55",
-    "lat": 41.679318,
-    "lng": -87.452592,
+    "lat": 41.809437,
+    "lng": -87.591318,
     "sectorInfo": [
       {
         "cellId": "CELL7478",
@@ -769,7 +769,7 @@
         "azimuth": 180,
         "cl": 50,
         "edt": "Yes",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       },
       {
         "cellId": "CELL9302",
@@ -777,7 +777,7 @@
         "azimuth": 90,
         "cl": 133,
         "edt": "Yes",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL3321",
@@ -785,7 +785,7 @@
         "azimuth": 0,
         "cl": 64,
         "edt": "No",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       }
     ],
     "state": "Chicago"
@@ -801,8 +801,8 @@
     "kpiType": "High Runners",
     "severity": 5,
     "updatedAt": "2025-06-07 23:40",
-    "lat": 35.63624,
-    "lng": -97.585427,
+    "lat": 35.441832,
+    "lng": -97.473575,
     "sectorInfo": [
       {
         "cellId": "CELL9777",
@@ -810,7 +810,7 @@
         "azimuth": 90,
         "cl": 63,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "Oklahoma City"
@@ -826,8 +826,8 @@
     "kpiType": "High Runners",
     "severity": 3,
     "updatedAt": "2025-06-08 00:30",
-    "lat": 38.709329,
-    "lng": -90.246098,
+    "lat": 38.719088,
+    "lng": -90.237816,
     "sectorInfo": [
       {
         "cellId": "CELL2419",
@@ -835,7 +835,7 @@
         "azimuth": 0,
         "cl": 139,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL5097",
@@ -843,7 +843,7 @@
         "azimuth": 180,
         "cl": 102,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL9809",
@@ -851,7 +851,7 @@
         "azimuth": 180,
         "cl": 112,
         "edt": "No",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "St Louis"
@@ -867,8 +867,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 02:29",
-    "lat": 32.845779,
-    "lng": -96.698777,
+    "lat": 32.846173,
+    "lng": -96.864355,
     "sectorInfo": [
       {
         "cellId": "CELL3786",
@@ -876,7 +876,7 @@
         "azimuth": 90,
         "cl": 119,
         "edt": "Yes",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Dallas"
@@ -892,8 +892,8 @@
     "kpiType": "High Runners",
     "severity": 1,
     "updatedAt": "2025-06-08 00:10",
-    "lat": 27.998666,
-    "lng": -82.303665,
+    "lat": 28.000039,
+    "lng": -82.522386,
     "sectorInfo": [
       {
         "cellId": "CELL8909",
@@ -901,7 +901,7 @@
         "azimuth": 90,
         "cl": 62,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Tampa"
@@ -917,8 +917,8 @@
     "kpiType": "High Runners",
     "severity": 2,
     "updatedAt": "2025-06-08 01:43",
-    "lat": 41.679429,
-    "lng": -87.565206,
+    "lat": 41.975146,
+    "lng": -87.704408,
     "sectorInfo": [
       {
         "cellId": "CELL8380",
@@ -926,7 +926,7 @@
         "azimuth": 0,
         "cl": 71,
         "edt": "No",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       }
     ],
     "state": "Chicago"
@@ -942,8 +942,8 @@
     "kpiType": "High Runners",
     "severity": 1,
     "updatedAt": "2025-06-07 23:39",
-    "lat": 35.394998,
-    "lng": -97.660503,
+    "lat": 35.560043,
+    "lng": -97.520148,
     "sectorInfo": [
       {
         "cellId": "CELL9741",
@@ -951,7 +951,7 @@
         "azimuth": 0,
         "cl": 76,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "Oklahoma City"
@@ -967,8 +967,8 @@
     "kpiType": "High Runners",
     "severity": 3,
     "updatedAt": "2025-06-07 23:43",
-    "lat": 38.517955,
-    "lng": -90.219117,
+    "lat": 38.540972,
+    "lng": -90.245241,
     "sectorInfo": [
       {
         "cellId": "CELL3752",
@@ -976,7 +976,7 @@
         "azimuth": 90,
         "cl": 137,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "St Louis"
@@ -992,8 +992,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 5,
     "updatedAt": "2025-06-08 01:34",
-    "lat": 32.593736,
-    "lng": -96.898632,
+    "lat": 32.781295,
+    "lng": -96.797035,
     "sectorInfo": [
       {
         "cellId": "CELL7936",
@@ -1001,7 +1001,7 @@
         "azimuth": 270,
         "cl": 92,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "Dallas"
@@ -1017,8 +1017,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:06",
-    "lat": 27.89297,
-    "lng": -82.469719,
+    "lat": 27.874237,
+    "lng": -82.432442,
     "sectorInfo": [
       {
         "cellId": "CELL3140",
@@ -1026,7 +1026,7 @@
         "azimuth": 270,
         "cl": 80,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       },
       {
         "cellId": "CELL6874",
@@ -1034,7 +1034,7 @@
         "azimuth": 270,
         "cl": 136,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Tampa"
@@ -1050,8 +1050,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:06",
-    "lat": 41.927628,
-    "lng": -87.72747,
+    "lat": 41.849357,
+    "lng": -87.673741,
     "sectorInfo": [
       {
         "cellId": "CELL3483",
@@ -1059,7 +1059,7 @@
         "azimuth": 270,
         "cl": 60,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL1111",
@@ -1067,7 +1067,7 @@
         "azimuth": 270,
         "cl": 131,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "Chicago"
@@ -1083,8 +1083,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 2,
     "updatedAt": "2025-06-08 00:00",
-    "lat": 35.57599,
-    "lng": -97.688931,
+    "lat": 35.478931,
+    "lng": -97.584625,
     "sectorInfo": [
       {
         "cellId": "CELL3026",
@@ -1092,7 +1092,7 @@
         "azimuth": 90,
         "cl": 71,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Oklahoma City"
@@ -1108,8 +1108,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 1,
     "updatedAt": "2025-06-08 00:33",
-    "lat": 38.812266,
-    "lng": -90.012263,
+    "lat": 38.54217,
+    "lng": -90.128971,
     "sectorInfo": [
       {
         "cellId": "CELL1109",
@@ -1117,7 +1117,7 @@
         "azimuth": 270,
         "cl": 142,
         "edt": "No",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL1664",
@@ -1125,7 +1125,7 @@
         "azimuth": 180,
         "cl": 149,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL3515",
@@ -1133,7 +1133,7 @@
         "azimuth": 90,
         "cl": 63,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "St Louis"
@@ -1149,8 +1149,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 00:31",
-    "lat": 32.744415,
-    "lng": -96.633817,
+    "lat": 32.809547,
+    "lng": -96.861295,
     "sectorInfo": [
       {
         "cellId": "CELL2461",
@@ -1158,7 +1158,7 @@
         "azimuth": 90,
         "cl": 72,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Dallas"
@@ -1174,8 +1174,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 3,
     "updatedAt": "2025-06-08 00:25",
-    "lat": 27.78932,
-    "lng": -82.293718,
+    "lat": 28.040776,
+    "lng": -82.520245,
     "sectorInfo": [
       {
         "cellId": "CELL2956",
@@ -1183,7 +1183,7 @@
         "azimuth": 90,
         "cl": 73,
         "edt": "Yes",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       },
       {
         "cellId": "CELL1837",
@@ -1191,7 +1191,7 @@
         "azimuth": 270,
         "cl": 103,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       }
     ],
     "state": "Tampa"
@@ -1207,8 +1207,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 01:30",
-    "lat": 41.838906,
-    "lng": -87.673886,
+    "lat": 41.894071,
+    "lng": -87.634655,
     "sectorInfo": [
       {
         "cellId": "CELL9555",
@@ -1216,7 +1216,7 @@
         "azimuth": 270,
         "cl": 67,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Chicago"
@@ -1232,8 +1232,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 5,
     "updatedAt": "2025-06-08 01:06",
-    "lat": 35.606282,
-    "lng": -97.453879,
+    "lat": 35.442207,
+    "lng": -97.566301,
     "sectorInfo": [
       {
         "cellId": "CELL1254",
@@ -1241,7 +1241,7 @@
         "azimuth": 180,
         "cl": 56,
         "edt": "No",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL7573",
@@ -1249,7 +1249,7 @@
         "azimuth": 180,
         "cl": 80,
         "edt": "Yes",
-        "tilt": "4\u00b0"
+        "tilt": "4°"
       }
     ],
     "state": "Oklahoma City"
@@ -1265,8 +1265,8 @@
     "kpiType": "Micro/Macro Outage",
     "severity": 4,
     "updatedAt": "2025-06-08 01:22",
-    "lat": 38.805335,
-    "lng": -90.167366,
+    "lat": 38.647748,
+    "lng": -90.229175,
     "sectorInfo": [
       {
         "cellId": "CELL2119",
@@ -1274,7 +1274,7 @@
         "azimuth": 0,
         "cl": 84,
         "edt": "No",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "St Louis"
@@ -1290,8 +1290,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 01:07",
-    "lat": 32.822951,
-    "lng": -96.93963,
+    "lat": 32.690083,
+    "lng": -96.711092,
     "sectorInfo": [
       {
         "cellId": "CELL2081",
@@ -1299,7 +1299,7 @@
         "azimuth": 0,
         "cl": 102,
         "edt": "Yes",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL4323",
@@ -1307,7 +1307,7 @@
         "azimuth": 270,
         "cl": 77,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL9792",
@@ -1315,7 +1315,7 @@
         "azimuth": 0,
         "cl": 111,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       }
     ],
     "state": "Dallas"
@@ -1331,8 +1331,8 @@
     "kpiType": "Broken Trends",
     "severity": 5,
     "updatedAt": "2025-06-08 01:29",
-    "lat": 27.758168,
-    "lng": -82.371435,
+    "lat": 27.96431,
+    "lng": -82.537031,
     "sectorInfo": [
       {
         "cellId": "CELL3546",
@@ -1340,7 +1340,7 @@
         "azimuth": 180,
         "cl": 120,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL7835",
@@ -1348,7 +1348,7 @@
         "azimuth": 270,
         "cl": 109,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Tampa"
@@ -1364,8 +1364,8 @@
     "kpiType": "Broken Trends",
     "severity": 5,
     "updatedAt": "2025-06-08 00:13",
-    "lat": 42.072494,
-    "lng": -87.662426,
+    "lat": 41.871563,
+    "lng": -87.618404,
     "sectorInfo": [
       {
         "cellId": "CELL8071",
@@ -1373,7 +1373,7 @@
         "azimuth": 0,
         "cl": 101,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "Chicago"
@@ -1389,8 +1389,8 @@
     "kpiType": "Broken Trends",
     "severity": 4,
     "updatedAt": "2025-06-08 01:44",
-    "lat": 35.288497,
-    "lng": -97.608746,
+    "lat": 35.564565,
+    "lng": -97.429957,
     "sectorInfo": [
       {
         "cellId": "CELL1373",
@@ -1398,7 +1398,7 @@
         "azimuth": 90,
         "cl": 139,
         "edt": "No",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "Oklahoma City"
@@ -1414,8 +1414,8 @@
     "kpiType": "Broken Trends",
     "severity": 3,
     "updatedAt": "2025-06-08 02:03",
-    "lat": 38.442812,
-    "lng": -90.190296,
+    "lat": 38.706146,
+    "lng": -90.297645,
     "sectorInfo": [
       {
         "cellId": "CELL5363",
@@ -1423,7 +1423,7 @@
         "azimuth": 90,
         "cl": 146,
         "edt": "No",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL2736",
@@ -1431,7 +1431,7 @@
         "azimuth": 90,
         "cl": 106,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       },
       {
         "cellId": "CELL4379",
@@ -1439,7 +1439,7 @@
         "azimuth": 180,
         "cl": 127,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "St Louis"
@@ -1455,8 +1455,8 @@
     "kpiType": "Broken Trends",
     "severity": 1,
     "updatedAt": "2025-06-08 01:03",
-    "lat": 32.642153,
-    "lng": -96.922972,
+    "lat": 32.716846,
+    "lng": -96.792625,
     "sectorInfo": [
       {
         "cellId": "CELL5393",
@@ -1464,7 +1464,7 @@
         "azimuth": 180,
         "cl": 124,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL8111",
@@ -1472,7 +1472,7 @@
         "azimuth": 0,
         "cl": 55,
         "edt": "No",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL6417",
@@ -1480,7 +1480,7 @@
         "azimuth": 180,
         "cl": 91,
         "edt": "No",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       }
     ],
     "state": "Dallas"
@@ -1496,8 +1496,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 02:11",
-    "lat": 27.984828,
-    "lng": -82.403471,
+    "lat": 27.881939,
+    "lng": -82.511881,
     "sectorInfo": [
       {
         "cellId": "CELL4238",
@@ -1505,7 +1505,7 @@
         "azimuth": 270,
         "cl": 125,
         "edt": "Yes",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL4675",
@@ -1513,7 +1513,7 @@
         "azimuth": 180,
         "cl": 132,
         "edt": "Yes",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Tampa"
@@ -1529,8 +1529,8 @@
     "kpiType": "Broken Trends",
     "severity": 3,
     "updatedAt": "2025-06-07 23:55",
-    "lat": 41.681112,
-    "lng": -87.645163,
+    "lat": 41.841838,
+    "lng": -87.636768,
     "sectorInfo": [
       {
         "cellId": "CELL5181",
@@ -1538,7 +1538,7 @@
         "azimuth": 90,
         "cl": 141,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       },
       {
         "cellId": "CELL9967",
@@ -1546,7 +1546,7 @@
         "azimuth": 180,
         "cl": 61,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL9004",
@@ -1554,7 +1554,7 @@
         "azimuth": 90,
         "cl": 51,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Chicago"
@@ -1570,8 +1570,8 @@
     "kpiType": "Broken Trends",
     "severity": 2,
     "updatedAt": "2025-06-08 01:53",
-    "lat": 35.487049,
-    "lng": -97.473655,
+    "lat": 35.540166,
+    "lng": -97.431687,
     "sectorInfo": [
       {
         "cellId": "CELL9440",
@@ -1579,7 +1579,7 @@
         "azimuth": 270,
         "cl": 89,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL8650",
@@ -1587,7 +1587,7 @@
         "azimuth": 270,
         "cl": 146,
         "edt": "No",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       }
     ],
     "state": "Oklahoma City"
@@ -1603,8 +1603,8 @@
     "kpiType": "Broken Trends",
     "severity": 1,
     "updatedAt": "2025-06-08 02:04",
-    "lat": 38.576061,
-    "lng": -90.375711,
+    "lat": 38.617494,
+    "lng": -90.16406,
     "sectorInfo": [
       {
         "cellId": "CELL5641",
@@ -1612,7 +1612,7 @@
         "azimuth": 0,
         "cl": 61,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL5912",
@@ -1620,7 +1620,7 @@
         "azimuth": 90,
         "cl": 77,
         "edt": "No",
-        "tilt": "8\u00b0"
+        "tilt": "8°"
       }
     ],
     "state": "St Louis"
@@ -1636,8 +1636,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 1,
     "updatedAt": "2025-06-08 00:52",
-    "lat": 32.943926,
-    "lng": -96.807003,
+    "lat": 32.757642,
+    "lng": -96.767575,
     "sectorInfo": [
       {
         "cellId": "CELL1449",
@@ -1645,7 +1645,7 @@
         "azimuth": 0,
         "cl": 55,
         "edt": "Yes",
-        "tilt": "7\u00b0"
+        "tilt": "7°"
       },
       {
         "cellId": "CELL2694",
@@ -1653,7 +1653,7 @@
         "azimuth": 0,
         "cl": 133,
         "edt": "Yes",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL8951",
@@ -1661,7 +1661,7 @@
         "azimuth": 270,
         "cl": 52,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Dallas"
@@ -1677,8 +1677,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 2,
     "updatedAt": "2025-06-08 01:33",
-    "lat": 28.007702,
-    "lng": -82.60145,
+    "lat": 28.024645,
+    "lng": -82.534718,
     "sectorInfo": [
       {
         "cellId": "CELL7399",
@@ -1686,7 +1686,7 @@
         "azimuth": 270,
         "cl": 123,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       }
     ],
     "state": "Tampa"
@@ -1702,8 +1702,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 4,
     "updatedAt": "2025-06-08 00:04",
-    "lat": 41.926002,
-    "lng": -87.468437,
+    "lat": 41.902335,
+    "lng": -87.621961,
     "sectorInfo": [
       {
         "cellId": "CELL7053",
@@ -1711,7 +1711,7 @@
         "azimuth": 270,
         "cl": 102,
         "edt": "No",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL9229",
@@ -1719,7 +1719,7 @@
         "azimuth": 0,
         "cl": 133,
         "edt": "Yes",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       }
     ],
     "state": "Chicago"
@@ -1735,8 +1735,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 5,
     "updatedAt": "2025-06-07 23:51",
-    "lat": 35.40547,
-    "lng": -97.444802,
+    "lat": 35.406515,
+    "lng": -97.595042,
     "sectorInfo": [
       {
         "cellId": "CELL6540",
@@ -1744,7 +1744,7 @@
         "azimuth": 0,
         "cl": 51,
         "edt": "Yes",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "Oklahoma City"
@@ -1760,8 +1760,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 5,
     "updatedAt": "2025-06-08 01:46",
-    "lat": 38.512807,
-    "lng": -90.080431,
+    "lat": 38.573338,
+    "lng": -90.248446,
     "sectorInfo": [
       {
         "cellId": "CELL4895",
@@ -1769,7 +1769,7 @@
         "azimuth": 90,
         "cl": 126,
         "edt": "No",
-        "tilt": "3\u00b0"
+        "tilt": "3°"
       },
       {
         "cellId": "CELL7767",
@@ -1777,7 +1777,7 @@
         "azimuth": 270,
         "cl": 136,
         "edt": "Yes",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL6313",
@@ -1785,7 +1785,7 @@
         "azimuth": 180,
         "cl": 76,
         "edt": "No",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       }
     ],
     "state": "St Louis"
@@ -1801,8 +1801,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 01:32",
-    "lat": 32.731729,
-    "lng": -96.702222,
+    "lat": 32.744383,
+    "lng": -96.737301,
     "sectorInfo": [
       {
         "cellId": "CELL5296",
@@ -1810,7 +1810,7 @@
         "azimuth": 0,
         "cl": 97,
         "edt": "No",
-        "tilt": "9\u00b0"
+        "tilt": "9°"
       },
       {
         "cellId": "CELL8608",
@@ -1818,7 +1818,7 @@
         "azimuth": 270,
         "cl": 125,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Dallas"
@@ -1834,8 +1834,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 00:16",
-    "lat": 28.057815,
-    "lng": -82.586924,
+    "lat": 27.981471,
+    "lng": -82.417128,
     "sectorInfo": [
       {
         "cellId": "CELL7769",
@@ -1843,7 +1843,7 @@
         "azimuth": 90,
         "cl": 146,
         "edt": "No",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       },
       {
         "cellId": "CELL1828",
@@ -1851,7 +1851,7 @@
         "azimuth": 90,
         "cl": 74,
         "edt": "Yes",
-        "tilt": "6\u00b0"
+        "tilt": "6°"
       },
       {
         "cellId": "CELL9920",
@@ -1859,7 +1859,7 @@
         "azimuth": 180,
         "cl": 90,
         "edt": "Yes",
-        "tilt": "5\u00b0"
+        "tilt": "5°"
       }
     ],
     "state": "Tampa"
@@ -1875,8 +1875,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 3,
     "updatedAt": "2025-06-08 02:30",
-    "lat": 41.929716,
-    "lng": -87.609349,
+    "lat": 41.88599,
+    "lng": -87.619383,
     "sectorInfo": [
       {
         "cellId": "CELL7458",
@@ -1884,7 +1884,7 @@
         "azimuth": 270,
         "cl": 95,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       },
       {
         "cellId": "CELL2116",
@@ -1892,7 +1892,7 @@
         "azimuth": 180,
         "cl": 137,
         "edt": "No",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       }
     ],
     "state": "Chicago"
@@ -1908,8 +1908,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 2,
     "updatedAt": "2025-06-08 00:34",
-    "lat": 35.350245,
-    "lng": -97.487869,
+    "lat": 35.542431,
+    "lng": -97.595315,
     "sectorInfo": [
       {
         "cellId": "CELL9988",
@@ -1917,7 +1917,7 @@
         "azimuth": 0,
         "cl": 126,
         "edt": "No",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       },
       {
         "cellId": "CELL8300",
@@ -1925,7 +1925,7 @@
         "azimuth": 0,
         "cl": 70,
         "edt": "Yes",
-        "tilt": "2\u00b0"
+        "tilt": "2°"
       },
       {
         "cellId": "CELL7466",
@@ -1933,7 +1933,7 @@
         "azimuth": 270,
         "cl": 100,
         "edt": "Yes",
-        "tilt": "10\u00b0"
+        "tilt": "10°"
       }
     ],
     "state": "Oklahoma City"
@@ -1949,8 +1949,8 @@
     "kpiType": "Sleepy Cells",
     "severity": 4,
     "updatedAt": "2025-06-08 00:03",
-    "lat": 38.53932,
-    "lng": -90.281378,
+    "lat": 38.600176,
+    "lng": -90.121144,
     "sectorInfo": [
       {
         "cellId": "CELL9770",
@@ -1958,7 +1958,7 @@
         "azimuth": 270,
         "cl": 143,
         "edt": "No",
-        "tilt": "1\u00b0"
+        "tilt": "1°"
       }
     ],
     "state": "St Louis"
