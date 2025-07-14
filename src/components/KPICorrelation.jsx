@@ -327,7 +327,10 @@ const KPICorrelation = ({ context, onCreateTask }) => {
                 alt={visualizations.find(v => v.id === activeVisualization).title}
                 className="max-w-full h-auto mx-auto rounded-lg shadow-md"
                 style={{ maxHeight: '500px' }}
+                onLoad={() => console.log('Image loaded successfully:', `${import.meta.env.BASE_URL}graphs/${visualizations.find(v => v.id === activeVisualization).image}`)}
                 onError={(e) => {
+                  console.error('Image failed to load:', e.target.src);
+                  console.error('BASE_URL:', import.meta.env.BASE_URL);
                   e.target.style.display = 'none';
                   e.target.nextSibling.style.display = 'block';
                 }}

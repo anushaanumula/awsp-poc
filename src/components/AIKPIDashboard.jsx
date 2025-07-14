@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import MapView from './MapView';
+import MapLegend from './MapLegend';
 import KpiTable from './KpiTable';
 import AiInsights from './AiInsights';
 import TaskModal from './TaskModal';
@@ -210,13 +211,18 @@ const AIKPIDashboard = ({
             <p className="text-sm text-gray-600">Select sites for AI analysis</p>
           </div>
           <div className="p-4">
-            <div style={{ height: '380px', width: '100%' }}>
+            <div style={{ height: '380px', width: '100%' }} className="mb-4">
               <MapView
                 sites={filteredSites}
                 onSelect={handleSiteSelection}
                 selected={selectedSite}
                 stateFilter={stateFilter}
+                zoomToSelected={true}
               />
+            </div>
+            {/* Map Legend */}
+            <div className="mt-4">
+              <MapLegend hasSelectedSite={!!selectedSite} />
             </div>
           </div>
         </div>

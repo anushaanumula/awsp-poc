@@ -12,27 +12,45 @@ const COLORS = {
   'Sleepy Cells': '#3182ce',
 };
 
-const getIcon = (type, selected) =>
-  L.divIcon({
+// Severity-based colors for selected sites (more vibrant and distinct)
+const SEVERITY_COLORS = {
+  1: '#FF1744', // Critical - Bright Red
+  2: '#FF9800', // Major - Orange
+  3: '#FFC107', // Minor - Amber
+  4: '#4CAF50', // Warning - Green
+  5: '#2196F3', // Normal - Blue
+};
+
+const getIcon = (type, selected, severity = 1) => {
+  // Use severity-based colors for selected sites, KPI type colors for others
+  const color = selected ? (SEVERITY_COLORS[severity] || SEVERITY_COLORS[1]) : (COLORS[type] || '#000');
+  
+  return L.divIcon({
     className: '',
-    html: `<span class="map-marker${selected ? ' selected' : ''}" style="--color:${
-      COLORS[type] || '#000'
-    }"></span>`,
-    iconSize: selected ? [22, 22] : [16, 16],
-    iconAnchor: selected ? [11, 11] : [8, 8],
+    html: `<span class="map-marker${selected ? ' selected' : ''}" style="--color:${color}"></span>`,
+    iconSize: selected ? [24, 24] : [16, 16],
+    iconAnchor: selected ? [12, 12] : [8, 8],
   });
+};
 
 const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = false }) => {
-  const center = [39.5, -97.5];
-  const [zoom, setZoom] = useState(6);
+  const center = [39.5, -98.35]; // Adjusted center to better center US
+  const [zoom, setZoom] = useState(5); // Start with a more zoomed out view
 
   const BoundsSetter = () => {
     const map = useMap();
     useEffect(() => {
       if (!sites.length) return;
-      const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
-      map.fitBounds(bounds, { maxZoom: stateFilter === 'All' ? 7 : 10 });
-      setZoom(map.getZoom());
+      
+      // Add a small delay to ensure the map is ready
+      setTimeout(() => {
+        const bounds = L.latLngBounds(sites.map((s) => [s.lat, s.lng]));
+        map.fitBounds(bounds, { 
+          maxZoom: stateFilter === 'All' ? 9 : 12, // Increased zoom levels for better detail
+          padding: [20, 20] // Increased padding for better visibility
+        });
+        setZoom(map.getZoom());
+      }, 50);
     }, [stateFilter, sites]);
     return null;
   };
@@ -40,9 +58,14 @@ const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = fals
   const SelectedSetter = () => {
     const map = useMap();
     useEffect(() => {
-      if (zoomToSelected && selected) {
-        map.flyTo([selected.lat, selected.lng], 12);
-        setZoom(12);
+      if (zoomToSelected && selected && selected.lat && selected.lng) {
+        // Add a small delay to ensure the map is ready
+        setTimeout(() => {
+          map.flyTo([selected.lat, selected.lng], 12, {
+            duration: 1.5 // Smooth animation duration
+          });
+          setZoom(12);
+        }, 100);
       }
     }, [selected, zoomToSelected]);
     return null;
@@ -79,7 +102,7 @@ const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = fals
           <Marker
             key={site.geoId}
             position={[site.lat, site.lng]}
-            icon={getIcon(site.kpiType, selected?.id === site.id)}
+            icon={getIcon(site.kpiType, selected?.id === site.id, site.severity)}
             eventHandlers={{ click: () => onSelect(site) }}
           >
             <Tooltip direction="top" offset={[0, -10]} opacity={1} className="!text-xs">
@@ -89,6 +112,9 @@ const MapView = ({ sites, onSelect, selected, stateFilter, zoomToSelected = fals
                 <div>Market: {site.state}</div>
                 <div>KPI: <span className="font-mono">{site.kpiType}</span></div>
                 <div>Severity: <span className="font-mono">{site.severity}</span></div>
+                <div className="text-gray-500 text-xs">
+                  {site.lat.toFixed(4)}, {site.lng.toFixed(4)}
+                </div>
               </div>
             </Tooltip>
           </Marker>
