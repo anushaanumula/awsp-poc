@@ -1074,7 +1074,7 @@ const ConversationalUI = ({ context, onSelectSite, onClose }) => {
       </div>
 
       {/* Suggested Queries */}
-      {messages.length === 1 && (
+      { (
         <div className="p-4 border-t bg-white">
           <p className="text-sm text-base-content font-semibold mb-3">Try these queries to see interactive charts:</p>
           <div className="flex flex-wrap gap-2">
