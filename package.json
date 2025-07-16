@@ -1,6 +1,7 @@
 {
   "name": "awsp-poc",
   "version": "1.0.0",
+  "homepage": "https://anushaanumula.github.io/awsp-poc/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

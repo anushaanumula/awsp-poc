@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === 'build' ? '/awsp-poc/' : '/',
+  base: '/awsp-poc/', // Repository name for GitHub Pages
   server: {
     port: 5173
   },
