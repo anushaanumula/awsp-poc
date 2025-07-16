@@ -6,7 +6,7 @@
 /* Import Neue Haas Grotesk font (fallback to Inter if not available) */
 @font-face {
   font-family: 'Neue Haas Grotesk';
-  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); /* Note: This URL points to Inter. Ensure you have the correct URL for Neue Haas Grotesk if it's external, or define it with local() if self-hosted */
   font-weight: 300 700;
   font-style: normal;
 }
@@ -17,10 +17,10 @@ body {
   font-family: 'Neue Haas Grotesk', 'Inter', 'Helvetica', 'Arial', sans-serif;
 }
 
-/* Verizon brand color utilities */
+/* Verizon brand color utilities (ensure these are correctly defined if coming from a config) */
 .bg-verizon-red { background-color: #ff0000; }
 .bg-verizon-black { background-color: #000000; }
-.bg-verizon-concrete { background-color: #f2f2f2; }
+.bg-verizon-concrete { background-color: #e0e0e0; }
 .bg-verizon-blue { background-color: #3285dc; }
 .text-verizon-red { color: #ff0000; }
 .text-verizon-black { color: #000000; }
@@ -40,33 +40,66 @@ body {
   filter: none;
 }
 
-/* Round marker style for map with Verizon colors */
-.map-marker {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background: var(--color, #ff0000);
-  border-radius: 50%;
-  border: 2px solid #000000;
+
+.map-marker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px; /* Base width */
+  height: 20px; /* Base height */
+  pointer-events: none;
+  transition: width 0.3s ease-out, height 0.3s ease-out;
 }
 
-.map-marker.selected {
-  width: 20px;
-  height: 20px;
-  border-width: 3px;
-  border-color: #ffffff;
-  box-shadow: 0 0 0 3px var(--color, #ff0000), 0 0 0 6px rgba(255, 255, 255, 0.4);
-  animation: pulse-selected 2s ease-in-out infinite;
+/* The actual circular marker shape */
+.map-marker {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-color: var(--marker-bg-color, #000000);
+  border-radius: 50%;
+  border: 1px solid var(--marker-bg-color, #000000);
+  box-shadow: none;
+  animation: none;
+  transition: all 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* Styles for a SELECTED map marker */
+.map-marker-container.selected {
+  width: 32px;
+  height: 32px;
   z-index: 1000;
 }
 
+.map-marker-container.selected .map-marker {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4),
+              0 0 8px var(--marker-bg-color, #ff0000);
+  animation: pulse-selected 1.5s infinite alternate;
+}
+
+/* Keyframes for the pulsing animation */
 @keyframes pulse-selected {
-  0%, 100% {
-    box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px rgba(255, 255, 255, 0.4);
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), 0 0 8px var(--marker-bg-color, #ff0000);
   }
   50% {
-    box-shadow: 0 0 0 3px #ffffff, 0 0 0 9px rgba(255, 255, 255, 0.2);
+    transform: scale(1.0);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2), 0 0 12px var(--marker-bg-color, #ff0000);
   }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), 0 0 8px var(--marker-bg-color, #ff0000);
+  }
+}
+
+/* Ensure Leaflet's default shadow is handled if it interferes */
+.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive {
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.4));
 }
 
 /* Leaflet map container styling */

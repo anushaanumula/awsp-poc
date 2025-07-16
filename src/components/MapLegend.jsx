@@ -1,75 +1,97 @@
 import React from 'react';
 
-const KPI_TYPES = [
-  { type: 'Top n Offenders', color: '#e53e3e', description: 'Worst performing sites' },
-  { type: 'Heavy Hitters', color: '#dd6b20', description: 'High traffic impact' },
-  { type: 'High Runners', color: '#38a169', description: 'Consistently high usage' },
-  { type: 'Micro/Macro Outage', color: '#805ad5', description: 'Currently unreachable' },
-  { type: 'Broken Trends', color: '#718096', description: 'KPIs trending down' },
-  { type: 'Sleepy Cells', color: '#3182ce', description: 'Low activity sites' },
-];
+// Define main colors for Map Markers
+const MAP_SEVERITY_COLORS = {
+  1: '#DC2626', // Critical
+  2: '#EA580C', // Major
+  3: '#FACC15', // Minor
+  4: '#06B6D4', // Warning
+  5: '#10B981', // Normal
+};
 
-const SEVERITY_LEVELS = [
-  { level: 1, color: '#FF1744', label: 'Critical', description: 'Immediate attention required' },
-  { level: 2, color: '#FF9800', label: 'Major', description: 'High priority issue' },
-  { level: 3, color: '#FFC107', label: 'Minor', description: 'Moderate impact' },
-  { level: 4, color: '#4CAF50', label: 'Warning', description: 'Potential issue' },
-  { level: 5, color: '#2196F3', label: 'Normal', description: 'Operating normally' },
-];
+// Define Impact Type Colors
+const MAP_IMPACT_TYPE_COLORS = {
+  'Top n Offenders': '#CC3333',
+  'Heavy Hitters': '#E67E22',
+  'High Runners': '#2ECC71',
+  'Micro/Macro Outage': '#9B59B6',
+  'Broken Trends': '#7F8C8D',
+  'Sleepy Cells': '#3498DB',
+  'Default': '#555555',
+};
 
-export default function MapLegend({ hasSelectedSite = false }) {
+/**
+ * Renders a map legend that shows the selected site's KPI type and severity
+ * @param {boolean} hasSelectedSite - Whether a site is currently selected
+ * @param {Object} selectedSite - The currently selected site
+ */
+export default function MapLegend({ hasSelectedSite, selectedSite, visibleSites = [] }) {
+  // Helper function to get severity label based on level
+  const getSeverityLabel = (level) => {
+    const labels = {
+      1: 'Critical',
+      2: 'Major',
+      3: 'Minor',
+      4: 'Warning',
+      5: 'Normal'
+    };
+    return labels[level] || `Severity ${level}`;
+  };
+
+  // Check if selectedSite has the necessary properties to be considered valid
+  const isValidSite = selectedSite && 
+                     selectedSite.severity !== undefined &&
+                     selectedSite.kpiType !== undefined;
+
+  // If no valid site is selected, don't show anything
+  if (!isValidSite) {
+    return null;
+  }
+
+  // If we reach here, we have a valid selected site
   return (
-    <div className="bg-white rounded-lg shadow-lg p-3 space-y-3 max-w-full">
-      <div className="text-sm font-semibold text-gray-800 border-b pb-2">
-        Map Legend
-      </div>
-      
-      {/* Default KPI Type Colors */}
-      <div className="space-y-2">
-        <div className="text-xs font-medium text-gray-700 uppercase tracking-wide">
-          Default Site Colors (KPI Types)
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-          {KPI_TYPES.map((item) => (
-            <div key={item.type} className="flex items-center space-x-1">
-              <div 
-                className="w-3 h-3 rounded-full border border-black flex-shrink-0" 
-                style={{ backgroundColor: item.color }}
-              />
-              <span className="font-medium truncate text-xs">{item.type}</span>
-            </div>
-          ))}
-        </div>
+    <div className="p-2 bg-white overflow-hidden h-full">
+      <div className="flex justify-between items-center mb-1">
+        <span className="font-semibold text-sm text-gray-800">Selected: {selectedSite.geoId || selectedSite.id}</span>
+        <span className="text-xs text-blue-600">{selectedSite.enodeb}</span>
       </div>
 
-      {/* Selected Site Colors */}
-      <div className="space-y-2">
-        <div className="text-xs font-medium text-gray-700 uppercase tracking-wide">
-          Selected Site Colors (Severity Level)
+      <div className="flex gap-2 items-center">
+        {/* Selected site's severity */}
+        <div className="bg-gray-50 p-1 rounded border border-gray-200 flex-1">
+          <div className="flex items-center gap-1">
+            <div 
+              className="w-3 h-3 rounded-full border border-gray-300 flex-shrink-0" 
+              style={{ backgroundColor: selectedSite.severity <= 5 ? 
+                (MAP_SEVERITY_COLORS[selectedSite.severity] || MAP_SEVERITY_COLORS[5]) : 
+                MAP_SEVERITY_COLORS[5] }}
+            />
+            <span className="text-xs">
+              Severity: <span className="font-medium">{selectedSite.severity} - {getSeverityLabel(selectedSite.severity)}</span>
+            </span>
+          </div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
-          {SEVERITY_LEVELS.map((item) => (
-            <div key={item.level} className="flex items-center space-x-1">
-              <div 
-                className={`w-3 h-3 rounded-full border-2 border-white flex-shrink-0 ${hasSelectedSite ? 'shadow-md' : ''}`}
-                style={{ 
-                  backgroundColor: item.color,
-                  boxShadow: hasSelectedSite ? `0 0 0 2px ${item.color}40` : 'none'
-                }}
-              />
-              <span className="font-medium text-xs">Sev {item.level} ({item.label})</span>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Instructions */}
-      <div className="text-xs text-gray-600 bg-blue-50 p-2 rounded border-l-4 border-blue-400">
-        <div className="font-medium text-blue-800 mb-1">How to read the map:</div>
-        <div className="flex flex-wrap gap-4 text-blue-700">
-          <span>• Unselected sites show <strong>KPI type</strong> colors</span>
-          <span>• Selected sites show <strong>severity level</strong> colors</span>
-          <span>• Selected sites are larger with pulsing animation</span>
+        {/* Selected site's KPI type */}
+        {selectedSite.kpiType && (
+          <div className="bg-gray-50 p-1 rounded border border-gray-200 flex-1">
+            <div className="flex items-center gap-1">
+              <div 
+                className="w-3 h-3 rounded-full border border-gray-300 flex-shrink-0" 
+                style={{ backgroundColor: MAP_IMPACT_TYPE_COLORS[selectedSite.kpiType] || MAP_IMPACT_TYPE_COLORS['Default'] }}
+              />
+              <span className="text-xs">
+                KPI: <span className="font-medium">{selectedSite.kpiType === 'Micro/Macro Outage' ? 'Outage' : selectedSite.kpiType}</span>
+              </span>
+            </div>
+          </div>
+        )}
+        
+        {/* Market info */}
+        <div className="bg-gray-50 p-1 rounded border border-gray-200">
+          <span className="text-xs">
+            Market: <span className="font-medium">{selectedSite.state}</span>
+          </span>
         </div>
       </div>
     </div>

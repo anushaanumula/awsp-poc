@@ -148,53 +148,86 @@ const AIKPIDashboard = ({
   return (
     <div className="space-y-6">
       {/* Always visible: Map and KPI Table */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* KPI Table */}
-        <div className="bg-white border border-verizon-black rounded-lg shadow-sm">
-          <div className="p-4 border-b border-verizon-black">
-            <h3 className="text-lg font-semibold text-verizon-black">Top KPI Issues</h3>
-            <p className="text-sm text-gray-600 mb-3">
-              {activeFilters.length > 0 
-                ? `Filtered results (${topSites.length} of ${filteredSites.length} sites)` 
-                : 'Sites with highest severity scores'
-              }
-            </p>
-            
-            {/* KPI Category Filters */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
-                  <FunnelIcon className="h-4 w-4 text-verizon-black" />
-                  <span className="text-sm font-medium text-verizon-black">Filter by Category:</span>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6"> {/* Changed from grid-cols-2 to grid-cols-12 for finer control */}
+        {/* KPI Table - Optimized header with less wasted space */}
+        <div className="lg:col-span-7 bg-white border border-verizon-black rounded-lg shadow-sm">
+          <div className="p-3 border-b border-verizon-black bg-gradient-to-r from-white to-gray-50">
+            {/* More compact header with better space utilization */}
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-semibold text-verizon-black flex items-center">
+                <ChartBarIcon className="h-5 w-5 mr-2 text-verizon-blue" />
+                Top KPI Issues
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-600">
+                  {activeFilters.length > 0 
+                    ? `Filtered: ${activeFilters.length} categories` 
+                    : 'By severity'
+                  }
+                </span>
+                <div className="text-xs px-2 py-0.5 bg-verizon-concrete text-verizon-black rounded-full">
+                  {topSites.length}/{filteredSites.length}
                 </div>
-                {activeFilters.length > 0 && (
-                  <button
-                    onClick={clearFilters}
-                    className="text-xs text-verizon-blue hover:text-verizon-red underline"
-                  >
-                    Clear All
-                  </button>
-                )}
               </div>
-              
-              <div className="flex flex-wrap gap-1">
-                {IMPACT_CATEGORIES.map((category) => (
+            </div>
+            
+            {/* More compact filter section */}
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center space-x-1">
+                <FunnelIcon className="h-4 w-4 text-verizon-blue" />
+                <span className="text-xs font-medium text-verizon-black">Filter by:</span>
+              </div>
+              {activeFilters.length > 0 && (
+                <button
+                  onClick={clearFilters}
+                  className="text-xs bg-gray-100 hover:bg-gray-200 text-verizon-blue hover:text-verizon-red px-2 py-0.5 rounded flex items-center transition-colors duration-200"
+                >
+                  <span>Clear</span>
+                  <span className="ml-1">×</span>
+                </button>
+              )}
+            </div>
+            
+            {/* More compact filter buttons in a tighter grid */}
+            <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-1.5">
+              {IMPACT_CATEGORIES.map((category) => {
+                const isActive = activeFilters.includes(category);
+                const displayName = category.replace('Micro/Macro Outage', 'Outage');
+                
+                // Get appropriate color based on category type
+                const getBgColor = () => {
+                  if (!isActive) return 'bg-white hover:bg-gray-50';
+                  
+                  switch(category) {
+                    case 'Top n Offenders': return 'bg-red-600';
+                    case 'Heavy Hitters': return 'bg-orange-500';
+                    case 'High Runners': return 'bg-green-600';
+                    case 'Micro/Macro Outage': return 'bg-purple-600';
+                    case 'Broken Trends': return 'bg-gray-600';
+                    case 'Sleepy Cells': return 'bg-blue-600';
+                    default: return 'bg-verizon-red';
+                  }
+                };
+                
+                return (
                   <button
                     key={category}
                     onClick={() => toggleFilter(category)}
                     className={`px-2 py-1 rounded text-xs font-medium transition-all duration-200 border ${
-                      activeFilters.includes(category)
-                        ? 'bg-verizon-red text-white border-verizon-red'
-                        : 'bg-white text-verizon-black border-verizon-black hover:bg-verizon-concrete'
-                    }`}
+                      isActive
+                        ? `${getBgColor()} text-white border-transparent`
+                        : 'bg-white text-verizon-black border-gray-300 hover:border-verizon-blue'
+                    } flex items-center justify-between`}
                   >
-                    {category.replace('Micro/Macro Outage', 'Outage')}
-                    {activeFilters.includes(category) && (
-                      <span className="ml-1">✓</span>
+                    <span className="truncate">{displayName}</span>
+                    {isActive && (
+                      <span className="ml-1 inline-flex items-center justify-center bg-white bg-opacity-25 rounded-full w-4 h-4 text-xs text-white flex-shrink-0">
+                        {filteredSites.filter(site => site.kpiType === category).length}
+                      </span>
                     )}
                   </button>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
           <KpiTable
@@ -204,14 +237,14 @@ const AIKPIDashboard = ({
           />
         </div>
 
-        {/* Map View */}
-        <div className="bg-white border border-verizon-black rounded-lg shadow-sm">
+        {/* Map View - Now takes 5 columns (less width) */}
+        <div className="lg:col-span-5 bg-white border border-verizon-black rounded-lg shadow-sm"> {/* Decreased from default 6 to 5 */}
           <div className="p-4 border-b border-verizon-black">
             <h3 className="text-lg font-semibold text-verizon-black">Live Network Map</h3>
             <p className="text-sm text-gray-600">Select sites for AI analysis</p>
           </div>
           <div className="p-4">
-            <div style={{ height: '380px', width: '100%' }} className="mb-4">
+            <div style={{ height: '500px', width: '100%' }} className="mb-4">
               <MapView
                 sites={filteredSites}
                 onSelect={handleSiteSelection}
@@ -219,10 +252,6 @@ const AIKPIDashboard = ({
                 stateFilter={stateFilter}
                 zoomToSelected={true}
               />
-            </div>
-            {/* Map Legend */}
-            <div className="mt-4">
-              <MapLegend hasSelectedSite={!!selectedSite} />
             </div>
           </div>
         </div>
